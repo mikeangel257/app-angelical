@@ -1,0 +1,3084 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="theme-color" content="#F5EFE4">
+
+<title>Configuración | Voz Angelical</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<script src="tema.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --dorado: #B48A42;
+    --dorado-oscuro: #8A632B;
+    --fondo: #F5EFE4;
+    --tarjeta: #FFFFFF;
+    --texto: #30271D;
+    --secundario: #796C59;
+    --borde: #E6D8C1;
+    --campo: #FCFAF6;
+    --suave: #EDE3D1;
+    --acento: #8A632B;
+    --rojo: #C74D4D;
+    --sidebar: 260px;
+}
+
+html[data-tema="oscuro"] {
+    --fondo: #171614;
+    --tarjeta: #252321;
+    --texto: #F5EFE4;
+    --secundario: #C1B6A5;
+    --borde: #413A30;
+    --campo: #1D1B19;
+    --suave: #33291B;
+    --acento: #DCC18A;
+    --rojo: #F07878;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ENCABEZADO */
+
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    padding-top: max(14px, env(safe-area-inset-top));
+    background: var(--tarjeta);
+    border-bottom: 1px solid var(--borde);
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--dorado);
+}
+
+.header-brand h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--acento);
+    margin: 0;
+}
+
+.header-brand small {
+    color: var(--secundario);
+    font-size: 10px;
+}
+
+.icon-button {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    background: var(--campo);
+    color: var(--acento);
+    font-size: 19px;
+}
+
+/* CONTENIDO */
+
+.main-content {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 16px;
+    padding-bottom: calc(110px + env(safe-area-inset-bottom));
+}
+
+.page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 25px;
+    font-weight: 700;
+    color: var(--acento);
+}
+
+.page-description {
+    font-size: 12px;
+    color: var(--secundario);
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.config-card {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+    margin-bottom: 18px;
+    overflow: hidden;
+}
+
+.card-heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 18px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.card-icon {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: var(--suave);
+    color: var(--acento);
+    font-size: 21px;
+}
+
+.card-heading h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 4px;
+}
+
+.card-heading p {
+    font-size: 10px;
+    color: var(--secundario);
+    margin: 0;
+}
+
+.card-content {
+    padding: 18px;
+}
+
+/* FORMULARIOS */
+
+.form-label {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-control,
+.form-select {
+    min-height: 50px;
+    background-color: var(--campo);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--campo);
+    color: var(--texto);
+    border-color: var(--dorado);
+    box-shadow: 0 0 0 3px rgba(180,138,66,.15);
+}
+
+.form-control::placeholder {
+    color: var(--secundario);
+    opacity: .7;
+}
+
+.form-control:read-only {
+    opacity: .8;
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-text {
+    font-size: 10px;
+    color: var(--secundario);
+    line-height: 1.7;
+}
+
+.btn-gold {
+    width: 100%;
+    min-height: 52px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(135deg,#8A632B,#A77B35);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.btn-gold:disabled {
+    opacity: .55;
+}
+
+.btn-outline-app {
+    min-height: 46px;
+    padding: 10px 15px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--campo);
+    color: var(--acento);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.btn-danger-app {
+    min-height: 46px;
+    padding: 10px 15px;
+    border: 1px solid var(--rojo);
+    border-radius: 12px;
+    background: transparent;
+    color: var(--rojo);
+    font-size: 12px;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: .55;
+}
+
+/* FIRMA DIGITALIZADA */
+
+.signature-area {
+    position: relative;
+    background: white;
+    border: 2px dashed var(--dorado);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+#canvasFirma {
+    display: block;
+    width: 100%;
+    height: 200px;
+    background: white;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.signature-line {
+    position: absolute;
+    bottom: 30px;
+    left: 10%;
+    right: 10%;
+    border-bottom: 1px dashed #C9C0B2;
+    pointer-events: none;
+}
+
+.signature-hint {
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #9A8F80;
+    font-size: 10px;
+    pointer-events: none;
+}
+
+.signature-actions {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 9px;
+    margin-top: 12px;
+}
+
+.signature-preview {
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.signature-preview img {
+    width: 100%;
+    max-width: 320px;
+    height: 110px;
+    object-fit: contain;
+}
+
+.signature-status {
+    font-size: 11px;
+    color: var(--secundario);
+    margin-bottom: 15px;
+}
+
+.info-box {
+    background: var(--suave);
+    border-radius: 12px;
+    padding: 14px;
+    color: var(--texto);
+    font-size: 11px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+/* TEMAS */
+
+.theme-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 9px;
+}
+
+.theme-option {
+    padding: 12px 5px;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    background: var(--campo);
+    color: var(--texto);
+    font-size: 10px;
+    text-align: center;
+}
+
+.theme-option.activo {
+    background: var(--suave);
+    border-color: var(--dorado);
+    color: var(--acento);
+}
+
+.theme-preview {
+    height: 65px;
+    border-radius: 9px;
+    padding: 9px;
+    margin-bottom: 9px;
+}
+
+.preview-light {
+    background: #F5EFE4;
+    border: 1px solid #E6D8C1;
+}
+
+.preview-dark {
+    background: #171614;
+    border: 1px solid #413A30;
+}
+
+.preview-auto {
+    background: linear-gradient(
+        90deg,
+        #F5EFE4 50%,
+        #171614 50%
+    );
+    border: 1px solid var(--borde);
+}
+
+.preview-bar {
+    height: 8px;
+    background: #B48A42;
+    border-radius: 4px;
+    margin-bottom: 7px;
+}
+
+.preview-block {
+    height: 25px;
+    border-radius: 5px;
+    background: rgba(180,138,66,.25);
+}
+
+/* MENÚ */
+
+.bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    display: grid;
+    grid-template-columns: repeat(5,minmax(0,1fr));
+    background: var(--tarjeta);
+    border-top: 1px solid var(--borde);
+    padding: 9px 5px;
+    padding-bottom: calc(9px + env(safe-area-inset-bottom));
+}
+
+.nav-item-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-height: 52px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--secundario);
+    font-size: 9px;
+}
+
+.nav-item-app i {
+    font-size: 21px;
+}
+
+.nav-item-app.active {
+    color: var(--acento);
+    background: var(--suave);
+    font-weight: 600;
+}
+
+.offcanvas {
+    background: var(--tarjeta);
+    color: var(--texto);
+}
+
+.offcanvas-bottom {
+    height: auto;
+    max-height: 85dvh;
+    border-radius: 25px 25px 0 0;
+}
+
+.offcanvas-title {
+    font-family: 'Cinzel', serif;
+    color: var(--acento);
+    font-size: 18px;
+}
+
+.menu-option {
+    width: 100%;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px;
+    margin-bottom: 8px;
+    background: var(--campo);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.menu-option i {
+    font-size: 18px;
+    color: var(--acento);
+}
+
+.menu-option.active {
+    background: var(--suave);
+    border-color: var(--dorado);
+}
+
+.sidebar {
+    display: none;
+}
+
+/* CARGA Y AVISOS */
+
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 25px;
+    background: var(--fondo);
+    text-align: center;
+}
+
+.loading-screen img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+
+.loading-screen p {
+    font-size: 12px;
+    color: var(--secundario);
+}
+
+.spinner-border {
+    color: var(--dorado);
+}
+
+.alert {
+    font-size: 12px;
+    border-radius: 13px;
+    line-height: 1.7;
+}
+
+.app-footer {
+    text-align: center;
+    color: var(--secundario);
+    font-size: 10px;
+    padding: 25px 10px;
+    line-height: 1.9;
+}
+
+@media(min-width:992px) {
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: var(--sidebar);
+        display: flex;
+        flex-direction: column;
+        padding: 20px 15px;
+        background: var(--tarjeta);
+        border-right: 1px solid var(--borde);
+        overflow-y: auto;
+    }
+
+    .sidebar-brand {
+        text-align: center;
+        padding: 10px 0 25px;
+    }
+
+    .sidebar-brand img {
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+    }
+
+    .sidebar-brand h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 18px;
+        color: var(--acento);
+        margin-top: 15px;
+    }
+
+    .sidebar-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px;
+        margin-bottom: 5px;
+        border-radius: 12px;
+        color: var(--secundario);
+        font-size: 13px;
+    }
+
+    .sidebar-link.active,
+    .sidebar-link:hover {
+        background: var(--suave);
+        color: var(--acento);
+    }
+
+    .sidebar-link i {
+        font-size: 18px;
+    }
+
+    .app-header {
+        margin-left: var(--sidebar);
+        padding: 15px 30px;
+    }
+
+    .main-content {
+        margin-left: var(--sidebar);
+        padding: 30px;
+    }
+
+    .bottom-nav {
+        display: none;
+    }
+
+    .card-content {
+        padding: 25px;
+    }
+
+    .page-title {
+        font-size: 30px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- PANTALLA DE CARGA -->
+
+<div class="loading-screen" id="pantallaCarga">
+
+    <img src="icon-192.png" alt="Voz Angelical">
+
+    <div class="spinner-border" role="status"></div>
+
+    <p id="textoCarga">Cargando configuración...</p>
+
+    <button
+        id="btnReintentar"
+        class="btn-outline-app"
+        onclick="location.reload()"
+        hidden>
+        Volver a intentar
+    </button>
+
+</div>
+
+<div id="aplicacion" hidden>
+
+<!-- MENÚ LATERAL -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-brand">
+
+        <img src="logo.png" alt="Voz Angelical">
+
+        <h2>Voz Angelical</h2>
+
+    </div>
+
+    <a href="inicio.html" class="sidebar-link">
+        <i class="bi bi-house-door"></i> Inicio
+    </a>
+
+    <a href="agenda.html" class="sidebar-link">
+        <i class="bi bi-calendar3"></i> Agenda
+    </a>
+
+    <a href="contratos.html" class="sidebar-link">
+        <i class="bi bi-file-earmark-text"></i> Contratos
+    </a>
+
+    <a href="clientes.html" class="sidebar-link">
+        <i class="bi bi-person-lines-fill"></i> Clientes
+    </a>
+
+    <a href="servicios.html" class="sidebar-link">
+        <i class="bi bi-music-note-beamed"></i> Servicios
+    </a>
+
+    <a href="socios.html" class="sidebar-link">
+        <i class="bi bi-people"></i> Socios
+    </a>
+
+    <a href="estadisticas.html" class="sidebar-link">
+        <i class="bi bi-bar-chart-line"></i> Estadísticas
+    </a>
+
+    <a href="configuracion.html" class="sidebar-link active">
+        <i class="bi bi-gear-fill"></i> Configuración
+    </a>
+
+    <a href="usuarios.html" class="sidebar-link">
+        <i class="bi bi-person-circle"></i> Mi cuenta
+    </a>
+
+</aside>
+
+<!-- ENCABEZADO -->
+
+<header class="app-header">
+
+    <div class="header-brand">
+
+        <img src="logo.png" class="header-logo" alt="Voz Angelical">
+
+        <div>
+
+            <h1>Voz Angelical</h1>
+
+            <small>Configuración general</small>
+
+        </div>
+
+    </div>
+
+    <a href="inicio.html" class="icon-button" aria-label="Regresar al inicio">
+
+        <i class="bi bi-arrow-left"></i>
+
+    </a>
+
+</header>
+
+<main class="main-content">
+
+    <h2 class="page-title">Configuración</h2>
+
+    <p class="page-description">
+        Personaliza tu aplicación y administra la información
+        de tu negocio musical.
+    </p>
+
+    <div id="mensajeGeneral" class="alert" role="alert" hidden></div>
+
+    <form id="formConfiguracion">
+
+        <!-- INFORMACIÓN COMERCIAL -->
+
+        <section class="config-card">
+
+            <div class="card-heading">
+
+                <div class="card-icon">
+                    <i class="bi bi-shop"></i>
+                </div>
+
+                <div>
+                    <h3>Información comercial</h3>
+                    <p>Datos utilizados en los contratos</p>
+                </div>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="nombreComercial">
+                            Nombre comercial
+                        </label>
+
+                        <input class="form-control"
+                        id="nombreComercial"
+                        maxlength="100"
+                        required>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="representante">
+                            Nombre del representante
+                        </label>
+
+                        <input class="form-control"
+                        id="representante"
+                        maxlength="150">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="rfc">
+                            RFC (opcional)
+                        </label>
+
+                        <input class="form-control"
+                        id="rfc"
+                        maxlength="13">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="estado">
+                            Estado
+                        </label>
+
+                        <input class="form-control"
+                        id="estado"
+                        maxlength="80">
+
+                    </div>
+
+                    <div class="col-12">
+
+                        <label class="form-label" for="domicilio">
+                            Domicilio comercial
+                        </label>
+
+                        <input class="form-control"
+                        id="domicilio"
+                        maxlength="250">
+
+                    </div>
+
+                    <div class="col-12">
+
+                        <label class="form-label" for="descripcion">
+                            Descripción del negocio
+                        </label>
+
+                        <textarea class="form-control"
+                        id="descripcion"
+                        maxlength="500"></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CONTACTO -->
+
+        <section class="config-card">
+
+            <div class="card-heading">
+
+                <div class="card-icon">
+                    <i class="bi bi-telephone"></i>
+                </div>
+
+                <div>
+                    <h3>Información de contacto</h3>
+                    <p>Teléfono y redes sociales</p>
+                </div>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="whatsapp">
+                            WhatsApp
+                        </label>
+
+                        <input class="form-control"
+                        id="whatsapp"
+                        type="tel"
+                        inputmode="tel"
+                        maxlength="20">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="correo">
+                            Correo electrónico
+                        </label>
+
+                        <input class="form-control"
+                        id="correo"
+                        type="email"
+                        maxlength="150">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="facebook">
+                            Facebook
+                        </label>
+
+                        <input class="form-control"
+                        id="facebook"
+                        maxlength="200">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="instagram">
+                            Instagram
+                        </label>
+
+                        <input class="form-control"
+                        id="instagram"
+                        maxlength="100">
+
+                    </div>
+
+                    <div class="col-12">
+
+                        <label class="form-label" for="sitioWeb">
+                            Sitio web
+                        </label>
+
+                        <input class="form-control"
+                        id="sitioWeb"
+                        type="url"
+                        placeholder="https://"
+                        maxlength="250">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- INFORMACIÓN BANCARIA -->
+
+        <section class="config-card">
+
+            <div class="card-heading">
+
+                <div class="card-icon">
+                    <i class="bi bi-bank"></i>
+                </div>
+
+                <div>
+                    <h3>Información bancaria</h3>
+                    <p>Datos para recibir transferencias</p>
+                </div>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="info-box">
+
+                    <i class="bi bi-shield-lock me-1"></i>
+
+                    Estos datos se guardan en Firestore.
+                    No se incluirán automáticamente en los
+                    contratos públicos.
+
+                </div>
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="banco">
+                            Banco
+                        </label>
+
+                        <input class="form-control"
+                        id="banco"
+                        maxlength="100">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="titular">
+                            Titular de la cuenta
+                        </label>
+
+                        <input class="form-control"
+                        id="titular"
+                        maxlength="150">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="clabe">
+                            CLABE interbancaria
+                        </label>
+
+                        <input class="form-control"
+                        id="clabe"
+                        inputmode="numeric"
+                        maxlength="18"
+                        autocomplete="off">
+
+                        <div class="form-text">
+                            Debe contener 18 dígitos.
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="cuenta">
+                            Número de cuenta (opcional)
+                        </label>
+
+                        <input class="form-control"
+                        id="cuenta"
+                        inputmode="numeric"
+                        maxlength="20"
+                        autocomplete="off">
+
+                    </div>
+
+                    <div class="col-12">
+
+                        <label class="form-label" for="concepto">
+                            Concepto de transferencia
+                        </label>
+
+                        <input class="form-control"
+                        id="concepto"
+                        maxlength="100">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- AGENDA -->
+
+        <section class="config-card">
+
+            <div class="card-heading">
+
+                <div class="card-icon">
+                    <i class="bi bi-calendar3"></i>
+                </div>
+
+                <div>
+                    <h3>Preferencias de agenda</h3>
+                    <p>Configuración de nuevas celebraciones</p>
+                </div>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="duracionPredeterminada">
+                            Duración predeterminada
+                        </label>
+
+                        <div class="input-group">
+
+                            <input class="form-control"
+                            id="duracionPredeterminada"
+                            type="number"
+                            min="1"
+                            max="1440"
+                            required>
+
+                            <span class="input-group-text">min</span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="margenTraslado">
+                            Tiempo de traslado
+                        </label>
+
+                        <div class="input-group">
+
+                            <input class="form-control"
+                            id="margenTraslado"
+                            type="number"
+                            min="0"
+                            max="1440"
+                            required>
+
+                            <span class="input-group-text">min</span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label" for="horaPredeterminada">
+                            Hora predeterminada
+                        </label>
+
+                        <input class="form-control"
+                        id="horaPredeterminada"
+                        type="time"
+                        required>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">Zona horaria</label>
+
+                        <input class="form-control"
+                        value="Centro de México"
+                        readonly>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">Moneda</label>
+
+                        <input class="form-control"
+                        value="Peso mexicano (MXN)"
+                        readonly>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Pago por socio y celebración
+                        </label>
+
+                        <input class="form-control"
+                        value="$300.00 MXN"
+                        readonly>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <button class="btn-gold mb-4"
+        type="submit"
+        id="btnGuardar"
+        disabled>
+
+            <i class="bi bi-floppy me-2"></i>
+
+            Guardar configuración general
+
+        </button>
+
+    </form>
+
+    <!-- FIRMA -->
+
+    <section class="config-card">
+
+        <div class="card-heading">
+
+            <div class="card-icon">
+                <i class="bi bi-pen"></i>
+            </div>
+
+            <div>
+                <h3>Firma manuscrita</h3>
+                <p>Firma del prestador de servicios</p>
+            </div>
+
+        </div>
+
+        <div class="card-content">
+
+            <div class="info-box">
+
+                Dibuja tu firma con el dedo o el mouse.
+                También puedes cargar una imagen PNG.
+                La firma solo se insertará en los contratos
+                cuando autorices su uso.
+
+            </div>
+
+            <div id="mensajeFirma" class="alert" role="alert" hidden></div>
+
+            <div class="signature-status" id="estadoFirma">
+
+                Consultando firma registrada...
+
+            </div>
+
+            <div class="signature-preview" id="vistaFirma" hidden>
+
+                <img id="imagenFirma" alt="Firma registrada">
+
+            </div>
+
+            <div class="signature-area">
+
+                <canvas
+                    id="canvasFirma"
+                    width="900"
+                    height="300"
+                    aria-label="Área para dibujar tu firma">
+                </canvas>
+
+                <div class="signature-line"></div>
+
+                <div class="signature-hint">
+                    Firma aquí
+                </div>
+
+            </div>
+
+            <div class="signature-actions">
+
+                <button type="button"
+                class="btn-outline-app"
+                id="btnLimpiarFirma">
+
+                    <i class="bi bi-eraser me-1"></i>
+                    Limpiar
+
+                </button>
+
+                <button type="button"
+                class="btn-outline-app"
+                id="btnSubirFirma">
+
+                    <i class="bi bi-image me-1"></i>
+                    Subir PNG
+
+                </button>
+
+            </div>
+
+            <input type="file"
+            id="archivoFirma"
+            accept="image/png"
+            hidden>
+
+            <button type="button"
+            class="btn-gold mt-3"
+            id="btnGuardarFirma"
+            disabled>
+
+                <i class="bi bi-check-circle me-2"></i>
+                Guardar firma
+
+            </button>
+
+            <button type="button"
+            class="btn-danger-app w-100 mt-2"
+            id="btnEliminarFirma"
+            disabled>
+
+                <i class="bi bi-trash me-2"></i>
+                Eliminar firma registrada
+
+            </button>
+
+            <p class="form-text mt-3">
+
+                Eliminar o sustituir esta firma no deberá
+                modificar los contratos emitidos anteriormente.
+                Una firma digitalizada no equivale a una
+                firma electrónica certificada.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- APARIENCIA -->
+
+    <section class="config-card">
+
+        <div class="card-heading">
+
+            <div class="card-icon">
+                <i class="bi bi-palette"></i>
+            </div>
+
+            <div>
+                <h3>Apariencia</h3>
+                <p>Personaliza el tema de la aplicación</p>
+            </div>
+
+        </div>
+
+        <div class="card-content">
+
+            <div class="theme-grid">
+
+                <button type="button"
+                class="theme-option"
+                data-elegir-tema="claro">
+
+                    <div class="theme-preview preview-light">
+                        <div class="preview-bar"></div>
+                        <div class="preview-block"></div>
+                    </div>
+
+                    <i class="bi bi-sun"></i>
+
+                    Claro
+
+                </button>
+
+                <button type="button"
+                class="theme-option"
+                data-elegir-tema="oscuro">
+
+                    <div class="theme-preview preview-dark">
+                        <div class="preview-bar"></div>
+                        <div class="preview-block"></div>
+                    </div>
+
+                    <i class="bi bi-moon-stars"></i>
+
+                    Oscuro
+
+                </button>
+
+                <button type="button"
+                class="theme-option"
+                data-elegir-tema="sistema">
+
+                    <div class="theme-preview preview-auto">
+                        <div class="preview-bar"></div>
+                        <div class="preview-block"></div>
+                    </div>
+
+                    <i class="bi bi-phone"></i>
+
+                    Automático
+
+                </button>
+
+            </div>
+
+            <p class="form-text mt-3">
+
+                Tema seleccionado:
+
+                <strong data-texto-tema></strong>
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- RESPALDO -->
+
+    <section class="config-card">
+
+        <div class="card-heading">
+
+            <div class="card-icon">
+                <i class="bi bi-database-down"></i>
+            </div>
+
+            <div>
+                <h3>Respaldo de información</h3>
+                <p>Exportación de registros</p>
+            </div>
+
+        </div>
+
+        <div class="card-content">
+
+            <div class="info-box">
+
+                El respaldo contiene información privada.
+                Guárdalo en un lugar seguro y no lo publiques
+                en GitHub ni lo compartas con desconocidos.
+
+            </div>
+
+            <div class="form-check mb-3">
+
+                <input type="checkbox"
+                class="form-check-input"
+                id="incluirBancos">
+
+                <label class="form-check-label small"
+                for="incluirBancos">
+
+                    Incluir información bancaria
+
+                </label>
+
+            </div>
+
+            <div class="form-check mb-3">
+
+                <input type="checkbox"
+                class="form-check-input"
+                id="incluirFirma">
+
+                <label class="form-check-label small"
+                for="incluirFirma">
+
+                    Incluir imágenes de firmas
+
+                </label>
+
+            </div>
+
+            <button type="button"
+            class="btn-outline-app w-100"
+            id="btnRespaldo"
+            disabled>
+
+                <i class="bi bi-download me-2"></i>
+
+                Descargar respaldo JSON
+
+            </button>
+
+            <div id="mensajeRespaldo" class="alert mt-3" role="alert" hidden></div>
+
+            <p class="form-text mt-3">
+
+                El respaldo no incluye contraseñas ni
+                credenciales de Firebase Authentication.
+                No realiza restauraciones automáticas.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- APLICACIÓN -->
+
+    <section class="config-card">
+
+        <div class="card-heading">
+
+            <div class="card-icon">
+                <i class="bi bi-phone"></i>
+            </div>
+
+            <div>
+                <h3>Aplicación</h3>
+                <p>Instalación y actualizaciones</p>
+            </div>
+
+        </div>
+
+        <div class="card-content">
+
+            <div class="d-flex justify-content-between mb-3">
+
+                <span class="small">Versión</span>
+
+                <strong class="small">2.0.0</strong>
+
+            </div>
+
+            <div class="d-flex justify-content-between mb-3">
+
+                <span class="small">Conexión</span>
+
+                <strong class="small" data-estado-conexion>
+                    Comprobando...
+                </strong>
+
+            </div>
+
+            <button type="button"
+            class="btn-outline-app w-100 mb-2"
+            data-instalar-app
+            hidden>
+
+                <i class="bi bi-download me-2"></i>
+                Instalar aplicación
+
+            </button>
+
+            <button type="button"
+            class="btn-outline-app w-100"
+            data-actualizar-app>
+
+                <i class="bi bi-arrow-repeat me-2"></i>
+                Buscar actualizaciones
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <footer class="app-footer">
+
+        Voz Angelical · Versión 2.0.0
+
+        <br>
+
+        Sistema Integral de Gestión Musical
+
+    </footer>
+
+</main>
+
+<!-- NAVEGACIÓN INFERIOR -->
+
+<nav class="bottom-nav" aria-label="Navegación principal">
+
+    <a href="inicio.html" class="nav-item-app">
+        <i class="bi bi-house-door"></i>
+        Inicio
+    </a>
+
+    <a href="agenda.html" class="nav-item-app">
+        <i class="bi bi-calendar3"></i>
+        Agenda
+    </a>
+
+    <a href="contratos.html" class="nav-item-app">
+        <i class="bi bi-file-earmark-text"></i>
+        Contratos
+    </a>
+
+    <a href="socios.html" class="nav-item-app">
+        <i class="bi bi-people"></i>
+        Socios
+    </a>
+
+    <button class="nav-item-app active"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#menuMas">
+
+        <i class="bi bi-grid-fill"></i>
+        Más
+
+    </button>
+
+</nav>
+
+<!-- MENÚ MÁS -->
+
+<div class="offcanvas offcanvas-bottom"
+id="menuMas"
+tabindex="-1"
+aria-labelledby="tituloMenu">
+
+    <div class="offcanvas-header">
+
+        <h5 class="offcanvas-title" id="tituloMenu">
+            Más opciones
+        </h5>
+
+        <button class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Cerrar"></button>
+
+    </div>
+
+    <div class="offcanvas-body">
+
+        <a href="clientes.html" class="menu-option">
+            <i class="bi bi-person-lines-fill"></i>
+            Clientes
+        </a>
+
+        <a href="servicios.html" class="menu-option">
+            <i class="bi bi-music-note-beamed"></i>
+            Servicios
+        </a>
+
+        <a href="estadisticas.html" class="menu-option">
+            <i class="bi bi-bar-chart-line"></i>
+            Estadísticas
+        </a>
+
+        <a href="configuracion.html" class="menu-option active">
+            <i class="bi bi-gear-fill"></i>
+            Configuración
+        </a>
+
+        <a href="usuarios.html" class="menu-option">
+            <i class="bi bi-person-circle"></i>
+            Mi cuenta
+        </a>
+
+        <button class="menu-option" id="btnCerrarSesion">
+            <i class="bi bi-box-arrow-right"></i>
+            Cerrar sesión
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+
+import { db } from "./firebase.js";
+
+import {
+    protegerPagina,
+    cerrarSesion
+} from "./auth.js";
+
+import {
+    doc,
+    collection,
+    getDocFromServer,
+    getDocsFromServer,
+    runTransaction,
+    setDoc,
+    deleteDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const $ = id => document.getElementById(id);
+
+const referenciaGeneral = doc(
+    db,
+    "configuracion",
+    "general"
+);
+
+const referenciaFirma = doc(
+    db,
+    "configuracion",
+    "firma"
+);
+
+let usuarioActual = null;
+
+let sistemaListo = false;
+
+let firmaGuardada = false;
+
+let firmaDibujada = false;
+
+let dibujando = false;
+
+let guardandoGeneral = false;
+
+let operacionFirma = false;
+
+let exportando = false;
+
+let cambiosPendientes = false;
+
+let versionGeneral = 0;
+
+// ======================================
+// CONFIGURACIÓN PREDETERMINADA
+// ======================================
+
+const valoresPredeterminados = {
+
+    nombreComercial: "Voz Angelical",
+
+    representante: "",
+
+    rfc: "",
+
+    estado: "Tlaxcala",
+
+    domicilio: "",
+
+    descripcion:
+        "Servicios musicales para misas y rosarios.",
+
+    whatsapp: "2461243905",
+
+    correo: "",
+
+    facebook: "Voz Angelical",
+
+    instagram: "@vozangelical01",
+
+    sitioWeb: "",
+
+    banco: "",
+
+    titular: "",
+
+    clabe: "",
+
+    cuenta: "",
+
+    concepto: "VOZ ANGELICAL",
+
+    duracionPredeterminada: 60,
+
+    margenTraslado: 30,
+
+    horaPredeterminada: "12:00",
+
+    zonaHoraria: "America/Mexico_City",
+
+    moneda: "MXN"
+
+};
+
+const campos = [
+
+    "nombreComercial",
+
+    "representante",
+
+    "rfc",
+
+    "estado",
+
+    "domicilio",
+
+    "descripcion",
+
+    "whatsapp",
+
+    "correo",
+
+    "facebook",
+
+    "instagram",
+
+    "sitioWeb",
+
+    "banco",
+
+    "titular",
+
+    "clabe",
+
+    "cuenta",
+
+    "concepto",
+
+    "duracionPredeterminada",
+
+    "margenTraslado",
+
+    "horaPredeterminada"
+
+];
+
+// ======================================
+// MENSAJES
+// ======================================
+
+function mensaje(id, texto, tipo = "success") {
+
+    const elemento = $(id);
+
+    elemento.className = `alert alert-${tipo} mt-3`;
+
+    elemento.textContent = texto;
+
+    elemento.hidden = false;
+
+}
+
+function mensajeError(error) {
+
+    if (error.code === "permission-denied") {
+
+        return "No tienes permisos para realizar esta operación.";
+
+    }
+
+    if (error.code === "unavailable") {
+
+        return "Firebase no está disponible. Verifica tu conexión.";
+
+    }
+
+    return error.message || "Ocurrió un error inesperado.";
+
+}
+
+// ======================================
+// ESTADO DE BOTONES
+// ======================================
+
+function actualizarBotones() {
+
+    const disponible = sistemaListo && navigator.onLine;
+
+    $("btnGuardar").disabled =
+        !disponible || guardandoGeneral;
+
+    $("btnGuardarFirma").disabled =
+        !disponible || !firmaDibujada || operacionFirma;
+
+    $("btnEliminarFirma").disabled =
+        !disponible || !firmaGuardada || operacionFirma;
+
+    $("btnRespaldo").disabled =
+        !disponible || exportando;
+
+    $("btnLimpiarFirma").disabled = operacionFirma;
+
+    $("btnSubirFirma").disabled = operacionFirma;
+
+}
+
+// ======================================
+// CARGAR CONFIGURACIÓN
+// ======================================
+
+async function cargarConfiguracion() {
+
+    const resultado = await getDocFromServer(
+        referenciaGeneral
+    );
+
+    const datos = {
+
+        ...valoresPredeterminados,
+
+        ...(resultado.exists() ? resultado.data() : {})
+
+    };
+
+    versionGeneral = Number(datos.version) || 0;
+
+    campos.forEach(campo => {
+
+        $(campo).value = datos[campo] ?? "";
+
+    });
+
+}
+
+// ======================================
+// VALIDAR CLABE
+// ======================================
+
+function validarClabe(clabe) {
+
+    if (!/^\d{18}$/.test(clabe)) {
+
+        return false;
+
+    }
+
+    const pesos = [3,7,1];
+
+    let suma = 0;
+
+    for (let i = 0; i < 17; i++) {
+
+        suma += (
+            Number(clabe[i]) * pesos[i % 3]
+        ) % 10;
+
+    }
+
+    const digito = (10 - suma % 10) % 10;
+
+    return digito === Number(clabe[17]);
+
+}
+
+["clabe","cuenta"].forEach(id => {
+
+    $(id).addEventListener("input", () => {
+
+        $(id).value = $(id).value.replace(/\D/g,"");
+
+    });
+
+});
+
+// ======================================
+// GUARDAR CONFIGURACIÓN
+// ======================================
+
+$("formConfiguracion").addEventListener(
+    "submit",
+    async evento => {
+
+        evento.preventDefault();
+
+        if (!sistemaListo ||
+            !navigator.onLine ||
+            guardandoGeneral) return;
+
+        const datos = {};
+
+        campos.forEach(campo => {
+
+            datos[campo] = $(campo).value.trim();
+
+        });
+
+        datos.nombreComercial =
+            datos.nombreComercial.trim();
+
+        if (!datos.nombreComercial) {
+
+            mensaje(
+                "mensajeGeneral",
+                "Escribe el nombre comercial.",
+                "danger"
+            );
+
+            return;
+
+        }
+
+        datos.rfc = datos.rfc.toUpperCase();
+
+        datos.duracionPredeterminada =
+            Number(datos.duracionPredeterminada);
+
+        datos.margenTraslado =
+            Number(datos.margenTraslado);
+
+        datos.zonaHoraria = "America/Mexico_City";
+
+        datos.moneda = "MXN";
+
+        if (
+            !Number.isInteger(datos.duracionPredeterminada) ||
+            datos.duracionPredeterminada < 1 ||
+            datos.duracionPredeterminada > 1440 ||
+            !Number.isInteger(datos.margenTraslado) ||
+            datos.margenTraslado < 0 ||
+            datos.margenTraslado > 1440
+        ) {
+
+            mensaje(
+                "mensajeGeneral",
+                "Revisa la duración y el tiempo de traslado.",
+                "danger"
+            );
+
+            return;
+
+        }
+
+        if (datos.clabe && !validarClabe(datos.clabe)) {
+
+            mensaje(
+                "mensajeGeneral",
+                "La CLABE interbancaria no es válida.",
+                "danger"
+            );
+
+            $("clabe").focus();
+
+            return;
+
+        }
+
+        guardandoGeneral = true;
+
+        actualizarBotones();
+
+        $("btnGuardar").textContent = "Guardando...";
+
+        const controles = [
+            ...$("formConfiguracion").querySelectorAll(
+                "input,textarea,select"
+            )
+        ];
+
+        controles.forEach(control => control.disabled = true);
+
+        try {
+
+            const nuevaVersion = await runTransaction(
+                db,
+                async transaccion => {
+
+                    const anterior = await transaccion.get(
+                        referenciaGeneral
+                    );
+
+                    const versionServidor = anterior.exists()
+                        ? Number(anterior.data().version) || 0
+                        : 0;
+
+                    if (versionServidor !== versionGeneral) {
+
+                        throw new Error(
+                            "La configuración cambió en otro dispositivo. " +
+                            "Recarga la página antes de guardar."
+                        );
+
+                    }
+
+                    const nuevo = {
+
+                        ...datos,
+
+                        version: versionServidor + 1,
+
+                        actualizadoEn: serverTimestamp(),
+
+                        actualizadoPor: usuarioActual.uid
+
+                    };
+
+                    if (!anterior.exists()) {
+
+                        nuevo.creadoEn = serverTimestamp();
+
+                    }
+
+                    transaccion.set(
+                        referenciaGeneral,
+                        nuevo,
+                        { merge: true }
+                    );
+
+                    return nuevo.version;
+
+                }
+            );
+
+            versionGeneral = nuevaVersion;
+
+            cambiosPendientes = false;
+
+            mensaje(
+                "mensajeGeneral",
+                "Configuración guardada correctamente."
+            );
+
+        } catch (error) {
+
+            mensaje(
+                "mensajeGeneral",
+                mensajeError(error),
+                "danger"
+            );
+
+        } finally {
+
+            controles.forEach(
+                control => control.disabled = false
+            );
+
+            guardandoGeneral = false;
+
+            $("btnGuardar").innerHTML =
+                '<i class="bi bi-floppy me-2"></i>' +
+                'Guardar configuración general';
+
+            actualizarBotones();
+
+            $("mensajeGeneral").scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }
+
+    }
+);
+
+// ======================================
+// DETECTAR CAMBIOS SIN GUARDAR
+// ======================================
+
+$("formConfiguracion").addEventListener(
+    "input",
+    () => {
+
+        cambiosPendientes = true;
+
+    }
+);
+
+window.addEventListener("beforeunload", evento => {
+
+    if (cambiosPendientes || firmaDibujada) {
+
+        evento.preventDefault();
+
+        evento.returnValue = "";
+
+    }
+
+});
+
+document.addEventListener("click", evento => {
+
+    const enlace = evento.target.closest("a[href]");
+
+    if (!enlace) return;
+
+    if (cambiosPendientes || firmaDibujada) {
+
+        if (!confirm(
+            "Tienes cambios sin guardar. ¿Deseas salir?"
+        )) {
+
+            evento.preventDefault();
+
+        }
+
+    }
+
+});
+
+// ======================================
+// CANVAS DE FIRMA
+// ======================================
+
+const canvas = $("canvasFirma");
+
+const contexto = canvas.getContext("2d");
+
+contexto.strokeStyle = "#202020";
+
+contexto.fillStyle = "#202020";
+
+contexto.lineWidth = 4;
+
+contexto.lineCap = "round";
+
+contexto.lineJoin = "round";
+
+let punteroActivo = null;
+
+function coordenadas(evento) {
+
+    const rect = canvas.getBoundingClientRect();
+
+    return {
+
+        x: (evento.clientX - rect.left) *
+            canvas.width / rect.width,
+
+        y: (evento.clientY - rect.top) *
+            canvas.height / rect.height
+
+    };
+
+}
+
+canvas.addEventListener("pointerdown", evento => {
+
+    if (operacionFirma || !sistemaListo) return;
+
+    if (punteroActivo !== null) return;
+
+    if (evento.pointerType === "mouse" &&
+        evento.button !== 0) return;
+
+    evento.preventDefault();
+
+    punteroActivo = evento.pointerId;
+
+    canvas.setPointerCapture(evento.pointerId);
+
+    const punto = coordenadas(evento);
+
+    dibujando = true;
+
+    contexto.beginPath();
+
+    contexto.arc(punto.x,punto.y,2,0,Math.PI * 2);
+
+    contexto.fill();
+
+    contexto.beginPath();
+
+    contexto.moveTo(punto.x,punto.y);
+
+    firmaDibujada = true;
+
+    actualizarBotones();
+
+});
+
+canvas.addEventListener("pointermove", evento => {
+
+    if (!dibujando ||
+        evento.pointerId !== punteroActivo) return;
+
+    const punto = coordenadas(evento);
+
+    contexto.lineTo(punto.x,punto.y);
+
+    contexto.stroke();
+
+});
+
+function terminarTrazo(evento) {
+
+    if (evento.pointerId !== punteroActivo) return;
+
+    dibujando = false;
+
+    punteroActivo = null;
+
+    contexto.closePath();
+
+}
+
+canvas.addEventListener("pointerup", terminarTrazo);
+
+canvas.addEventListener("pointercancel", terminarTrazo);
+
+canvas.addEventListener("lostpointercapture", terminarTrazo);
+
+// ======================================
+// LIMPIAR FIRMA
+// ======================================
+
+function limpiarFirma() {
+
+    contexto.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    firmaDibujada = false;
+
+    actualizarBotones();
+
+}
+
+$("btnLimpiarFirma").addEventListener(
+    "click",
+    limpiarFirma
+);
+
+// ======================================
+// IMPORTAR IMAGEN PNG
+// ======================================
+
+$("btnSubirFirma").addEventListener("click", () => {
+
+    $("archivoFirma").click();
+
+});
+
+$("archivoFirma").addEventListener(
+    "change",
+    async evento => {
+
+        const archivo = evento.target.files[0];
+
+        if (!archivo || operacionFirma) return;
+
+        if (archivo.type !== "image/png") {
+
+            mensaje(
+                "mensajeFirma",
+                "Selecciona una imagen PNG.",
+                "danger"
+            );
+
+            evento.target.value = "";
+
+            return;
+
+        }
+
+        if (archivo.size > 5 * 1024 * 1024) {
+
+            mensaje(
+                "mensajeFirma",
+                "La imagen no puede superar los 5 MB.",
+                "danger"
+            );
+
+            evento.target.value = "";
+
+            return;
+
+        }
+
+        const url = URL.createObjectURL(archivo);
+
+        operacionFirma = true;
+
+        actualizarBotones();
+
+        try {
+
+            const imagen = new Image();
+
+            imagen.src = url;
+
+            await imagen.decode();
+
+            if (imagen.naturalWidth *
+                imagen.naturalHeight > 16000000) {
+
+                throw new Error(
+                    "La imagen tiene demasiada resolución."
+                );
+
+            }
+
+            limpiarFirma();
+
+            const escala = Math.min(
+
+                (canvas.width - 30) / imagen.naturalWidth,
+
+                (canvas.height - 30) / imagen.naturalHeight
+
+            );
+
+            const ancho = imagen.naturalWidth * escala;
+
+            const alto = imagen.naturalHeight * escala;
+
+            contexto.drawImage(
+
+                imagen,
+
+                (canvas.width - ancho) / 2,
+
+                (canvas.height - alto) / 2,
+
+                ancho,
+
+                alto
+
+            );
+
+            firmaDibujada = true;
+
+        } catch (error) {
+
+            mensaje(
+                "mensajeFirma",
+                mensajeError(error),
+                "danger"
+            );
+
+        } finally {
+
+            URL.revokeObjectURL(url);
+
+            evento.target.value = "";
+
+            operacionFirma = false;
+
+            actualizarBotones();
+
+        }
+
+    }
+);
+
+// ======================================
+// PREPARAR IMAGEN DE FIRMA
+// ======================================
+
+function generarImagenFirma() {
+
+    const ancho = canvas.width;
+
+    const alto = canvas.height;
+
+    const pixeles = contexto.getImageData(
+        0,0,ancho,alto
+    ).data;
+
+    let izquierda = ancho;
+
+    let derecha = -1;
+
+    let arriba = alto;
+
+    let abajo = -1;
+
+    for (let y = 0; y < alto; y++) {
+
+        for (let x = 0; x < ancho; x++) {
+
+            const i = (y * ancho + x) * 4;
+
+            const visible = pixeles[i + 3] > 30;
+
+            const oscuro = Math.min(
+                pixeles[i],
+                pixeles[i + 1],
+                pixeles[i + 2]
+            ) < 210;
+
+            if (visible && oscuro) {
+
+                izquierda = Math.min(izquierda,x);
+
+                derecha = Math.max(derecha,x);
+
+                arriba = Math.min(arriba,y);
+
+                abajo = Math.max(abajo,y);
+
+            }
+
+        }
+
+    }
+
+    if (derecha < izquierda || abajo < arriba) {
+
+        throw new Error("La firma está vacía.");
+
+    }
+
+    const margen = 12;
+
+    izquierda = Math.max(0,izquierda - margen);
+
+    arriba = Math.max(0,arriba - margen);
+
+    derecha = Math.min(ancho - 1,derecha + margen);
+
+    abajo = Math.min(alto - 1,abajo + margen);
+
+    const recorteAncho = derecha - izquierda + 1;
+
+    const recorteAlto = abajo - arriba + 1;
+
+    const escala = Math.min(
+        1,
+        600 / recorteAncho,
+        220 / recorteAlto
+    );
+
+    const temporal = document.createElement("canvas");
+
+    temporal.width = Math.max(
+        1,
+        Math.round(recorteAncho * escala)
+    );
+
+    temporal.height = Math.max(
+        1,
+        Math.round(recorteAlto * escala)
+    );
+
+    const ctx = temporal.getContext("2d");
+
+    ctx.drawImage(
+
+        canvas,
+
+        izquierda,
+
+        arriba,
+
+        recorteAncho,
+
+        recorteAlto,
+
+        0,
+
+        0,
+
+        temporal.width,
+
+        temporal.height
+
+    );
+
+    const imagen = temporal.toDataURL("image/png");
+
+    if (imagen.length > 450000) {
+
+        throw new Error(
+            "La firma es demasiado pesada. " +
+            "Utiliza una imagen más sencilla."
+        );
+
+    }
+
+    return imagen;
+
+}
+
+// ======================================
+// MOSTRAR FIRMA REGISTRADA
+// ======================================
+
+function mostrarFirma(imagen) {
+
+    firmaGuardada = Boolean(
+        typeof imagen === "string" &&
+        imagen.startsWith("data:image/png;base64,")
+    );
+
+    $("vistaFirma").hidden = !firmaGuardada;
+
+    if (firmaGuardada) {
+
+        $("imagenFirma").src = imagen;
+
+        $("estadoFirma").textContent =
+            "Tienes una firma registrada.";
+
+    } else {
+
+        $("imagenFirma").removeAttribute("src");
+
+        $("estadoFirma").textContent =
+            "Todavía no tienes una firma registrada.";
+
+    }
+
+    actualizarBotones();
+
+}
+
+async function cargarFirma() {
+
+    const resultado = await getDocFromServer(
+        referenciaFirma
+    );
+
+    mostrarFirma(
+        resultado.exists()
+            ? resultado.data().imagen
+            : null
+    );
+
+}
+
+// ======================================
+// GUARDAR FIRMA
+// ======================================
+
+$("btnGuardarFirma").addEventListener(
+    "click",
+    async () => {
+
+        if (!sistemaListo ||
+            !navigator.onLine ||
+            !firmaDibujada ||
+            operacionFirma) return;
+
+        if (!confirm(
+
+            "¿Autorizas guardar esta firma manuscrita " +
+            "para utilizarla posteriormente en los contratos?"
+
+        )) return;
+
+        operacionFirma = true;
+
+        actualizarBotones();
+
+        try {
+
+            const imagen = generarImagenFirma();
+
+            await runTransaction(
+                db,
+                async transaccion => {
+
+                    const anterior = await transaccion.get(
+                        referenciaFirma
+                    );
+
+                    const version = anterior.exists()
+                        ? Number(anterior.data().version) || 0
+                        : 0;
+
+                    transaccion.set(referenciaFirma, {
+
+                        imagen,
+
+                        formato: "image/png",
+
+                        tipo: "firma-manuscrita",
+
+                        version: version + 1,
+
+                        actualizadoPor: usuarioActual.uid,
+
+                        actualizadoEn: serverTimestamp()
+
+                    });
+
+                }
+            );
+
+            mostrarFirma(imagen);
+
+            limpiarFirma();
+
+            mensaje(
+                "mensajeFirma",
+                "Firma guardada correctamente."
+            );
+
+        } catch (error) {
+
+            mensaje(
+                "mensajeFirma",
+                mensajeError(error),
+                "danger"
+            );
+
+        } finally {
+
+            operacionFirma = false;
+
+            actualizarBotones();
+
+        }
+
+    }
+);
+
+// ======================================
+// ELIMINAR FIRMA
+// ======================================
+
+$("btnEliminarFirma").addEventListener(
+    "click",
+    async () => {
+
+        if (!sistemaListo ||
+            !navigator.onLine ||
+            !firmaGuardada ||
+            operacionFirma) return;
+
+        if (!confirm(
+            "¿Deseas eliminar la firma registrada?"
+        )) return;
+
+        operacionFirma = true;
+
+        actualizarBotones();
+
+        try {
+
+            // Se conserva el número de versión,
+            // pero se elimina la imagen.
+
+            await runTransaction(
+                db,
+                async transaccion => {
+
+                    const anterior = await transaccion.get(
+                        referenciaFirma
+                    );
+
+                    const version = anterior.exists()
+                        ? Number(anterior.data().version) || 0
+                        : 0;
+
+                    transaccion.set(referenciaFirma, {
+
+                        imagen: null,
+
+                        version: version + 1,
+
+                        eliminado: true,
+
+                        actualizadoPor: usuarioActual.uid,
+
+                        actualizadoEn: serverTimestamp()
+
+                    });
+
+                }
+            );
+
+            mostrarFirma(null);
+
+            limpiarFirma();
+
+            mensaje(
+                "mensajeFirma",
+                "La firma registrada fue eliminada."
+            );
+
+        } catch (error) {
+
+            mensaje(
+                "mensajeFirma",
+                mensajeError(error),
+                "danger"
+            );
+
+        } finally {
+
+            operacionFirma = false;
+
+            actualizarBotones();
+
+        }
+
+    }
+);
+
+// ======================================
+// RESPALDO DE INFORMACIÓN
+// ======================================
+
+const coleccionesRespaldo = [
+
+    "clientes",
+
+    "servicios",
+
+    "eventos",
+
+    "contratos",
+
+    "socios",
+
+    "pagosSocios",
+
+    "configuracion",
+
+    "contadores",
+
+    "usuarios"
+
+];
+
+function prepararRespaldo(valor, opciones) {
+
+    if (valor === null ||
+        typeof valor !== "object") {
+
+        if (
+            !opciones.firma &&
+            typeof valor === "string" &&
+            valor.startsWith("data:image/")
+        ) {
+
+            return null;
+
+        }
+
+        return valor;
+
+    }
+
+    if (typeof valor.toDate === "function") {
+
+        return {
+
+            tipo: "timestamp",
+
+            valor: valor.toDate().toISOString()
+
+        };
+
+    }
+
+    if (Array.isArray(valor)) {
+
+        return valor.map(
+            item => prepararRespaldo(item,opciones)
+        );
+
+    }
+
+    const resultado = {};
+
+    const camposBancarios = [
+
+        "banco",
+
+        "titular",
+
+        "clabe",
+
+        "cuenta",
+
+        "concepto",
+
+        "numerocuenta",
+
+        "datosbancarios"
+
+    ];
+
+    for (const [clave,dato] of Object.entries(valor)) {
+
+        const normalizada = clave.toLowerCase();
+
+        if (!opciones.bancos &&
+            camposBancarios.includes(normalizada)) {
+
+            continue;
+
+        }
+
+        if (!opciones.firma &&
+            normalizada.includes("firma")) {
+
+            continue;
+
+        }
+
+        resultado[clave] = prepararRespaldo(
+            dato,
+            opciones
+        );
+
+    }
+
+    return resultado;
+
+}
+
+$("btnRespaldo").addEventListener(
+    "click",
+    async () => {
+
+        if (!sistemaListo ||
+            !navigator.onLine ||
+            exportando) return;
+
+        if (!confirm(
+
+            "Se descargará un respaldo con información privada. " +
+            "¿Deseas continuar?"
+
+        )) return;
+
+        exportando = true;
+
+        actualizarBotones();
+
+        $("btnRespaldo").textContent =
+            "Preparando respaldo...";
+
+        const opciones = {
+
+            bancos: $("incluirBancos").checked,
+
+            firma: $("incluirFirma").checked
+
+        };
+
+        try {
+
+            const respaldo = {
+
+                aplicacion: "Voz Angelical",
+
+                version: "2.0.0",
+
+                fechaExportacion: new Date().toISOString(),
+
+                opciones,
+
+                colecciones: {}
+
+            };
+
+            for (const nombre of coleccionesRespaldo) {
+
+                $("btnRespaldo").textContent =
+                    `Exportando ${nombre}...`;
+
+                const resultado = await getDocsFromServer(
+                    collection(db,nombre)
+                );
+
+                respaldo.colecciones[nombre] = resultado.docs
+
+                    .filter(documento => {
+
+                        return !(
+                            nombre === "configuracion" &&
+                            documento.id === "firma" &&
+                            !opciones.firma
+                        );
+
+                    })
+
+                    .map(documento => ({
+
+                        id: documento.id,
+
+                        datos: prepararRespaldo(
+                            documento.data(),
+                            opciones
+                        )
+
+                    }));
+
+            }
+
+            const archivo = new Blob(
+
+                [JSON.stringify(respaldo,null,2)],
+
+                { type: "application/json" }
+
+            );
+
+            const url = URL.createObjectURL(archivo);
+
+            const enlace = document.createElement("a");
+
+            enlace.href = url;
+
+            enlace.download =
+                "voz-angelical-respaldo-" +
+                new Date().toISOString().slice(0,10) +
+                ".json";
+
+            document.body.appendChild(enlace);
+
+            enlace.click();
+
+            enlace.remove();
+
+            setTimeout(
+                () => URL.revokeObjectURL(url),
+                60000
+            );
+
+            mensaje(
+
+                "mensajeRespaldo",
+
+                "Respaldo generado. Revisa las descargas de tu dispositivo."
+
+            );
+
+        } catch (error) {
+
+            mensaje(
+
+                "mensajeRespaldo",
+
+                mensajeError(error),
+
+                "danger"
+
+            );
+
+        } finally {
+
+            exportando = false;
+
+            $("btnRespaldo").innerHTML =
+                '<i class="bi bi-download me-2"></i>' +
+                'Descargar respaldo JSON';
+
+            actualizarBotones();
+
+        }
+
+    }
+);
+
+// ======================================
+// CERRAR SESIÓN
+// ======================================
+
+$("btnCerrarSesion").addEventListener(
+    "click",
+    async () => {
+
+        if (!confirm(
+
+            cambiosPendientes || firmaDibujada
+
+                ? "Hay cambios sin guardar. ¿Deseas cerrar sesión?"
+
+                : "¿Deseas cerrar sesión?"
+
+        )) return;
+
+        try {
+
+            await cerrarSesion();
+
+        } catch (error) {
+
+            mensaje(
+                "mensajeGeneral",
+                mensajeError(error),
+                "danger"
+            );
+
+        }
+
+    }
+);
+
+// ======================================
+// ESTADO DE CONEXIÓN
+// ======================================
+
+window.addEventListener(
+    "online",
+    actualizarBotones
+);
+
+window.addEventListener(
+    "offline",
+    actualizarBotones
+);
+
+// ======================================
+// INICIALIZACIÓN
+// ======================================
+
+try {
+
+    usuarioActual = await protegerPagina();
+
+    await Promise.all([
+
+        cargarConfiguracion(),
+
+        cargarFirma()
+
+    ]);
+
+    sistemaListo = true;
+
+    $("aplicacion").hidden = false;
+
+    $("pantallaCarga").hidden = true;
+
+    actualizarBotones();
+
+    window.VozAngelicalTema?.aplicar();
+
+} catch (error) {
+
+    $("textoCarga").textContent =
+        mensajeError(error);
+
+    $("btnReintentar").hidden = false;
+
+    $("pantallaCarga")
+        .querySelector(".spinner-border")
+        .hidden = true;
+
+}
+
+</script>
+
+<script src="pwa.js" defer></script>
+
+</body>
+</html>

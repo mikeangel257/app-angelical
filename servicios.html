@@ -1,0 +1,2762 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="theme-color" content="#F5EFE4">
+
+<title>Servicios | Voz Angelical</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<script src="tema.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =====================================
+   PALETA DE COLORES
+===================================== */
+
+:root {
+    --dorado: #B48A42;
+    --dorado-oscuro: #8A632B;
+    --fondo: #F5EFE4;
+    --tarjeta: #FFFFFF;
+    --texto: #30271D;
+    --secundario: #796C59;
+    --borde: #E6D8C1;
+    --campo: #FCFAF6;
+    --suave: #EDE3D1;
+    --acento: #8A632B;
+    --verde: #328653;
+    --rojo: #C74D4D;
+    --sidebar: 260px;
+}
+
+html[data-tema="oscuro"] {
+    --fondo: #171614;
+    --tarjeta: #252321;
+    --texto: #F5EFE4;
+    --secundario: #C1B6A5;
+    --borde: #413A30;
+    --campo: #1D1B19;
+    --suave: #33291B;
+    --acento: #DCC18A;
+    --verde: #68C78A;
+    --rojo: #F07878;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* =====================================
+   ENCABEZADO
+===================================== */
+
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    padding-top: max(14px,env(safe-area-inset-top));
+    background: var(--tarjeta);
+    border-bottom: 1px solid var(--borde);
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--dorado);
+}
+
+.header-brand h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--acento);
+    margin: 0;
+}
+
+.header-brand small {
+    font-size: 10px;
+    color: var(--secundario);
+}
+
+.icon-button {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    background: var(--campo);
+    color: var(--acento);
+    font-size: 19px;
+}
+
+/* =====================================
+   CONTENIDO PRINCIPAL
+===================================== */
+
+.main-content {
+    max-width: 1400px;
+    margin: auto;
+    padding: 22px 16px;
+    padding-bottom: calc(110px + env(safe-area-inset-bottom));
+}
+
+.page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--acento);
+    margin-bottom: 10px;
+}
+
+.page-description {
+    color: var(--secundario);
+    font-size: 12px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+/* =====================================
+   RESUMEN
+===================================== */
+
+.summary-card {
+    background: linear-gradient(135deg,#63451F,#A77B35);
+    color: white;
+    border-radius: 22px;
+    padding: 22px;
+    margin-bottom: 24px;
+}
+
+.summary-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 10px;
+}
+
+.summary-item {
+    text-align: center;
+}
+
+.summary-item strong {
+    display: block;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.summary-item span {
+    font-size: 10px;
+    color: #F5EFE4;
+}
+
+.summary-footer {
+    border-top: 1px solid rgba(255,255,255,.2);
+    margin-top: 20px;
+    padding-top: 14px;
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+/* =====================================
+   PAQUETES MUSICALES
+===================================== */
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+
+.package-card {
+    min-width: 0;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,.04);
+}
+
+.package-card.inactivo {
+    border-style: dashed;
+}
+
+.package-header {
+    padding: 20px;
+    background: var(--suave);
+    border-bottom: 1px solid var(--borde);
+}
+
+.package-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.package-number {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--acento);
+    font-weight: 600;
+}
+
+.status-label {
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.status-active {
+    color: var(--verde);
+    background: rgba(50,134,83,.12);
+}
+
+.status-inactive {
+    color: var(--rojo);
+    background: rgba(199,77,77,.12);
+}
+
+.package-icon {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: var(--tarjeta);
+    color: var(--acento);
+    font-size: 31px;
+    margin: 20px auto 12px;
+}
+
+.package-name {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--acento);
+    margin: 0;
+}
+
+.package-subtitle {
+    text-align: center;
+    color: var(--secundario);
+    font-size: 11px;
+    margin-top: 6px;
+}
+
+.package-body {
+    padding: 20px;
+}
+
+.price-label {
+    text-align: center;
+    font-size: 11px;
+    color: var(--secundario);
+}
+
+.package-price {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--acento);
+    overflow-wrap: anywhere;
+}
+
+.price-currency {
+    text-align: center;
+    font-size: 10px;
+    color: var(--secundario);
+}
+
+.package-features {
+    margin: 20px 0;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--borde);
+    font-size: 12px;
+}
+
+.feature i {
+    color: var(--verde);
+    font-size: 17px;
+}
+
+.package-description {
+    font-size: 11px;
+    color: var(--secundario);
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+/* =====================================
+   DESGLOSE FINANCIERO
+===================================== */
+
+.finance-box {
+    padding: 15px;
+    background: var(--campo);
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    margin: 18px 0;
+}
+
+.finance-title {
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.finance-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 11px;
+}
+
+.finance-row span {
+    color: var(--secundario);
+}
+
+.finance-total {
+    border-top: 1px solid var(--borde);
+    padding-top: 12px;
+    margin-bottom: 0;
+}
+
+.finance-total strong {
+    font-size: 19px;
+    color: var(--verde);
+}
+
+.finance-note {
+    color: var(--secundario);
+    font-size: 9px;
+    line-height: 1.7;
+    margin-top: 12px;
+}
+
+/* =====================================
+   BOTONES
+===================================== */
+
+.btn-gold {
+    width: 100%;
+    min-height: 50px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(135deg,#8A632B,#A77B35);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.btn-outline-app {
+    min-height: 46px;
+    padding: 10px 14px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--campo);
+    color: var(--acento);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.btn-danger-app {
+    width: 100%;
+    min-height: 46px;
+    border: 1px solid var(--rojo);
+    border-radius: 12px;
+    background: transparent;
+    color: var(--rojo);
+    font-size: 12px;
+}
+
+button:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+.package-actions {
+    display: grid;
+    gap: 9px;
+}
+
+/* =====================================
+   FORMULARIOS Y MODALES
+===================================== */
+
+.modal-content {
+    background: var(--tarjeta);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 22px;
+}
+
+.modal-header,
+.modal-footer {
+    border-color: var(--borde);
+}
+
+.modal-title {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--acento);
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.form-label {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.form-control {
+    min-height: 50px;
+    background: var(--campo);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.form-control:focus {
+    background: var(--campo);
+    color: var(--texto);
+    border-color: var(--dorado);
+    box-shadow: 0 0 0 3px rgba(180,138,66,.15);
+}
+
+textarea.form-control {
+    min-height: 100px;
+}
+
+.form-text {
+    font-size: 10px;
+    color: var(--secundario);
+    line-height: 1.8;
+}
+
+.info-box {
+    padding: 15px;
+    background: var(--suave);
+    border-radius: 13px;
+    font-size: 11px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.alert {
+    font-size: 12px;
+    line-height: 1.7;
+    border-radius: 13px;
+}
+
+/* =====================================
+   NAVEGACIÓN INFERIOR
+===================================== */
+
+.bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    display: grid;
+    grid-template-columns: repeat(5,minmax(0,1fr));
+    background: var(--tarjeta);
+    border-top: 1px solid var(--borde);
+    padding: 9px 5px;
+    padding-bottom: calc(9px + env(safe-area-inset-bottom));
+}
+
+.nav-item-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-height: 52px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--secundario);
+    font-size: 9px;
+}
+
+.nav-item-app i {
+    font-size: 21px;
+}
+
+.nav-item-app.active {
+    color: var(--acento);
+    background: var(--suave);
+    font-weight: 600;
+}
+
+/* =====================================
+   MENÚ ADICIONAL
+===================================== */
+
+.offcanvas {
+    background: var(--tarjeta);
+    color: var(--texto);
+}
+
+.offcanvas-bottom {
+    height: auto;
+    max-height: 85dvh;
+    border-radius: 25px 25px 0 0;
+}
+
+.offcanvas-title {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: var(--acento);
+}
+
+.menu-option {
+    width: 100%;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px;
+    margin-bottom: 8px;
+    background: var(--campo);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.menu-option i {
+    font-size: 18px;
+    color: var(--acento);
+}
+
+.menu-option.active {
+    background: var(--suave);
+    border-color: var(--dorado);
+}
+
+.sidebar {
+    display: none;
+}
+
+/* =====================================
+   PANTALLA DE CARGA
+===================================== */
+
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 25px;
+    background: var(--fondo);
+    text-align: center;
+}
+
+.loading-screen img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+
+.loading-screen p {
+    font-size: 12px;
+    color: var(--secundario);
+}
+
+.spinner-border {
+    color: var(--dorado);
+}
+
+.app-footer {
+    text-align: center;
+    color: var(--secundario);
+    font-size: 10px;
+    padding: 30px 10px;
+    line-height: 1.9;
+}
+
+/* =====================================
+   TABLETAS Y COMPUTADORAS
+===================================== */
+
+@media(min-width:700px) {
+
+    .packages-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media(min-width:992px) {
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: var(--sidebar);
+        display: flex;
+        flex-direction: column;
+        padding: 20px 15px;
+        background: var(--tarjeta);
+        border-right: 1px solid var(--borde);
+        overflow-y: auto;
+    }
+
+    .sidebar-brand {
+        text-align: center;
+        padding: 10px 0 25px;
+    }
+
+    .sidebar-brand img {
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+    }
+
+    .sidebar-brand h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 18px;
+        color: var(--acento);
+        margin-top: 15px;
+    }
+
+    .sidebar-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px;
+        margin-bottom: 5px;
+        border-radius: 12px;
+        color: var(--secundario);
+        font-size: 13px;
+    }
+
+    .sidebar-link.active,
+    .sidebar-link:hover {
+        background: var(--suave);
+        color: var(--acento);
+    }
+
+    .sidebar-link i {
+        font-size: 18px;
+    }
+
+    .app-header {
+        margin-left: var(--sidebar);
+        padding: 15px 30px;
+    }
+
+    .main-content {
+        margin-left: var(--sidebar);
+        padding: 30px;
+    }
+
+    .bottom-nav {
+        display: none;
+    }
+
+}
+
+@media(min-width:1250px) {
+
+    .packages-grid {
+        grid-template-columns: repeat(3,minmax(0,1fr));
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- PANTALLA DE CARGA -->
+
+<div class="loading-screen" id="pantallaCarga">
+
+    <img src="icon-192.png" alt="Voz Angelical">
+
+    <div class="spinner-border" role="status"></div>
+
+    <p id="textoCarga">
+        Cargando paquetes musicales...
+    </p>
+
+    <button
+        class="btn-outline-app"
+        id="btnReintentar"
+        onclick="location.reload()"
+        hidden>
+
+        Volver a intentar
+
+    </button>
+
+</div>
+
+<div id="aplicacion" hidden>
+
+<!-- MENÚ LATERAL -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-brand">
+
+        <img src="logo.png" alt="Voz Angelical">
+
+        <h2>Voz Angelical</h2>
+
+    </div>
+
+    <a href="inicio.html" class="sidebar-link">
+        <i class="bi bi-house-door"></i> Inicio
+    </a>
+
+    <a href="agenda.html" class="sidebar-link">
+        <i class="bi bi-calendar3"></i> Agenda
+    </a>
+
+    <a href="contratos.html" class="sidebar-link">
+        <i class="bi bi-file-earmark-text"></i> Contratos
+    </a>
+
+    <a href="clientes.html" class="sidebar-link">
+        <i class="bi bi-person-lines-fill"></i> Clientes
+    </a>
+
+    <a href="servicios.html" class="sidebar-link active">
+        <i class="bi bi-music-note-beamed"></i> Servicios
+    </a>
+
+    <a href="socios.html" class="sidebar-link">
+        <i class="bi bi-people"></i> Socios
+    </a>
+
+    <a href="estadisticas.html" class="sidebar-link">
+        <i class="bi bi-bar-chart-line"></i> Estadísticas
+    </a>
+
+    <a href="configuracion.html" class="sidebar-link">
+        <i class="bi bi-gear"></i> Configuración
+    </a>
+
+    <a href="usuarios.html" class="sidebar-link">
+        <i class="bi bi-person-circle"></i> Mi cuenta
+    </a>
+
+</aside>
+
+<!-- ENCABEZADO -->
+
+<header class="app-header">
+
+    <div class="header-brand">
+
+        <img src="logo.png"
+        class="header-logo"
+        alt="Voz Angelical">
+
+        <div>
+
+            <h1>Voz Angelical</h1>
+
+            <small>Servicios musicales</small>
+
+        </div>
+
+    </div>
+
+    <div class="d-flex gap-2">
+
+        <button class="icon-button"
+        id="btnRecargar"
+        aria-label="Actualizar servicios">
+
+            <i class="bi bi-arrow-clockwise"></i>
+
+        </button>
+
+        <button class="icon-button"
+        data-alternar-tema
+        aria-label="Cambiar tema">
+
+            <i class="bi bi-moon-stars"
+            data-icono-tema></i>
+
+        </button>
+
+    </div>
+
+</header>
+
+<!-- CONTENIDO -->
+
+<main class="main-content">
+
+    <h2 class="page-title">
+        Servicios musicales
+    </h2>
+
+    <p class="page-description">
+
+        Administra los paquetes disponibles,
+        sus precios y las ganancias estimadas
+        por cada celebración.
+
+    </p>
+
+    <div class="alert"
+    id="mensajeGeneral"
+    role="alert"
+    hidden></div>
+
+    <!-- RESUMEN -->
+
+    <section class="summary-card">
+
+        <div class="summary-title">
+
+            <i class="bi bi-music-note-list me-2"></i>
+
+            Catálogo de servicios
+
+        </div>
+
+        <div class="summary-grid">
+
+            <div class="summary-item">
+
+                <strong id="totalPaquetes">—</strong>
+
+                <span>Paquetes</span>
+
+            </div>
+
+            <div class="summary-item">
+
+                <strong id="totalActivos">—</strong>
+
+                <span>Disponibles</span>
+
+            </div>
+
+            <div class="summary-item">
+
+                <strong id="totalInactivos">—</strong>
+
+                <span>Inactivos</span>
+
+            </div>
+
+        </div>
+
+        <div class="summary-footer">
+
+            <i class="bi bi-info-circle me-1"></i>
+
+            Los precios pueden ajustarse individualmente
+            al registrar una celebración o contrato.
+
+        </div>
+
+    </section>
+
+    <!-- PAQUETES -->
+
+    <section class="packages-grid"
+    id="listaPaquetes"></section>
+
+    <!-- RESTAURAR PRECIOS -->
+
+    <section class="mt-4">
+
+        <div class="info-box">
+
+            <strong>
+
+                <i class="bi bi-shield-check me-1"></i>
+
+                Historial protegido
+
+            </strong>
+
+            <br>
+
+            Los cambios de precio se aplicarán a los
+            nuevos servicios. Los contratos anteriores
+            conservarán sus importes registrados.
+
+        </div>
+
+        <button class="btn-outline-app w-100"
+        id="btnRestaurar">
+
+            <i class="bi bi-arrow-counterclockwise me-2"></i>
+
+            Restaurar precios originales
+
+        </button>
+
+    </section>
+
+    <footer class="app-footer">
+
+        Voz Angelical · Versión 2.0.0
+
+        <br>
+
+        Sistema Integral de Gestión Musical
+
+    </footer>
+
+</main>
+
+<!-- NAVEGACIÓN INFERIOR -->
+
+<nav class="bottom-nav" aria-label="Navegación principal">
+
+    <a href="inicio.html" class="nav-item-app">
+        <i class="bi bi-house-door"></i>
+        Inicio
+    </a>
+
+    <a href="agenda.html" class="nav-item-app">
+        <i class="bi bi-calendar3"></i>
+        Agenda
+    </a>
+
+    <a href="contratos.html" class="nav-item-app">
+        <i class="bi bi-file-earmark-text"></i>
+        Contratos
+    </a>
+
+    <a href="socios.html" class="nav-item-app">
+        <i class="bi bi-people"></i>
+        Socios
+    </a>
+
+    <button class="nav-item-app active"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#menuMas">
+
+        <i class="bi bi-grid-fill"></i>
+        Más
+
+    </button>
+
+</nav>
+
+<!-- MENÚ MÁS -->
+
+<div class="offcanvas offcanvas-bottom"
+id="menuMas"
+tabindex="-1"
+aria-labelledby="tituloMenu">
+
+    <div class="offcanvas-header">
+
+        <h5 class="offcanvas-title" id="tituloMenu">
+            Más opciones
+        </h5>
+
+        <button class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Cerrar"></button>
+
+    </div>
+
+    <div class="offcanvas-body">
+
+        <a href="clientes.html" class="menu-option">
+            <i class="bi bi-person-lines-fill"></i>
+            Clientes
+        </a>
+
+        <a href="servicios.html" class="menu-option active">
+            <i class="bi bi-music-note-beamed"></i>
+            Servicios musicales
+        </a>
+
+        <a href="estadisticas.html" class="menu-option">
+            <i class="bi bi-bar-chart-line"></i>
+            Estadísticas
+        </a>
+
+        <a href="configuracion.html" class="menu-option">
+            <i class="bi bi-gear"></i>
+            Configuración
+        </a>
+
+        <a href="usuarios.html" class="menu-option">
+            <i class="bi bi-person-circle"></i>
+            Mi cuenta
+        </a>
+
+        <button class="menu-option" id="btnCerrarSesion">
+            <i class="bi bi-box-arrow-right"></i>
+            Cerrar sesión
+        </button>
+
+    </div>
+
+</div>
+
+<!-- MODAL EDITAR PAQUETE -->
+
+<div class="modal fade"
+id="modalEditar"
+tabindex="-1"
+aria-labelledby="tituloEditar"
+aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="tituloEditar">
+                    Editar paquete
+                </h5>
+
+                <button class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar"></button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div id="mensajeEditar"
+                class="alert"
+                role="alert"
+                hidden></div>
+
+                <form id="formEditar">
+
+                    <input type="hidden" id="paqueteId">
+
+                    <div class="mb-3">
+
+                        <label class="form-label"
+                        for="nombrePaquete">
+
+                            Nombre del paquete
+
+                        </label>
+
+                        <input class="form-control"
+                        id="nombrePaquete"
+                        readonly>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label"
+                        for="precioPaquete">
+
+                            Precio base (MXN)
+
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">$</span>
+
+                            <input type="number"
+                            class="form-control"
+                            id="precioPaquete"
+                            min="1"
+                            max="1000000"
+                            step="0.01"
+                            inputmode="decimal"
+                            required>
+
+                        </div>
+
+                        <div class="form-text">
+
+                            Puedes ajustar este precio
+                            posteriormente en cada contrato.
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label"
+                        for="descripcionPaquete">
+
+                            Descripción adicional
+
+                        </label>
+
+                        <textarea class="form-control"
+                        id="descripcionPaquete"
+                        maxlength="500"
+                        placeholder="Información adicional del paquete"></textarea>
+
+                    </div>
+
+                    <div class="finance-box">
+
+                        <div class="finance-title">
+                            Distribución estimada
+                        </div>
+
+                        <div class="finance-row">
+
+                            <span>Precio del servicio</span>
+
+                            <strong id="previewPrecio">
+                                $0.00
+                            </strong>
+
+                        </div>
+
+                        <div class="finance-row">
+
+                            <span>Pago total a socios</span>
+
+                            <strong id="previewSocios">
+                                $0.00
+                            </strong>
+
+                        </div>
+
+                        <div class="finance-row finance-total">
+
+                            <span>Tu ganancia estimada</span>
+
+                            <strong id="previewGanancia">
+                                $0.00
+                            </strong>
+
+                        </div>
+
+                        <div class="finance-note">
+
+                            Antes de transporte y otros gastos.
+
+                        </div>
+
+                    </div>
+
+                    <button class="btn-gold"
+                    type="submit"
+                    id="btnGuardar">
+
+                        <i class="bi bi-floppy me-2"></i>
+
+                        Guardar cambios
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+
+import { db, APP_CONFIG } from "./firebase.js";
+
+import {
+    protegerPagina,
+    cerrarSesion
+} from "./auth.js";
+
+import {
+
+    collection,
+    doc,
+    getDocsFromServer,
+    runTransaction,
+    serverTimestamp
+
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const $ = id => document.getElementById(id);
+
+const PAGO_SOCIO = APP_CONFIG.pagoPorSocio;
+
+let paquetes = [];
+
+let paqueteEditado = null;
+
+let ocupado = false;
+
+let sistemaListo = false;
+
+let modalEditar;
+
+// =====================================
+// PAQUETES ORIGINALES
+// =====================================
+
+const PAQUETES_ORIGINALES = [
+
+    {
+
+        id: "paquete1",
+
+        numero: 1,
+
+        nombre: "Solista",
+
+        voces: 1,
+
+        instrumento: "Piano",
+
+        audio: true,
+
+        precio: 500,
+
+        activo: true,
+
+        descripcion: ""
+
+    },
+
+    {
+
+        id: "paquete2",
+
+        numero: 2,
+
+        nombre: "Dúo",
+
+        voces: 2,
+
+        instrumento: "Piano",
+
+        audio: true,
+
+        precio: 800,
+
+        activo: true,
+
+        descripcion: ""
+
+    },
+
+    {
+
+        id: "paquete3",
+
+        numero: 3,
+
+        nombre: "Trío",
+
+        voces: 3,
+
+        instrumento: "Piano",
+
+        audio: true,
+
+        precio: 1200,
+
+        activo: true,
+
+        descripcion: ""
+
+    }
+
+];
+
+// =====================================
+// FUNCIONES GENERALES
+// =====================================
+
+function moneda(valor) {
+
+    return new Intl.NumberFormat("es-MX", {
+
+        style: "currency",
+
+        currency: "MXN"
+
+    }).format(Number(valor) || 0);
+
+}
+
+function cantidadSocios(paquete) {
+
+    return Math.max(
+
+        0,
+
+        Number(paquete.voces) - 1
+
+    );
+
+}
+
+function costoSocios(paquete) {
+
+    return cantidadSocios(paquete) * PAGO_SOCIO;
+
+}
+
+function ganancia(paquete) {
+
+    return Number(paquete.precio) - costoSocios(paquete);
+
+}
+
+function mensaje(id,texto,tipo = "success") {
+
+    const elemento = $(id);
+
+    elemento.className = `alert alert-${tipo}`;
+
+    elemento.textContent = texto;
+
+    elemento.hidden = false;
+
+}
+
+function mensajeError(error) {
+
+    if (error.code === "permission-denied") {
+
+        return "No tienes permisos para administrar los servicios.";
+
+    }
+
+    if (error.code === "unavailable") {
+
+        return "Verifica tu conexión a internet.";
+
+    }
+
+    return error.message || "Ocurrió un error inesperado.";
+
+}
+
+function crear(etiqueta,clase,texto) {
+
+    const elemento = document.createElement(etiqueta);
+
+    if (clase) elemento.className = clase;
+
+    if (texto !== undefined) {
+
+        elemento.textContent = texto;
+
+    }
+
+    return elemento;
+
+}
+
+function boton(texto,icono,clase,accion) {
+
+    const elemento = crear("button",clase);
+
+    elemento.type = "button";
+
+    elemento.dataset.operacion = "true";
+
+    elemento.append(
+
+        crear("i",icono + " me-2"),
+
+        document.createTextNode(texto)
+
+    );
+
+    elemento.addEventListener("click",accion);
+
+    return elemento;
+
+}
+
+// =====================================
+// CONTROL DE BOTONES
+// =====================================
+
+function actualizarBotones() {
+
+    const bloqueado =
+
+        ocupado ||
+
+        !sistemaListo ||
+
+        !navigator.onLine;
+
+    $("btnRecargar").disabled = bloqueado;
+
+    $("btnRestaurar").disabled = bloqueado;
+
+    $("btnGuardar").disabled = bloqueado;
+
+    $("precioPaquete").disabled = ocupado;
+
+    $("descripcionPaquete").disabled = ocupado;
+
+    document.querySelectorAll(
+        "[data-operacion]"
+    ).forEach(elemento => {
+
+        elemento.disabled = bloqueado;
+
+    });
+
+}
+
+// =====================================
+// CREAR PAQUETES FALTANTES
+// =====================================
+
+async function inicializarPaquetes() {
+
+    await runTransaction(
+
+        db,
+
+        async transaccion => {
+
+            const referencias = PAQUETES_ORIGINALES.map(
+
+                paquete => doc(
+
+                    db,
+
+                    "servicios",
+
+                    paquete.id
+
+                )
+
+            );
+
+            const resultados = await Promise.all(
+
+                referencias.map(
+
+                    referencia => transaccion.get(referencia)
+
+                )
+
+            );
+
+            resultados.forEach((resultado,indice) => {
+
+                if (!resultado.exists()) {
+
+                    const {
+
+                        id,
+
+                        ...datos
+
+                    } = PAQUETES_ORIGINALES[indice];
+
+                    transaccion.set(
+
+                        referencias[indice],
+
+                        {
+
+                            ...datos,
+
+                            creadoEn: serverTimestamp(),
+
+                            actualizadoEn: serverTimestamp()
+
+                        }
+
+                    );
+
+                }
+
+            });
+
+        }
+
+    );
+
+}
+
+// =====================================
+// CONSULTAR PAQUETES
+// =====================================
+
+async function leerPaquetes() {
+
+    const resultado = await getDocsFromServer(
+
+        collection(db,"servicios")
+
+    );
+
+    paquetes = resultado.docs
+
+        .map(documento => ({
+
+            ...documento.data(),
+
+            id: documento.id
+
+        }))
+
+        .filter(paquete =>
+
+            PAQUETES_ORIGINALES.some(
+
+                original => original.id === paquete.id
+
+            )
+
+        )
+
+        .sort((a,b) =>
+
+            Number(a.numero) - Number(b.numero)
+
+        );
+
+    mostrarPaquetes();
+
+}
+
+// =====================================
+// CREAR CARACTERÍSTICAS
+// =====================================
+
+function crearCaracteristica(texto) {
+
+    const fila = crear("div","feature");
+
+    fila.append(
+
+        crear("i","bi bi-check-circle-fill"),
+
+        crear("span","",texto)
+
+    );
+
+    return fila;
+
+}
+
+function crearFilaFinanciera(
+    etiqueta,
+    importe,
+    total = false
+) {
+
+    const fila = crear(
+
+        "div",
+
+        total
+
+            ? "finance-row finance-total"
+
+            : "finance-row"
+
+    );
+
+    fila.append(
+
+        crear("span","",etiqueta),
+
+        crear("strong","",moneda(importe))
+
+    );
+
+    return fila;
+
+}
+
+// =====================================
+// MOSTRAR PAQUETES
+// =====================================
+
+function mostrarPaquetes() {
+
+    const contenedor = $("listaPaquetes");
+
+    contenedor.replaceChildren();
+
+    $("totalPaquetes").textContent = paquetes.length;
+
+    $("totalActivos").textContent =
+
+        paquetes.filter(p => p.activo !== false).length;
+
+    $("totalInactivos").textContent =
+
+        paquetes.filter(p => p.activo === false).length;
+
+    paquetes.forEach(paquete => {
+
+        const activo = paquete.activo !== false;
+
+        const tarjeta = crear(
+
+            "article",
+
+            "package-card" +
+
+            (activo ? "" : " inactivo")
+
+        );
+
+        // ENCABEZADO DEL PAQUETE
+
+        const encabezado = crear(
+
+            "div",
+
+            "package-header"
+
+        );
+
+        const superior = crear("div","package-top");
+
+        superior.append(
+
+            crear(
+
+                "span",
+
+                "package-number",
+
+                "Paquete " + paquete.numero
+
+            ),
+
+            crear(
+
+                "span",
+
+                "status-label " +
+
+                (activo
+
+                    ? "status-active"
+
+                    : "status-inactive"),
+
+                activo ? "Disponible" : "Inactivo"
+
+            )
+
+        );
+
+        const icono = crear("div","package-icon");
+
+        icono.append(
+
+            crear(
+
+                "i",
+
+                Number(paquete.voces) === 1
+
+                    ? "bi bi-person-fill"
+
+                    : Number(paquete.voces) === 2
+
+                        ? "bi bi-people"
+
+                        : "bi bi-people-fill"
+
+            )
+
+        );
+
+        encabezado.append(
+
+            superior,
+
+            icono,
+
+            crear(
+
+                "h3",
+
+                "package-name",
+
+                paquete.nombre
+
+            ),
+
+            crear(
+
+                "div",
+
+                "package-subtitle",
+
+                "Servicio musical profesional"
+
+            )
+
+        );
+
+        // CONTENIDO DEL PAQUETE
+
+        const cuerpo = crear("div","package-body");
+
+        cuerpo.append(
+
+            crear("div","price-label","Precio base"),
+
+            crear(
+
+                "div",
+
+                "package-price",
+
+                moneda(paquete.precio)
+
+            ),
+
+            crear(
+
+                "div",
+
+                "price-currency",
+
+                "MXN por celebración"
+
+            )
+
+        );
+
+        // CARACTERÍSTICAS
+
+        const caracteristicas = crear(
+
+            "div",
+
+            "package-features"
+
+        );
+
+        caracteristicas.append(
+
+            crearCaracteristica(
+
+                `${paquete.voces} ` +
+
+                (Number(paquete.voces) === 1
+
+                    ? "voz"
+
+                    : "voces")
+
+            ),
+
+            crearCaracteristica(
+
+                paquete.instrumento || "Piano"
+
+            )
+
+        );
+
+        if (paquete.audio !== false) {
+
+            caracteristicas.append(
+
+                crearCaracteristica(
+
+                    "Equipo de audio incluido"
+
+                )
+
+            );
+
+        }
+
+        cuerpo.append(caracteristicas);
+
+        if (paquete.descripcion) {
+
+            cuerpo.append(
+
+                crear(
+
+                    "p",
+
+                    "package-description",
+
+                    paquete.descripcion
+
+                )
+
+            );
+
+        }
+
+        // DISTRIBUCIÓN FINANCIERA
+
+        const finanzas = crear(
+
+            "div",
+
+            "finance-box"
+
+        );
+
+        finanzas.append(
+
+            crear(
+
+                "div",
+
+                "finance-title",
+
+                "Distribución por celebración"
+
+            ),
+
+            crearFilaFinanciera(
+
+                "Ingreso total",
+
+                paquete.precio
+
+            ),
+
+            crearFilaFinanciera(
+
+                `Pago a ${cantidadSocios(paquete)} socio(s)`,
+
+                costoSocios(paquete)
+
+            ),
+
+            crearFilaFinanciera(
+
+                "Tu ganancia",
+
+                ganancia(paquete),
+
+                true
+
+            ),
+
+            crear(
+
+                "div",
+
+                "finance-note",
+
+                "Ganancia estimada antes de otros gastos."
+
+            )
+
+        );
+
+        cuerpo.append(finanzas);
+
+        // BOTONES
+
+        const acciones = crear(
+
+            "div",
+
+            "package-actions"
+
+        );
+
+        acciones.append(
+
+            boton(
+
+                "Editar precio",
+
+                "bi bi-pencil-square",
+
+                "btn-gold",
+
+                () => abrirEditor(paquete.id)
+
+            ),
+
+            boton(
+
+                activo
+
+                    ? "Desactivar paquete"
+
+                    : "Activar paquete",
+
+                activo
+
+                    ? "bi bi-pause-circle"
+
+                    : "bi bi-play-circle",
+
+                activo
+
+                    ? "btn-danger-app"
+
+                    : "btn-outline-app",
+
+                () => cambiarDisponibilidad(paquete.id)
+
+            )
+
+        );
+
+        cuerpo.append(acciones);
+
+        tarjeta.append(encabezado,cuerpo);
+
+        contenedor.append(tarjeta);
+
+    });
+
+    actualizarBotones();
+
+}
+
+// =====================================
+// ABRIR EDITOR
+// =====================================
+
+function abrirEditor(id) {
+
+    if (ocupado || !navigator.onLine) return;
+
+    const paquete = paquetes.find(p => p.id === id);
+
+    if (!paquete) return;
+
+    paqueteEditado = { ...paquete };
+
+    $("paqueteId").value = paquete.id;
+
+    $("nombrePaquete").value = paquete.nombre;
+
+    $("precioPaquete").value = paquete.precio;
+
+    $("descripcionPaquete").value =
+
+        paquete.descripcion || "";
+
+    $("tituloEditar").textContent =
+
+        "Editar " + paquete.nombre;
+
+    $("mensajeEditar").hidden = true;
+
+    actualizarVistaPrevia();
+
+    modalEditar.show();
+
+}
+
+// =====================================
+// CALCULAR GANANCIA EN TIEMPO REAL
+// =====================================
+
+function actualizarVistaPrevia() {
+
+    if (!paqueteEditado) return;
+
+    const precio = Number(
+
+        $("precioPaquete").value
+
+    ) || 0;
+
+    const socios = costoSocios(paqueteEditado);
+
+    const restante = precio - socios;
+
+    $("previewPrecio").textContent = moneda(precio);
+
+    $("previewSocios").textContent = moneda(socios);
+
+    $("previewGanancia").textContent = moneda(restante);
+
+    $("previewGanancia").style.color =
+
+        restante < 0
+
+            ? "var(--rojo)"
+
+            : "var(--verde)";
+
+}
+
+$("precioPaquete").addEventListener(
+
+    "input",
+
+    actualizarVistaPrevia
+
+);
+
+// =====================================
+// GUARDAR CAMBIOS
+// =====================================
+
+$("formEditar").addEventListener(
+
+    "submit",
+
+    async evento => {
+
+        evento.preventDefault();
+
+        if (
+
+            !sistemaListo ||
+
+            ocupado ||
+
+            !navigator.onLine ||
+
+            !paqueteEditado
+
+        ) return;
+
+        const original = { ...paqueteEditado };
+
+        const precio = Math.round(
+
+            Number($("precioPaquete").value) * 100
+
+        ) / 100;
+
+        const descripcion =
+
+            $("descripcionPaquete").value.trim();
+
+        if (
+
+            !Number.isFinite(precio) ||
+
+            precio <= 0 ||
+
+            precio > 1000000
+
+        ) {
+
+            mensaje(
+
+                "mensajeEditar",
+
+                "Ingresa un precio válido.",
+
+                "danger"
+
+            );
+
+            return;
+
+        }
+
+        if (precio < costoSocios(original)) {
+
+            mensaje(
+
+                "mensajeEditar",
+
+                "El precio no puede ser inferior al pago total de los socios.",
+
+                "danger"
+
+            );
+
+            return;
+
+        }
+
+        ocupado = true;
+
+        actualizarBotones();
+
+        $("btnGuardar").textContent = "Guardando...";
+
+        let guardado = false;
+
+        try {
+
+            const referencia = doc(
+
+                db,
+
+                "servicios",
+
+                original.id
+
+            );
+
+            await runTransaction(
+
+                db,
+
+                async transaccion => {
+
+                    const resultado = await transaccion.get(
+
+                        referencia
+
+                    );
+
+                    if (!resultado.exists()) {
+
+                        throw new Error(
+
+                            "El paquete ya no existe."
+
+                        );
+
+                    }
+
+                    const actual = resultado.data();
+
+                    if (
+
+                        Number(actual.precio) !== Number(original.precio) ||
+
+                        (actual.descripcion || "") !==
+
+                        (original.descripcion || "") ||
+
+                        Number(actual.voces) !== Number(original.voces)
+
+                    ) {
+
+                        throw new Error(
+
+                            "El paquete cambió en otro dispositivo. " +
+
+                            "Cierra el editor y actualiza la información."
+
+                        );
+
+                    }
+
+                    transaccion.update(referencia,{
+
+                        precio,
+
+                        descripcion,
+
+                        actualizadoEn: serverTimestamp()
+
+                    });
+
+                }
+
+            );
+
+            guardado = true;
+
+            modalEditar.hide();
+
+            await leerPaquetes();
+
+            mensaje(
+
+                "mensajeGeneral",
+
+                "Paquete actualizado correctamente."
+
+            );
+
+        } catch (error) {
+
+            mensaje(
+
+                guardado
+
+                    ? "mensajeGeneral"
+
+                    : "mensajeEditar",
+
+                guardado
+
+                    ? "Los cambios se guardaron, pero no se pudo actualizar la pantalla."
+
+                    : mensajeError(error),
+
+                "danger"
+
+            );
+
+        } finally {
+
+            ocupado = false;
+
+            $("btnGuardar").innerHTML =
+
+                '<i class="bi bi-floppy me-2"></i>' +
+
+                'Guardar cambios';
+
+            actualizarBotones();
+
+        }
+
+    }
+
+);
+
+// =====================================
+// ACTIVAR O DESACTIVAR PAQUETE
+// =====================================
+
+async function cambiarDisponibilidad(id) {
+
+    if (ocupado || !navigator.onLine) return;
+
+    const paquete = paquetes.find(p => p.id === id);
+
+    if (!paquete) return;
+
+    const activo = paquete.activo !== false;
+
+    const nuevoEstado = !activo;
+
+    const confirmar = confirm(
+
+        activo
+
+            ? `¿Deseas desactivar el paquete ${paquete.nombre}? ` +
+
+              "Los contratos anteriores no se modificarán."
+
+            : `¿Deseas activar el paquete ${paquete.nombre}?`
+
+    );
+
+    if (!confirmar) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    let guardado = false;
+
+    try {
+
+        const referencia = doc(db,"servicios",id);
+
+        await runTransaction(
+
+            db,
+
+            async transaccion => {
+
+                const resultado = await transaccion.get(
+
+                    referencia
+
+                );
+
+                if (!resultado.exists()) {
+
+                    throw new Error("El paquete no existe.");
+
+                }
+
+                const actual = resultado.data();
+
+                if ((actual.activo !== false) !== activo) {
+
+                    throw new Error(
+
+                        "La disponibilidad cambió en otro dispositivo. Actualiza la página."
+
+                    );
+
+                }
+
+                transaccion.update(referencia,{
+
+                    activo: nuevoEstado,
+
+                    actualizadoEn: serverTimestamp()
+
+                });
+
+            }
+
+        );
+
+        guardado = true;
+
+        await leerPaquetes();
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            nuevoEstado
+
+                ? "Paquete activado correctamente."
+
+                : "Paquete desactivado correctamente."
+
+        );
+
+    } catch (error) {
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            guardado
+
+                ? "La disponibilidad se guardó, pero falta actualizar la pantalla."
+
+                : mensajeError(error),
+
+            "danger"
+
+        );
+
+    } finally {
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+}
+
+// =====================================
+// RESTAURAR PRECIOS ORIGINALES
+// =====================================
+
+$("btnRestaurar").addEventListener(
+
+    "click",
+
+    async () => {
+
+        if (ocupado || !navigator.onLine) return;
+
+        if (!confirm(
+
+            "Se restaurarán los precios originales:\n\n" +
+
+            "Solista: $500\n" +
+
+            "Dúo: $800\n" +
+
+            "Trío: $1,200\n\n" +
+
+            "Los contratos anteriores no cambiarán. " +
+
+            "¿Deseas continuar?"
+
+        )) return;
+
+        ocupado = true;
+
+        actualizarBotones();
+
+        let guardado = false;
+
+        try {
+
+            await runTransaction(
+
+                db,
+
+                async transaccion => {
+
+                    const referencias =
+
+                        PAQUETES_ORIGINALES.map(
+
+                            paquete => doc(
+
+                                db,
+
+                                "servicios",
+
+                                paquete.id
+
+                            )
+
+                        );
+
+                    const resultados = await Promise.all(
+
+                        referencias.map(
+
+                            referencia => transaccion.get(referencia)
+
+                        )
+
+                    );
+
+                    resultados.forEach((resultado,indice) => {
+
+                        const original = PAQUETES_ORIGINALES[indice];
+
+                        if (resultado.exists()) {
+
+                            transaccion.update(
+
+                                referencias[indice],
+
+                                {
+
+                                    precio: original.precio,
+
+                                    actualizadoEn: serverTimestamp()
+
+                                }
+
+                            );
+
+                        } else {
+
+                            const { id, ...datos } = original;
+
+                            transaccion.set(
+
+                                referencias[indice],
+
+                                {
+
+                                    ...datos,
+
+                                    creadoEn: serverTimestamp(),
+
+                                    actualizadoEn: serverTimestamp()
+
+                                }
+
+                            );
+
+                        }
+
+                    });
+
+                }
+
+            );
+
+            guardado = true;
+
+            await leerPaquetes();
+
+            mensaje(
+
+                "mensajeGeneral",
+
+                "Los precios originales fueron restaurados."
+
+            );
+
+        } catch (error) {
+
+            mensaje(
+
+                "mensajeGeneral",
+
+                guardado
+
+                    ? "Los precios se restauraron, pero falta actualizar la pantalla."
+
+                    : mensajeError(error),
+
+                "danger"
+
+            );
+
+        } finally {
+
+            ocupado = false;
+
+            actualizarBotones();
+
+        }
+
+    }
+
+);
+
+// =====================================
+// ACTUALIZACIÓN MANUAL
+// =====================================
+
+$("btnRecargar").addEventListener(
+
+    "click",
+
+    async () => {
+
+        if (ocupado || !navigator.onLine) return;
+
+        ocupado = true;
+
+        actualizarBotones();
+
+        try {
+
+            await leerPaquetes();
+
+            mensaje(
+
+                "mensajeGeneral",
+
+                "Información actualizada."
+
+            );
+
+        } catch (error) {
+
+            mensaje(
+
+                "mensajeGeneral",
+
+                mensajeError(error),
+
+                "danger"
+
+            );
+
+        } finally {
+
+            ocupado = false;
+
+            actualizarBotones();
+
+        }
+
+    }
+
+);
+
+// =====================================
+// CONEXIÓN
+// =====================================
+
+window.addEventListener("online",() => {
+
+    actualizarBotones();
+
+    mensaje(
+
+        "mensajeGeneral",
+
+        "Conexión restablecida. Actualiza los servicios antes de continuar.",
+
+        "info"
+
+    );
+
+});
+
+window.addEventListener("offline",() => {
+
+    actualizarBotones();
+
+    mensaje(
+
+        "mensajeGeneral",
+
+        "Sin conexión. No puedes modificar los paquetes.",
+
+        "warning"
+
+    );
+
+});
+
+// =====================================
+// CERRAR SESIÓN
+// =====================================
+
+$("btnCerrarSesion").addEventListener(
+
+    "click",
+
+    async () => {
+
+        if (ocupado) return;
+
+        if (!confirm("¿Deseas cerrar sesión?")) return;
+
+        try {
+
+            await cerrarSesion();
+
+        } catch (error) {
+
+            mensaje(
+
+                "mensajeGeneral",
+
+                mensajeError(error),
+
+                "danger"
+
+            );
+
+        }
+
+    }
+
+);
+
+// =====================================
+// INICIALIZAR SISTEMA
+// =====================================
+
+try {
+
+    await protegerPagina();
+
+    modalEditar = new bootstrap.Modal(
+
+        $("modalEditar")
+
+    );
+
+    await leerPaquetes();
+
+    // Solo crear documentos si falta algún paquete.
+    // Nunca sobrescribir precios existentes.
+
+    if (paquetes.length < PAQUETES_ORIGINALES.length) {
+
+        await inicializarPaquetes();
+
+        await leerPaquetes();
+
+    }
+
+    sistemaListo = true;
+
+    $("aplicacion").hidden = false;
+
+    $("pantallaCarga").hidden = true;
+
+    actualizarBotones();
+
+    window.VozAngelicalTema?.aplicar();
+
+} catch (error) {
+
+    $("textoCarga").textContent = mensajeError(error);
+
+    $("btnReintentar").hidden = false;
+
+    $("pantallaCarga")
+
+        .querySelector(".spinner-border")
+
+        .hidden = true;
+
+}
+
+</script>
+
+<script src="pwa.js" defer></script>
+
+</body>
+</html>

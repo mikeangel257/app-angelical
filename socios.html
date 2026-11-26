@@ -1,0 +1,3662 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F5EFE4">
+
+<title>Socios | Voz Angelical</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<script src="tema.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --dorado: #B48A42;
+    --fondo: #F5EFE4;
+    --tarjeta: #FFFFFF;
+    --texto: #30271D;
+    --secundario: #796C59;
+    --borde: #E6D8C1;
+    --campo: #FCFAF6;
+    --suave: #EDE3D1;
+    --acento: #8A632B;
+    --verde: #328653;
+    --rojo: #C74D4D;
+    --azul: #3976B5;
+    --sidebar: 260px;
+}
+
+html[data-tema="oscuro"] {
+    --fondo: #171614;
+    --tarjeta: #252321;
+    --texto: #F5EFE4;
+    --secundario: #C1B6A5;
+    --borde: #413A30;
+    --campo: #1D1B19;
+    --suave: #33291B;
+    --acento: #DCC18A;
+    --verde: #68C78A;
+    --rojo: #F07878;
+    --azul: #8BB9F0;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* ENCABEZADO */
+
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    padding-top: max(14px,env(safe-area-inset-top));
+    background: var(--tarjeta);
+    border-bottom: 1px solid var(--borde);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid var(--dorado);
+}
+
+.brand h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    color: var(--acento);
+    font-weight: 700;
+    margin: 0;
+}
+
+.brand small {
+    font-size: 10px;
+    color: var(--secundario);
+}
+
+.icon-button {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    background: var(--campo);
+    color: var(--acento);
+    font-size: 19px;
+}
+
+/* CONTENIDO */
+
+.main-content {
+    padding: 22px 16px;
+    padding-bottom: calc(110px + env(safe-area-inset-bottom));
+}
+
+.page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--acento);
+}
+
+.description {
+    color: var(--secundario);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* RESUMEN */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px;
+    margin: 22px 0;
+}
+
+.summary-card {
+    min-width: 0;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 18px;
+    padding: 17px;
+}
+
+.summary-card i {
+    color: var(--acento);
+    font-size: 23px;
+}
+
+.summary-card strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 22px;
+    overflow-wrap: anywhere;
+}
+
+.summary-card span {
+    font-size: 10px;
+    color: var(--secundario);
+}
+
+/* BOTONES */
+
+.btn-gold {
+    min-height: 48px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(135deg,#8A632B,#A77B35);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.btn-app {
+    min-height: 45px;
+    padding: 10px 13px;
+    background: var(--campo);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    color: var(--acento);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* PESTAÑAS */
+
+.tabs {
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    padding: 7px;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    flex: 1;
+    min-height: 44px;
+    padding: 10px;
+    white-space: nowrap;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--secundario);
+    font-size: 11px;
+}
+
+.tab-button.active {
+    background: var(--suave);
+    color: var(--acento);
+    font-weight: 600;
+}
+
+/* TARJETAS */
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.app-card {
+    min-width: 0;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 18px;
+    padding: 18px;
+    overflow-wrap: anywhere;
+}
+
+.socio-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 15px;
+}
+
+.avatar {
+    flex-shrink: 0;
+    width: 53px;
+    height: 53px;
+    border-radius: 50%;
+    background: var(--suave);
+    color: var(--acento);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.card-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.card-subtitle {
+    color: var(--secundario);
+    font-size: 11px;
+}
+
+.status {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 5px 9px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.status-verde {
+    background: rgba(50,134,83,.12);
+    color: var(--verde);
+}
+
+.status-rojo {
+    background: rgba(199,77,77,.12);
+    color: var(--rojo);
+}
+
+.status-dorado {
+    background: var(--suave);
+    color: var(--acento);
+}
+
+.status-azul {
+    background: rgba(57,118,181,.12);
+    color: var(--azul);
+}
+
+.info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--borde);
+    font-size: 12px;
+}
+
+.info-row i {
+    color: var(--acento);
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.finance-box {
+    background: var(--campo);
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    padding: 13px;
+    margin: 15px 0;
+}
+
+.finance-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 5px 0;
+    font-size: 11px;
+}
+
+.finance-row strong {
+    color: var(--acento);
+}
+
+.card-actions {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.empty-state {
+    padding: 35px 20px;
+    border: 1px dashed var(--borde);
+    border-radius: 18px;
+    background: var(--tarjeta);
+    text-align: center;
+}
+
+.empty-state i {
+    color: var(--acento);
+    font-size: 40px;
+}
+
+.empty-state h3 {
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+.empty-state p {
+    color: var(--secundario);
+    font-size: 12px;
+}
+
+/* FORMULARIOS */
+
+.form-label {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.form-control,
+.form-select {
+    min-height: 48px;
+    background-color: var(--campo);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--campo);
+    color: var(--texto);
+    border-color: var(--dorado);
+    box-shadow: 0 0 0 3px rgba(180,138,66,.15);
+}
+
+.form-text {
+    font-size: 11px;
+    color: var(--secundario);
+}
+
+.form-check-input:checked {
+    background-color: var(--dorado);
+    border-color: var(--dorado);
+}
+
+textarea.form-control {
+    min-height: 90px;
+}
+
+.modal-content {
+    background: var(--tarjeta);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 22px;
+}
+
+.modal-header,
+.modal-footer {
+    border-color: var(--borde);
+}
+
+.modal-title {
+    font-family: 'Cinzel', serif;
+    color: var(--acento);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.alert {
+    font-size: 12px;
+    line-height: 1.8;
+    border-radius: 12px;
+}
+
+.filters {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+/* NAVEGACIÓN */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    display: grid;
+    grid-template-columns: repeat(5,minmax(0,1fr));
+    padding: 9px 5px;
+    padding-bottom: calc(9px + env(safe-area-inset-bottom));
+    background: var(--tarjeta);
+    border-top: 1px solid var(--borde);
+}
+
+.nav-item-app {
+    min-height: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    color: var(--secundario);
+    font-size: 9px;
+}
+
+.nav-item-app i {
+    font-size: 21px;
+}
+
+.nav-item-app.active {
+    background: var(--suave);
+    color: var(--acento);
+    font-weight: 600;
+}
+
+.offcanvas {
+    background: var(--tarjeta);
+    color: var(--texto);
+}
+
+.offcanvas-bottom {
+    height: auto;
+    max-height: 85dvh;
+    border-radius: 25px 25px 0 0;
+}
+
+.menu-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 50px;
+    padding: 13px;
+    margin-bottom: 8px;
+    background: var(--campo);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    color: var(--texto);
+    font-size: 13px;
+    text-align: left;
+}
+
+.menu-option i {
+    color: var(--acento);
+    font-size: 18px;
+}
+
+.sidebar {
+    display: none;
+}
+
+/* CARGA */
+
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--fondo);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 25px;
+    text-align: center;
+}
+
+.loading-screen img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+
+.loading-screen p {
+    color: var(--secundario);
+    font-size: 12px;
+}
+
+.spinner-border {
+    color: var(--dorado);
+}
+
+.app-footer {
+    text-align: center;
+    color: var(--secundario);
+    font-size: 10px;
+    line-height: 1.9;
+    padding: 30px 10px;
+}
+
+/* RESPONSIVE */
+
+@media(min-width:700px) {
+
+    .summary-grid {
+        grid-template-columns: repeat(4,minmax(0,1fr));
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media(min-width:992px) {
+
+    .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: var(--sidebar);
+        display: flex;
+        flex-direction: column;
+        padding: 20px 15px;
+        background: var(--tarjeta);
+        border-right: 1px solid var(--borde);
+        overflow-y: auto;
+    }
+
+    .sidebar-brand {
+        text-align: center;
+        padding: 10px 0 25px;
+    }
+
+    .sidebar-brand img {
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+    }
+
+    .sidebar-brand h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 18px;
+        color: var(--acento);
+        margin-top: 15px;
+    }
+
+    .sidebar-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px;
+        margin-bottom: 5px;
+        border-radius: 12px;
+        color: var(--secundario);
+        font-size: 13px;
+    }
+
+    .sidebar-link.active,
+    .sidebar-link:hover {
+        background: var(--suave);
+        color: var(--acento);
+    }
+
+    .sidebar-link i {
+        font-size: 18px;
+    }
+
+    .app-header {
+        margin-left: var(--sidebar);
+        padding: 15px 30px;
+    }
+
+    .main-content {
+        margin-left: var(--sidebar);
+        padding: 30px;
+    }
+
+    .bottom-nav {
+        display: none;
+    }
+
+}
+
+@media(min-width:1400px) {
+
+    .cards-grid {
+        grid-template-columns: repeat(3,minmax(0,1fr));
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="loading-screen" id="pantallaCarga">
+
+    <img src="icon-192.png" alt="Voz Angelical">
+
+    <div class="spinner-border" id="spinnerCarga"></div>
+
+    <p id="textoCarga">Cargando administración de socios...</p>
+
+    <button class="btn-app"
+    id="btnReintentar"
+    onclick="location.reload()"
+    hidden>
+
+        Volver a intentar
+
+    </button>
+
+</div>
+
+<div id="aplicacion" hidden>
+
+<!-- MENÚ LATERAL -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-brand">
+
+        <img src="logo.png" alt="Voz Angelical">
+
+        <h2>Voz Angelical</h2>
+
+    </div>
+
+    <a href="inicio.html" class="sidebar-link">
+        <i class="bi bi-house-door"></i> Inicio
+    </a>
+
+    <a href="agenda.html" class="sidebar-link">
+        <i class="bi bi-calendar3"></i> Agenda
+    </a>
+
+    <a href="contratos.html" class="sidebar-link">
+        <i class="bi bi-file-earmark-text"></i> Contratos
+    </a>
+
+    <a href="clientes.html" class="sidebar-link">
+        <i class="bi bi-person-lines-fill"></i> Clientes
+    </a>
+
+    <a href="servicios.html" class="sidebar-link">
+        <i class="bi bi-music-note-beamed"></i> Servicios
+    </a>
+
+    <a href="socios.html" class="sidebar-link active">
+        <i class="bi bi-people"></i> Socios
+    </a>
+
+    <a href="estadisticas.html" class="sidebar-link">
+        <i class="bi bi-bar-chart-line"></i> Estadísticas
+    </a>
+
+    <a href="configuracion.html" class="sidebar-link">
+        <i class="bi bi-gear"></i> Configuración
+    </a>
+
+    <a href="usuarios.html" class="sidebar-link">
+        <i class="bi bi-person-circle"></i> Mi cuenta
+    </a>
+
+</aside>
+
+<header class="app-header">
+
+    <div class="brand">
+
+        <img src="logo.png" alt="Voz Angelical">
+
+        <div>
+
+            <h1>Voz Angelical</h1>
+
+            <small>Administración de socios</small>
+
+        </div>
+
+    </div>
+
+    <div class="d-flex gap-2">
+
+        <button class="icon-button"
+        id="btnRecargar"
+        data-operacion
+        aria-label="Actualizar">
+
+            <i class="bi bi-arrow-clockwise"></i>
+
+        </button>
+
+        <button class="icon-button"
+        data-alternar-tema
+        aria-label="Cambiar tema">
+
+            <i class="bi bi-moon-stars" data-icono-tema></i>
+
+        </button>
+
+    </div>
+
+</header>
+
+<main class="main-content">
+
+    <h2 class="page-title">Mis socios</h2>
+
+    <p class="description">
+
+        Administra a tus compañeros, sus participaciones
+        musicales y los pagos correspondientes a cada celebración.
+
+    </p>
+
+    <div class="alert" id="mensajeGeneral" hidden></div>
+
+    <section class="summary-grid">
+
+        <article class="summary-card">
+
+            <i class="bi bi-people"></i>
+
+            <strong id="totalSocios">0</strong>
+
+            <span>Socios activos</span>
+
+        </article>
+
+        <article class="summary-card">
+
+            <i class="bi bi-calendar-check"></i>
+
+            <strong id="totalAsignaciones">0</strong>
+
+            <span>Participaciones programadas</span>
+
+        </article>
+
+        <article class="summary-card">
+
+            <i class="bi bi-wallet2"></i>
+
+            <strong id="totalDeuda">$0</strong>
+
+            <span>Pendiente de pagar</span>
+
+        </article>
+
+        <article class="summary-card">
+
+            <i class="bi bi-cash-stack"></i>
+
+            <strong id="totalPagado">$0</strong>
+
+            <span>Total histórico pagado</span>
+
+        </article>
+
+    </section>
+
+    <div class="action-grid">
+
+        <button class="btn-gold"
+        id="btnNuevoSocio"
+        data-operacion>
+
+            <i class="bi bi-person-plus me-1"></i>
+
+            Nuevo socio
+
+        </button>
+
+        <button class="btn-app"
+        id="btnAsignar"
+        data-operacion>
+
+            <i class="bi bi-calendar-plus me-1"></i>
+
+            Asignar celebración
+
+        </button>
+
+    </div>
+
+    <div class="tabs">
+
+        <button class="tab-button active" data-tab="socios">
+            <i class="bi bi-people me-1"></i> Socios
+        </button>
+
+        <button class="tab-button" data-tab="asignaciones">
+            <i class="bi bi-calendar3 me-1"></i> Asignaciones
+        </button>
+
+        <button class="tab-button" data-tab="pagos">
+            <i class="bi bi-wallet2 me-1"></i> Pagos
+        </button>
+
+    </div>
+
+    <div class="filters">
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+
+                <label class="form-label" for="buscador">
+                    Buscar
+                </label>
+
+                <input type="search"
+                class="form-control"
+                id="buscador"
+                placeholder="Nombre o celebración">
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label class="form-label" for="filtroEstado">
+                    Estado
+                </label>
+
+                <select class="form-select"
+                id="filtroEstado"></select>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <section class="cards-grid" id="lista"></section>
+
+    <div class="empty-state" id="estadoVacio" hidden>
+
+        <i class="bi bi-inbox"></i>
+
+        <h3>No hay registros</h3>
+
+        <p>No se encontraron resultados.</p>
+
+    </div>
+
+    <button class="btn-app w-100 mt-3"
+    id="btnMostrarMas"
+    hidden>
+
+        Mostrar más
+
+    </button>
+
+    <footer class="app-footer">
+
+        Voz Angelical · Versión 2.0.0
+
+        <br>
+
+        Sistema Integral de Gestión Musical
+
+    </footer>
+
+</main>
+
+<!-- NAVEGACIÓN INFERIOR -->
+
+<nav class="bottom-nav">
+
+    <a href="inicio.html" class="nav-item-app">
+        <i class="bi bi-house-door"></i> Inicio
+    </a>
+
+    <a href="agenda.html" class="nav-item-app">
+        <i class="bi bi-calendar3"></i> Agenda
+    </a>
+
+    <a href="contratos.html" class="nav-item-app">
+        <i class="bi bi-file-earmark-text"></i> Contratos
+    </a>
+
+    <a href="socios.html" class="nav-item-app active">
+        <i class="bi bi-people"></i> Socios
+    </a>
+
+    <button class="nav-item-app"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#menuMas">
+
+        <i class="bi bi-grid-fill"></i> Más
+
+    </button>
+
+</nav>
+
+<div class="offcanvas offcanvas-bottom"
+id="menuMas"
+tabindex="-1">
+
+    <div class="offcanvas-header">
+
+        <h5 class="offcanvas-title">Más opciones</h5>
+
+        <button class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Cerrar"></button>
+
+    </div>
+
+    <div class="offcanvas-body">
+
+        <a href="clientes.html" class="menu-option">
+            <i class="bi bi-person-lines-fill"></i> Clientes
+        </a>
+
+        <a href="servicios.html" class="menu-option">
+            <i class="bi bi-music-note-beamed"></i> Servicios
+        </a>
+
+        <a href="estadisticas.html" class="menu-option">
+            <i class="bi bi-bar-chart-line"></i> Estadísticas
+        </a>
+
+        <a href="configuracion.html" class="menu-option">
+            <i class="bi bi-gear"></i> Configuración
+        </a>
+
+        <a href="usuarios.html" class="menu-option">
+            <i class="bi bi-person-circle"></i> Mi cuenta
+        </a>
+
+        <button class="menu-option"
+        id="btnCerrarSesion"
+        data-operacion>
+
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- MODAL SOCIO -->
+
+<div class="modal fade" id="modalSocio" tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="tituloSocio">
+                    Nuevo socio
+                </h5>
+
+                <button class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar"></button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="alert" id="mensajeSocio" hidden></div>
+
+                <form id="formSocio">
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="nombre">
+                            Nombre completo *
+                        </label>
+
+                        <input class="form-control"
+                        id="nombre"
+                        maxlength="150"
+                        required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="telefono">
+                            Teléfono
+                        </label>
+
+                        <input type="tel"
+                        class="form-control"
+                        id="telefono"
+                        inputmode="numeric"
+                        pattern="[0-9]{10}"
+                        maxlength="10">
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="correo">
+                            Correo electrónico
+                        </label>
+
+                        <input type="email"
+                        class="form-control"
+                        id="correo"
+                        maxlength="150">
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="funcion">
+                            Función musical
+                        </label>
+
+                        <select class="form-select" id="funcion">
+
+                            <option>Cantante</option>
+                            <option>Pianista</option>
+                            <option>Guitarrista</option>
+                            <option>Músico</option>
+                            <option>Apoyo musical</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Pago por celebración
+                        </label>
+
+                        <input class="form-control"
+                        id="tarifaSocio"
+                        value="$300.00 MXN"
+                        readonly>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="notas">
+                            Observaciones
+                        </label>
+
+                        <textarea class="form-control"
+                        id="notas"
+                        maxlength="1000"></textarea>
+
+                    </div>
+
+                    <div class="form-check form-switch mb-4">
+
+                        <input class="form-check-input"
+                        type="checkbox"
+                        id="activo"
+                        checked>
+
+                        <label class="form-check-label" for="activo">
+                            Socio activo
+                        </label>
+
+                    </div>
+
+                    <button class="btn-gold w-100"
+                    type="submit"
+                    data-operacion>
+
+                        <i class="bi bi-floppy me-1"></i>
+
+                        Guardar socio
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MODAL ASIGNACIÓN -->
+
+<div class="modal fade" id="modalAsignacion" tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">Asignar celebración</h5>
+
+                <button class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar"></button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="alert" id="mensajeAsignacion" hidden></div>
+
+                <form id="formAsignacion">
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="eventoSeleccionado">
+                            Celebración *
+                        </label>
+
+                        <select class="form-select"
+                        id="eventoSeleccionado"
+                        required></select>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="socioSeleccionado">
+                            Socio *
+                        </label>
+
+                        <select class="form-select"
+                        id="socioSeleccionado"
+                        required></select>
+
+                    </div>
+
+                    <div class="finance-box">
+
+                        <div class="finance-row">
+                            <span>Paquete</span>
+                            <strong id="detallePaquete">—</strong>
+                        </div>
+
+                        <div class="finance-row">
+                            <span>Espacios disponibles</span>
+                            <strong id="detalleEspacios">0</strong>
+                        </div>
+
+                        <div class="finance-row">
+                            <span>Precio contratado</span>
+                            <strong id="detallePrecio">$0</strong>
+                        </div>
+
+                        <div class="finance-row">
+                            <span>Pago total previsto a socios</span>
+                            <strong id="detalleCosto">$0</strong>
+                        </div>
+
+                        <div class="finance-row">
+                            <span>Tu ganancia prevista</span>
+                            <strong id="detalleGanancia">$0</strong>
+                        </div>
+
+                    </div>
+
+                    <p class="form-text">
+
+                        Cada socio recibe $300 por celebración.
+                        La ganancia mostrada no incluye transporte
+                        ni otros gastos.
+
+                    </p>
+
+                    <button class="btn-gold w-100"
+                    type="submit"
+                    data-operacion>
+
+                        Confirmar asignación
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MODAL PAGO -->
+
+<div class="modal fade" id="modalPago" tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">Registrar pago a socio</h5>
+
+                <button class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar"></button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="alert" id="mensajePago" hidden></div>
+
+                <div class="finance-box" id="resumenPago"></div>
+
+                <form id="formPago">
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="metodoPago">
+                            Método de pago
+                        </label>
+
+                        <select class="form-select" id="metodoPago">
+
+                            <option value="efectivo">Efectivo</option>
+
+                            <option value="transferencia">
+                                Transferencia bancaria
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="fechaPago">
+                            Fecha del pago
+                        </label>
+
+                        <input type="date"
+                        class="form-control"
+                        id="fechaPago"
+                        required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="notasPago">
+                            Referencia u observaciones
+                        </label>
+
+                        <textarea class="form-control"
+                        id="notasPago"
+                        maxlength="500"></textarea>
+
+                    </div>
+
+                    <button type="submit"
+                    class="btn-gold w-100"
+                    data-operacion>
+
+                        Confirmar pago
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+
+import { db, APP_CONFIG } from "./firebase.js";
+
+import {
+    protegerPagina,
+    cerrarSesion
+} from "./auth.js";
+
+import {
+    collection,
+    doc,
+    getDocsFromServer,
+    getDocFromServer,
+    runTransaction,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const $ = id => document.getElementById(id);
+
+const TARIFA = APP_CONFIG.pagoPorSocio;
+
+const controlAgenda = doc(db,"contadores","agenda");
+
+const controlSocios = doc(db,"contadores","socios");
+
+let socios = [];
+let eventos = [];
+let pagos = [];
+
+let socioEditado = null;
+let pagoSeleccionado = null;
+
+let modalSocio;
+let modalAsignacion;
+let modalPago;
+
+let ocupado = false;
+let sistemaListo = false;
+let cambiosPendientes = false;
+
+let pestana = "socios";
+let limite = 24;
+
+// =====================================
+// UTILIDADES
+// =====================================
+
+function hoy() {
+
+    const partes = new Intl.DateTimeFormat("en-CA",{
+
+        timeZone: "America/Mexico_City",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+
+    }).formatToParts(new Date());
+
+    const obtener = tipo =>
+
+        partes.find(p => p.type === tipo).value;
+
+    return `${obtener("year")}-${obtener("month")}-${obtener("day")}`;
+
+}
+
+function moneda(valor) {
+
+    return new Intl.NumberFormat("es-MX",{
+
+        style: "currency",
+        currency: "MXN"
+
+    }).format(Number(valor) || 0);
+
+}
+
+function fechaBonita(fecha) {
+
+    if (!fecha) return "Sin fecha";
+
+    const valor = new Date(fecha + "T12:00:00Z");
+
+    if (Number.isNaN(valor.getTime())) return fecha;
+
+    return new Intl.DateTimeFormat("es-MX",{
+
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC"
+
+    }).format(valor);
+
+}
+
+function normalizar(texto) {
+
+    return String(texto || "")
+
+        .normalize("NFD")
+
+        .replace(/[\u0300-\u036f]/g,"")
+
+        .toLowerCase()
+
+        .trim();
+
+}
+
+function crear(etiqueta,clase,texto) {
+
+    const elemento = document.createElement(etiqueta);
+
+    if (clase) elemento.className = clase;
+
+    if (texto !== undefined) {
+
+        elemento.textContent = texto;
+
+    }
+
+    return elemento;
+
+}
+
+function mensaje(id,texto,tipo = "success") {
+
+    $(id).className = `alert alert-${tipo}`;
+
+    $(id).textContent = texto;
+
+    $(id).hidden = false;
+
+}
+
+function errorTexto(error) {
+
+    if (error.code === "permission-denied") {
+
+        return "No tienes permisos. Revisa las reglas de Firebase.";
+
+    }
+
+    if (error.code === "unavailable") {
+
+        return "Verifica tu conexión a internet.";
+
+    }
+
+    return error.message || "Ocurrió un error inesperado.";
+
+}
+
+function version(resultado) {
+
+    return resultado.exists()
+
+        ? Number(resultado.data().version) || 0
+
+        : 0;
+
+}
+
+function incrementar(transaccion,referencia,resultado) {
+
+    transaccion.set(referencia,{
+
+        version: version(resultado) + 1,
+
+        actualizadoEn: serverTimestamp()
+
+    },{ merge: true });
+
+}
+
+function mismaFecha(a,b) {
+
+    if (!a && !b) return true;
+
+    if (!a || !b) return false;
+
+    return a.seconds === b.seconds &&
+
+        a.nanoseconds === b.nanoseconds;
+
+}
+
+function actualizarBotones() {
+
+    document.querySelectorAll("[data-operacion]")
+
+        .forEach(elemento => {
+
+            elemento.disabled = ocupado ||
+
+                !sistemaListo ||
+
+                !navigator.onLine;
+
+        });
+
+    document.querySelectorAll(".modal form input, .modal form select, .modal form textarea")
+
+        .forEach(elemento => {
+
+            elemento.disabled = ocupado;
+
+        });
+
+}
+
+function disponible() {
+
+    return sistemaListo && !ocupado && navigator.onLine;
+
+}
+
+function agregarOpcion(select,valor,texto) {
+
+    const opcion = crear("option","",texto);
+
+    opcion.value = valor;
+
+    select.append(opcion);
+
+}
+
+function obtenerEvento(id) {
+
+    return eventos.find(evento => evento.id === id);
+
+}
+
+function capacidadSocios(evento) {
+
+    if (!evento) return 0;
+
+    const voces = Number(evento.paqueteDetalle?.voces);
+
+    if ([1,2,3].includes(voces)) {
+
+        return voces - 1;
+
+    }
+
+    const nombre = normalizar(evento.paqueteNombre);
+
+    if (nombre.includes("trio")) return 2;
+
+    if (nombre.includes("duo")) return 1;
+
+    return 0;
+
+}
+
+function asignacionesEvento(id) {
+
+    return pagos.filter(pago =>
+
+        pago.eventoId === id &&
+
+        pago.estado !== "cancelado"
+
+    );
+
+}
+
+function estadoMovimiento(pago) {
+
+    if (pago.estado === "pagado") return "pagado";
+
+    if (pago.estado === "cancelado") return "cancelado";
+
+    const evento = obtenerEvento(pago.eventoId);
+
+    if (!evento) return "revision";
+
+    if (evento.estado === "cancelado") return "cancelado";
+
+    if (evento.estado === "realizado") return "pendiente";
+
+    return "programado";
+
+}
+
+function sumar(lista) {
+
+    return lista.reduce((total,pago) =>
+
+        total + (Number(pago.importe) || 0),0
+
+    );
+
+}
+
+// =====================================
+// CARGAR FIREBASE
+// =====================================
+
+async function cargarDatos() {
+
+    const resultados = await Promise.all([
+
+        getDocsFromServer(collection(db,"socios")),
+
+        getDocsFromServer(collection(db,"eventos")),
+
+        getDocsFromServer(collection(db,"pagosSocios"))
+
+    ]);
+
+    const convertir = resultado =>
+
+        resultado.docs.map(documento => ({
+
+            ...documento.data(),
+
+            id: documento.id
+
+        }));
+
+    socios = convertir(resultados[0]);
+
+    eventos = convertir(resultados[1]);
+
+    pagos = convertir(resultados[2]);
+
+    socios.sort((a,b) =>
+
+        String(a.nombre || "").localeCompare(
+
+            String(b.nombre || ""),"es"
+
+        )
+
+    );
+
+    actualizarResumen();
+
+    renderizar();
+
+}
+
+function actualizarResumen() {
+
+    $("totalSocios").textContent =
+
+        socios.filter(socio => socio.activo !== false).length;
+
+    $("totalAsignaciones").textContent =
+
+        pagos.filter(pago =>
+
+            estadoMovimiento(pago) === "programado"
+
+        ).length;
+
+    $("totalDeuda").textContent = moneda(
+
+        sumar(pagos.filter(pago =>
+
+            estadoMovimiento(pago) === "pendiente"
+
+        ))
+
+    );
+
+    $("totalPagado").textContent = moneda(
+
+        sumar(pagos.filter(pago =>
+
+            estadoMovimiento(pago) === "pagado"
+
+        ))
+
+    );
+
+}
+
+// =====================================
+// PESTAÑAS Y FILTROS
+// =====================================
+
+function cambiarPestana(nueva) {
+
+    pestana = nueva;
+
+    limite = 24;
+
+    $("buscador").value = "";
+
+    document.querySelectorAll("[data-tab]")
+
+        .forEach(boton => {
+
+            const activa = boton.dataset.tab === nueva;
+
+            boton.classList.toggle("active",activa);
+
+            boton.setAttribute("aria-pressed",String(activa));
+
+        });
+
+    const select = $("filtroEstado");
+
+    select.replaceChildren();
+
+    agregarOpcion(select,"","Todos");
+
+    const opciones = nueva === "socios"
+
+        ? [
+
+            ["activo","Activos"],
+
+            ["inactivo","Inactivos"]
+
+        ]
+
+        : nueva === "asignaciones"
+
+        ? [
+
+            ["programado","Programadas"],
+
+            ["pendiente","Realizadas por pagar"],
+
+            ["pagado","Pagadas"],
+
+            ["cancelado","Canceladas"],
+
+            ["revision","Por revisar"]
+
+        ]
+
+        : [
+
+            ["pendiente","Pendientes de pago"],
+
+            ["pagado","Pagadas"],
+
+            ["revision","Por revisar"]
+
+        ];
+
+    opciones.forEach(([valor,texto]) =>
+
+        agregarOpcion(select,valor,texto)
+
+    );
+
+    renderizar();
+
+}
+
+document.querySelectorAll("[data-tab]")
+
+    .forEach(boton => {
+
+        boton.addEventListener("click",() =>
+
+            cambiarPestana(boton.dataset.tab)
+
+        );
+
+    });
+
+$("buscador").addEventListener("input",() => {
+
+    limite = 24;
+
+    renderizar();
+
+});
+
+$("filtroEstado").addEventListener("change",() => {
+
+    limite = 24;
+
+    renderizar();
+
+});
+
+$("btnMostrarMas").addEventListener("click",() => {
+
+    limite += 24;
+
+    renderizar();
+
+});
+
+// =====================================
+// CONSTRUIR TARJETAS
+// =====================================
+
+function fila(icono,texto) {
+
+    const elemento = crear("div","info-row");
+
+    elemento.append(
+
+        crear("i",icono),
+
+        crear("span","",texto)
+
+    );
+
+    return elemento;
+
+}
+
+function filaFinanciera(texto,valor) {
+
+    const elemento = crear("div","finance-row");
+
+    elemento.append(
+
+        crear("span","",texto),
+
+        crear("strong","",valor)
+
+    );
+
+    return elemento;
+
+}
+
+function boton(texto,icono,accion,color = "") {
+
+    const elemento = crear("button","btn-app");
+
+    elemento.type = "button";
+
+    elemento.dataset.operacion = "";
+
+    if (color) elemento.style.color = color;
+
+    elemento.append(
+
+        crear("i",icono + " me-1"),
+
+        document.createTextNode(texto)
+
+    );
+
+    elemento.addEventListener("click",accion);
+
+    return elemento;
+
+}
+
+function tarjetaSocio(socio) {
+
+    const tarjeta = crear("article","app-card");
+
+    const encabezado = crear("div","socio-header");
+
+    const iniciales = String(socio.nombre || "S")
+
+        .split(/\s+/)
+
+        .filter(Boolean)
+
+        .slice(0,2)
+
+        .map(palabra => palabra[0].toUpperCase())
+
+        .join("");
+
+    const datos = crear("div");
+
+    datos.append(
+
+        crear("h3","card-title",socio.nombre),
+
+        crear("div","card-subtitle",socio.funcion || "Músico"),
+
+        crear(
+
+            "span",
+
+            "status mt-2 " +
+
+            (socio.activo !== false ? "status-verde" : "status-rojo"),
+
+            socio.activo !== false ? "Activo" : "Inactivo"
+
+        )
+
+    );
+
+    encabezado.append(
+
+        crear("div","avatar",iniciales),
+
+        datos
+
+    );
+
+    tarjeta.append(encabezado);
+
+    if (socio.telefono) {
+
+        tarjeta.append(fila("bi bi-telephone",socio.telefono));
+
+    }
+
+    if (socio.correo) {
+
+        tarjeta.append(fila("bi bi-envelope",socio.correo));
+
+    }
+
+    tarjeta.append(
+
+        fila("bi bi-cash",moneda(TARIFA) + " por celebración")
+
+    );
+
+    const movimientos = pagos.filter(pago =>
+
+        pago.socioId === socio.id
+
+    );
+
+    const pendientes = movimientos.filter(pago =>
+
+        estadoMovimiento(pago) === "pendiente"
+
+    );
+
+    const pagados = movimientos.filter(pago =>
+
+        estadoMovimiento(pago) === "pagado"
+
+    );
+
+    const programados = movimientos.filter(pago =>
+
+        estadoMovimiento(pago) === "programado"
+
+    );
+
+    const finanzas = crear("div","finance-box");
+
+    finanzas.append(
+
+        filaFinanciera("Próximas participaciones",programados.length),
+
+        filaFinanciera("Pendiente de pagar",moneda(sumar(pendientes))),
+
+        filaFinanciera("Total pagado",moneda(sumar(pagados)))
+
+    );
+
+    tarjeta.append(finanzas);
+
+    if (socio.notas) {
+
+        tarjeta.append(fila("bi bi-sticky",socio.notas));
+
+    }
+
+    const acciones = crear("div","card-actions");
+
+    acciones.append(
+
+        boton(
+
+            "Editar",
+
+            "bi bi-pencil-square",
+
+            () => abrirSocio(socio.id)
+
+        ),
+
+        boton(
+
+            "Historial",
+
+            "bi bi-clock-history",
+
+            () => {
+
+                cambiarPestana("asignaciones");
+
+                $("buscador").value = socio.nombre;
+
+                renderizar();
+
+            }
+
+        )
+
+    );
+
+    if (socio.activo !== false) {
+
+        acciones.append(
+
+            boton(
+
+                "Asignar",
+
+                "bi bi-calendar-plus",
+
+                () => abrirAsignacion(socio.id)
+
+            )
+
+        );
+
+    }
+
+    acciones.append(
+
+        boton(
+
+            socio.activo !== false ? "Desactivar" : "Activar",
+
+            socio.activo !== false
+
+                ? "bi bi-person-dash"
+
+                : "bi bi-person-check",
+
+            () => cambiarEstadoSocio(socio.id),
+
+            socio.activo !== false
+
+                ? "var(--rojo)"
+
+                : "var(--verde)"
+
+        )
+
+    );
+
+    tarjeta.append(acciones);
+
+    return tarjeta;
+
+}
+
+function tarjetaMovimiento(pago) {
+
+    const tarjeta = crear("article","app-card");
+
+    const estado = estadoMovimiento(pago);
+
+    const nombres = {
+
+        programado: "Programado",
+
+        pendiente: "Pendiente de pago",
+
+        pagado: "Pagado",
+
+        cancelado: "Cancelado",
+
+        revision: "Requiere revisión"
+
+    };
+
+    const colores = {
+
+        programado: "status-azul",
+
+        pendiente: "status-dorado",
+
+        pagado: "status-verde",
+
+        cancelado: "status-rojo",
+
+        revision: "status-rojo"
+
+    };
+
+    tarjeta.append(
+
+        crear("h3","card-title",pago.socioNombre || "Socio"),
+
+        crear("div","card-subtitle",pago.tipoServicio || "Celebración"),
+
+        crear("span","status mt-2 " + colores[estado],nombres[estado]),
+
+        fila("bi bi-calendar3",fechaBonita(pago.fecha)),
+
+        fila("bi bi-clock",pago.hora || "Sin hora"),
+
+        fila("bi bi-geo-alt",pago.lugar || "Sin lugar"),
+
+        fila("bi bi-music-note-beamed",pago.paqueteNombre || "Servicio"),
+
+        fila("bi bi-person",pago.clienteNombre || "Cliente")
+
+    );
+
+    const finanzas = crear("div","finance-box");
+
+    finanzas.append(
+
+        filaFinanciera("Importe",moneda(pago.importe))
+
+    );
+
+    if (estado === "pagado") {
+
+        finanzas.append(
+
+            filaFinanciera(
+
+                "Método",
+
+                pago.metodoPago === "transferencia"
+
+                    ? "Transferencia"
+
+                    : pago.metodoPago || "Sin especificar"
+
+            ),
+
+            filaFinanciera("Fecha de pago",fechaBonita(pago.fechaPago))
+
+        );
+
+    }
+
+    tarjeta.append(finanzas);
+
+    if (pago.notasPago) {
+
+        tarjeta.append(fila("bi bi-sticky",pago.notasPago));
+
+    }
+
+    const acciones = crear("div","card-actions");
+
+    const enlace = crear("a","btn-app text-center","Ver celebración");
+
+    enlace.href = "agenda.html?eventoId=" +
+
+        encodeURIComponent(pago.eventoId);
+
+    acciones.append(enlace);
+
+    if (estado === "pendiente") {
+
+        acciones.append(
+
+            boton(
+
+                "Registrar pago",
+
+                "bi bi-wallet2",
+
+                () => abrirPago(pago.id),
+
+                "var(--verde)"
+
+            )
+
+        );
+
+    }
+
+    if (estado === "programado") {
+
+        acciones.append(
+
+            boton(
+
+                "Retirar socio",
+
+                "bi bi-x-circle",
+
+                () => retirarAsignacion(pago.id),
+
+                "var(--rojo)"
+
+            )
+
+        );
+
+    }
+
+    tarjeta.append(acciones);
+
+    return tarjeta;
+
+}
+
+function renderizar() {
+
+    const contenedor = $("lista");
+
+    contenedor.replaceChildren();
+
+    const busqueda = normalizar($("buscador").value);
+
+    const filtro = $("filtroEstado").value;
+
+    let resultados;
+
+    if (pestana === "socios") {
+
+        resultados = socios.filter(socio => {
+
+            const estado = socio.activo !== false
+
+                ? "activo"
+
+                : "inactivo";
+
+            const contenido = normalizar([
+
+                socio.nombre,
+
+                socio.telefono,
+
+                socio.funcion
+
+            ].join(" "));
+
+            return (!filtro || estado === filtro) &&
+
+                contenido.includes(busqueda);
+
+        });
+
+    } else {
+
+        resultados = pagos.filter(pago => {
+
+            const estado = estadoMovimiento(pago);
+
+            if (
+
+                pestana === "pagos" &&
+
+                !["pendiente","pagado","revision"].includes(estado)
+
+            ) return false;
+
+            const contenido = normalizar([
+
+                pago.socioNombre,
+
+                pago.clienteNombre,
+
+                pago.tipoServicio,
+
+                pago.lugar,
+
+                pago.fecha
+
+            ].join(" "));
+
+            return (!filtro || estado === filtro) &&
+
+                contenido.includes(busqueda);
+
+        }).sort((a,b) =>
+
+            `${b.fecha || ""} ${b.hora || ""}`.localeCompare(
+
+                `${a.fecha || ""} ${a.hora || ""}`
+
+            )
+
+        );
+
+    }
+
+    resultados.slice(0,limite).forEach(registro => {
+
+        contenedor.append(
+
+            pestana === "socios"
+
+                ? tarjetaSocio(registro)
+
+                : tarjetaMovimiento(registro)
+
+        );
+
+    });
+
+    $("estadoVacio").hidden = resultados.length !== 0;
+
+    $("btnMostrarMas").hidden = resultados.length <= limite;
+
+    actualizarBotones();
+
+}
+
+// =====================================
+// REGISTRAR Y EDITAR SOCIOS
+// =====================================
+
+function abrirSocio(id = "") {
+
+    if (!disponible()) return;
+
+    socioEditado = socios.find(socio => socio.id === id) || null;
+
+    $("formSocio").reset();
+
+    $("tituloSocio").textContent = socioEditado
+
+        ? "Editar socio"
+
+        : "Nuevo socio";
+
+    ["nombre","telefono","correo","funcion","notas"]
+
+        .forEach(campo => {
+
+            if (socioEditado) {
+
+                $(campo).value = socioEditado[campo] || "";
+
+            }
+
+        });
+
+    $("activo").checked = socioEditado?.activo !== false;
+
+    $("tarifaSocio").value = moneda(TARIFA) + " MXN";
+
+    $("mensajeSocio").hidden = true;
+
+    cambiosPendientes = false;
+
+    modalSocio.show();
+
+}
+
+$("btnNuevoSocio").addEventListener("click",() => abrirSocio());
+
+$("formSocio").addEventListener("submit",async evento => {
+
+    evento.preventDefault();
+
+    if (!disponible()) return;
+
+    const original = socioEditado;
+
+    const datos = {
+
+        nombre: $("nombre").value.trim(),
+
+        telefono: $("telefono").value.trim(),
+
+        correo: $("correo").value.trim(),
+
+        funcion: $("funcion").value,
+
+        notas: $("notas").value.trim(),
+
+        tarifa: TARIFA,
+
+        activo: $("activo").checked
+
+    };
+
+    if (!datos.nombre || !datos.funcion) {
+
+        mensaje("mensajeSocio","Completa los campos obligatorios.","danger");
+
+        return;
+
+    }
+
+    if (datos.telefono && !/^\d{10}$/.test(datos.telefono)) {
+
+        mensaje("mensajeSocio","El teléfono debe tener 10 dígitos.","danger");
+
+        return;
+
+    }
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    let guardado = false;
+
+    try {
+
+        const referencia = original
+
+            ? doc(db,"socios",original.id)
+
+            : doc(collection(db,"socios"));
+
+        await runTransaction(db,async transaccion => {
+
+            const control = await transaccion.get(controlSocios);
+
+            const actual = await transaccion.get(referencia);
+
+            if (original) {
+
+                if (
+
+                    !actual.exists() ||
+
+                    !mismaFecha(
+
+                        actual.data().actualizadoEn,
+
+                        original.actualizadoEn
+
+                    )
+
+                ) {
+
+                    throw new Error("El socio cambió. Actualiza la página.");
+
+                }
+
+                transaccion.update(referencia,{
+
+                    ...datos,
+
+                    actualizadoEn: serverTimestamp()
+
+                });
+
+            } else {
+
+                if (actual.exists()) {
+
+                    throw new Error("El identificador ya existe.");
+
+                }
+
+                transaccion.set(referencia,{
+
+                    ...datos,
+
+                    creadoEn: serverTimestamp(),
+
+                    actualizadoEn: serverTimestamp()
+
+                });
+
+            }
+
+            incrementar(transaccion,controlSocios,control);
+
+        });
+
+        guardado = true;
+
+        cambiosPendientes = false;
+
+        ocupado = false;
+
+        modalSocio.hide();
+
+        ocupado = true;
+
+        await cargarDatos();
+
+        mensaje("mensajeGeneral","Socio guardado correctamente.");
+
+    } catch (error) {
+
+        mensaje(
+
+            guardado ? "mensajeGeneral" : "mensajeSocio",
+
+            guardado
+
+                ? "El socio se guardó. Actualiza la pantalla."
+
+                : errorTexto(error),
+
+            "danger"
+
+        );
+
+    } finally {
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// ACTIVAR O DESACTIVAR
+// =====================================
+
+async function cambiarEstadoSocio(id) {
+
+    if (!disponible()) return;
+
+    const socio = socios.find(socio => socio.id === id);
+
+    if (!socio) return;
+
+    const nuevoEstado = socio.activo === false;
+
+    if (!confirm(
+
+        nuevoEstado
+
+            ? "¿Activar este socio?"
+
+            : "¿Desactivar este socio? Sus asignaciones y pagos existentes se conservarán."
+
+    )) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    let guardado = false;
+
+    try {
+
+        await runTransaction(db,async transaccion => {
+
+            const control = await transaccion.get(controlSocios);
+
+            const referencia = doc(db,"socios",id);
+
+            const actual = await transaccion.get(referencia);
+
+            if (
+
+                !actual.exists() ||
+
+                !mismaFecha(actual.data().actualizadoEn,socio.actualizadoEn)
+
+            ) {
+
+                throw new Error("El socio cambió. Actualiza la página.");
+
+            }
+
+            transaccion.update(referencia,{
+
+                activo: nuevoEstado,
+
+                actualizadoEn: serverTimestamp()
+
+            });
+
+            incrementar(transaccion,controlSocios,control);
+
+        });
+
+        guardado = true;
+
+        await cargarDatos();
+
+        mensaje("mensajeGeneral","Estado del socio actualizado.");
+
+    } catch (error) {
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            guardado
+
+                ? "El cambio se guardó. Actualiza la pantalla."
+
+                : errorTexto(error),
+
+            "danger"
+
+        );
+
+    } finally {
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+}
+
+// =====================================
+// ASIGNAR SOCIOS
+// =====================================
+
+function abrirAsignacion(socioId = "",eventoId = "") {
+
+    if (!disponible()) return;
+
+    $("formAsignacion").reset();
+
+    $("eventoSeleccionado").replaceChildren();
+
+    $("socioSeleccionado").replaceChildren();
+
+    agregarOpcion(
+
+        $("eventoSeleccionado"),
+
+        "",
+
+        "Seleccionar celebración"
+
+    );
+
+    agregarOpcion(
+
+        $("socioSeleccionado"),
+
+        "",
+
+        "Seleccionar socio"
+
+    );
+
+    eventos.filter(evento =>
+
+        evento.estado === "programado" &&
+
+        capacidadSocios(evento) > 0 &&
+
+        asignacionesEvento(evento.id).length < capacidadSocios(evento)
+
+    ).sort((a,b) =>
+
+        `${a.fecha} ${a.hora}`.localeCompare(`${b.fecha} ${b.hora}`)
+
+    ).forEach(evento => {
+
+        agregarOpcion(
+
+            $("eventoSeleccionado"),
+
+            evento.id,
+
+            `${evento.fecha} · ${evento.hora} · ${evento.tipoServicio} · ${evento.clienteNombre}`
+
+        );
+
+    });
+
+    socios.filter(socio => socio.activo !== false)
+
+        .forEach(socio => {
+
+            agregarOpcion(
+
+                $("socioSeleccionado"),
+
+                socio.id,
+
+                socio.nombre
+
+            );
+
+        });
+
+    $("eventoSeleccionado").value = eventoId;
+
+    $("socioSeleccionado").value = socioId;
+
+    $("mensajeAsignacion").hidden = true;
+
+    cambiosPendientes = false;
+
+    actualizarDetalleAsignacion();
+
+    modalAsignacion.show();
+
+}
+
+$("btnAsignar").addEventListener("click",() => abrirAsignacion());
+
+function actualizarDetalleAsignacion() {
+
+    const evento = obtenerEvento($("eventoSeleccionado").value);
+
+    const capacidad = capacidadSocios(evento);
+
+    const espacios = evento
+
+        ? Math.max(0,capacidad - asignacionesEvento(evento.id).length)
+
+        : 0;
+
+    const costo = capacidad * TARIFA;
+
+    const precio = Number(evento?.precio) || 0;
+
+    $("detallePaquete").textContent = evento?.paqueteNombre || "—";
+
+    $("detalleEspacios").textContent = espacios;
+
+    $("detallePrecio").textContent = moneda(precio);
+
+    $("detalleCosto").textContent = moneda(costo);
+
+    $("detalleGanancia").textContent = moneda(precio - costo);
+
+}
+
+$("eventoSeleccionado").addEventListener(
+
+    "change",actualizarDetalleAsignacion
+
+);
+
+// =====================================
+// CONFLICTOS DE HORARIO DEL SOCIO
+// =====================================
+
+function inicioCivil(evento) {
+
+    return Date.parse(`${evento.fecha}T${evento.hora}:00Z`);
+
+}
+
+function hayConflicto(a,b) {
+
+    const inicioA = inicioCivil(a);
+
+    const inicioB = inicioCivil(b);
+
+    if (!Number.isFinite(inicioA) || !Number.isFinite(inicioB)) {
+
+        throw new Error("Existe una celebración con horario inválido.");
+
+    }
+
+    const finA = inicioA + (Number(a.duracion) || 60) * 60000;
+
+    const finB = inicioB + (Number(b.duracion) || 60) * 60000;
+
+    const margen = Math.max(
+
+        Number(a.traslado) || 0,
+
+        Number(b.traslado) || 0
+
+    ) * 60000;
+
+    return inicioA < finB + margen &&
+
+        finA + margen > inicioB;
+
+}
+
+$("formAsignacion").addEventListener("submit",async evento => {
+
+    evento.preventDefault();
+
+    if (!disponible()) return;
+
+    const eventoId = $("eventoSeleccionado").value;
+
+    const socioId = $("socioSeleccionado").value;
+
+    if (!eventoId || !socioId) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    let guardado = false;
+
+    try {
+
+        const [agendaBase,sociosBase] = await Promise.all([
+
+            getDocFromServer(controlAgenda),
+
+            getDocFromServer(controlSocios)
+
+        ]);
+
+        const [agendaActual,pagosActuales] = await Promise.all([
+
+            getDocsFromServer(collection(db,"eventos")),
+
+            getDocsFromServer(collection(db,"pagosSocios"))
+
+        ]);
+
+        const mapaEventos = new Map(
+
+            agendaActual.docs.map(documento => [
+
+                documento.id,
+
+                documento.data()
+
+            ])
+
+        );
+
+        const eventoNuevo = mapaEventos.get(eventoId);
+
+        if (!eventoNuevo) {
+
+            throw new Error("La celebración ya no existe.");
+
+        }
+
+        for (const documento of pagosActuales.docs) {
+
+            const pago = documento.data();
+
+            if (
+
+                pago.socioId !== socioId ||
+
+                pago.estado === "cancelado" ||
+
+                pago.eventoId === eventoId
+
+            ) continue;
+
+            const otroEvento = mapaEventos.get(pago.eventoId);
+
+            if (!otroEvento) {
+
+                throw new Error("Existe una asignación sin celebración. Revísala primero.");
+
+            }
+
+            if (otroEvento.estado === "cancelado") continue;
+
+            if (hayConflicto(eventoNuevo,otroEvento)) {
+
+                throw new Error(
+
+                    `El socio tiene otra celebración el ${otroEvento.fecha} a las ${otroEvento.hora}.`
+
+                );
+
+            }
+
+        }
+
+        await runTransaction(db,async transaccion => {
+
+            const controlA = await transaccion.get(controlAgenda);
+
+            const controlS = await transaccion.get(controlSocios);
+
+            const referenciaEvento = doc(db,"eventos",eventoId);
+
+            const referenciaSocio = doc(db,"socios",socioId);
+
+            const actualEvento = await transaccion.get(referenciaEvento);
+
+            const actualSocio = await transaccion.get(referenciaSocio);
+
+            const referencias = [1,2].map(numero =>
+
+                doc(db,"pagosSocios",`${eventoId}_socio_${numero}`)
+
+            );
+
+            const espacios = await Promise.all(
+
+                referencias.map(ref => transaccion.get(ref))
+
+            );
+
+            if (
+
+                version(controlA) !== version(agendaBase) ||
+
+                version(controlS) !== version(sociosBase)
+
+            ) {
+
+                throw new Error("La agenda cambió. Intenta nuevamente.");
+
+            }
+
+            if (
+
+                !actualEvento.exists() ||
+
+                actualEvento.data().estado !== "programado"
+
+            ) {
+
+                throw new Error("La celebración no está disponible.");
+
+            }
+
+            if (
+
+                !actualSocio.exists() ||
+
+                actualSocio.data().activo === false
+
+            ) {
+
+                throw new Error("El socio no está activo.");
+
+            }
+
+            const datosEvento = actualEvento.data();
+
+            const datosSocio = actualSocio.data();
+
+            const capacidad = capacidadSocios(datosEvento);
+
+            if (!capacidad) {
+
+                throw new Error("Este paquete no requiere socios.");
+
+            }
+
+            if (Number(datosEvento.precio) < capacidad * TARIFA) {
+
+                throw new Error("El precio no cubre el pago de los socios.");
+
+            }
+
+            const ocupados = espacios.filter(resultado =>
+
+                resultado.exists() &&
+
+                resultado.data().estado !== "cancelado"
+
+            );
+
+            if (ocupados.length >= capacidad) {
+
+                throw new Error("No hay espacios disponibles.");
+
+            }
+
+            if (ocupados.some(resultado =>
+
+                resultado.data().socioId === socioId
+
+            )) {
+
+                throw new Error("Este socio ya está asignado.");
+
+            }
+
+            const indice = espacios.findIndex(resultado =>
+
+                !resultado.exists() ||
+
+                resultado.data().estado === "cancelado"
+
+            );
+
+            if (indice < 0) {
+
+                throw new Error("No hay espacios disponibles.");
+
+            }
+
+            // Conservar el registro anterior si se reutiliza
+            // un espacio de una asignación cancelada.
+
+            if (espacios[indice].exists()) {
+
+                const anterior = espacios[indice].data();
+
+                const historial = doc(collection(db,"pagosSocios"));
+
+                transaccion.set(historial,{
+
+                    ...anterior,
+
+                    estado: "cancelado",
+
+                    asignacionOriginalId: referencias[indice].id,
+
+                    archivadoEn: serverTimestamp()
+
+                });
+
+            }
+
+            transaccion.set(referencias[indice],{
+
+                eventoId,
+
+                socioId,
+
+                socioNombre: datosSocio.nombre,
+
+                clienteNombre: datosEvento.clienteNombre || "",
+
+                tipoServicio: datosEvento.tipoServicio || "",
+
+                paqueteNombre: datosEvento.paqueteNombre || "",
+
+                lugar: datosEvento.lugar || "",
+
+                fecha: datosEvento.fecha,
+
+                hora: datosEvento.hora,
+
+                importe: TARIFA,
+
+                estado: "pendiente",
+
+                creadoEn: serverTimestamp(),
+
+                actualizadoEn: serverTimestamp()
+
+            });
+
+            incrementar(transaccion,controlAgenda,controlA);
+
+            incrementar(transaccion,controlSocios,controlS);
+
+        });
+
+        guardado = true;
+
+        cambiosPendientes = false;
+
+        ocupado = false;
+
+        modalAsignacion.hide();
+
+        ocupado = true;
+
+        await cargarDatos();
+
+        cambiarPestana("asignaciones");
+
+        mensaje("mensajeGeneral","Socio asignado correctamente.");
+
+    } catch (error) {
+
+        mensaje(
+
+            guardado ? "mensajeGeneral" : "mensajeAsignacion",
+
+            guardado
+
+                ? "La asignación se guardó. Actualiza la pantalla."
+
+                : errorTexto(error),
+
+            "danger"
+
+        );
+
+    } finally {
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// RETIRAR ASIGNACIÓN
+// =====================================
+
+async function retirarAsignacion(id) {
+
+    if (!disponible()) return;
+
+    const pago = pagos.find(pago => pago.id === id);
+
+    if (!pago || estadoMovimiento(pago) !== "programado") return;
+
+    if (!confirm(
+
+        `¿Retirar a ${pago.socioNombre} de esta celebración?`
+
+    )) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    let guardado = false;
+
+    try {
+
+        await runTransaction(db,async transaccion => {
+
+            const controlA = await transaccion.get(controlAgenda);
+
+            const controlS = await transaccion.get(controlSocios);
+
+            const referencia = doc(db,"pagosSocios",id);
+
+            const actual = await transaccion.get(referencia);
+
+            const evento = await transaccion.get(
+
+                doc(db,"eventos",pago.eventoId)
+
+            );
+
+            if (
+
+                !actual.exists() ||
+
+                !mismaFecha(actual.data().actualizadoEn,pago.actualizadoEn) ||
+
+                actual.data().estado !== "pendiente" ||
+
+                actual.data().socioId !== pago.socioId ||
+
+                !evento.exists() ||
+
+                evento.data().estado !== "programado"
+
+            ) {
+
+                throw new Error("La asignación ya no puede retirarse.");
+
+            }
+
+            transaccion.update(referencia,{
+
+                estado: "cancelado",
+
+                motivoCancelacion: "Socio retirado de la celebración",
+
+                canceladoEn: serverTimestamp(),
+
+                actualizadoEn: serverTimestamp()
+
+            });
+
+            incrementar(transaccion,controlAgenda,controlA);
+
+            incrementar(transaccion,controlSocios,controlS);
+
+        });
+
+        guardado = true;
+
+        await cargarDatos();
+
+        mensaje("mensajeGeneral","Asignación retirada correctamente.");
+
+    } catch (error) {
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            guardado
+
+                ? "El cambio se guardó. Actualiza la pantalla."
+
+                : errorTexto(error),
+
+            "danger"
+
+        );
+
+    } finally {
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+}
+
+// =====================================
+// REGISTRAR PAGO
+// =====================================
+
+function abrirPago(id) {
+
+    if (!disponible()) return;
+
+    const pago = pagos.find(pago => pago.id === id);
+
+    if (!pago || estadoMovimiento(pago) !== "pendiente") return;
+
+    pagoSeleccionado = { ...pago };
+
+    $("formPago").reset();
+
+    $("resumenPago").replaceChildren(
+
+        filaFinanciera("Socio",pago.socioNombre),
+
+        filaFinanciera("Celebración",pago.tipoServicio),
+
+        filaFinanciera("Fecha",fechaBonita(pago.fecha)),
+
+        filaFinanciera("Importe a pagar",moneda(pago.importe))
+
+    );
+
+    $("fechaPago").value = hoy();
+
+    $("fechaPago").min = pago.fecha;
+
+    $("fechaPago").max = hoy();
+
+    $("mensajePago").hidden = true;
+
+    cambiosPendientes = false;
+
+    modalPago.show();
+
+}
+
+$("formPago").addEventListener("submit",async evento => {
+
+    evento.preventDefault();
+
+    if (!disponible() || !pagoSeleccionado) return;
+
+    const original = { ...pagoSeleccionado };
+
+    const fechaPago = $("fechaPago").value;
+
+    const metodoPago = $("metodoPago").value;
+
+    const notasPago = $("notasPago").value.trim();
+
+    if (
+
+        !fechaPago ||
+
+        fechaPago > hoy() ||
+
+        fechaPago < original.fecha
+
+    ) {
+
+        mensaje("mensajePago","Selecciona una fecha válida.","danger");
+
+        return;
+
+    }
+
+    if (!confirm(
+
+        `¿Confirmas que ya entregaste ${moneda(original.importe)} a ${original.socioNombre}?`
+
+    )) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    let guardado = false;
+
+    try {
+
+        await runTransaction(db,async transaccion => {
+
+            const control = await transaccion.get(controlSocios);
+
+            const referencia = doc(db,"pagosSocios",original.id);
+
+            const actual = await transaccion.get(referencia);
+
+            const evento = await transaccion.get(
+
+                doc(db,"eventos",original.eventoId)
+
+            );
+
+            if (
+
+                !actual.exists() ||
+
+                actual.data().estado !== "pendiente" ||
+
+                actual.data().socioId !== original.socioId ||
+
+                Number(actual.data().importe) !== Number(original.importe) ||
+
+                !mismaFecha(actual.data().actualizadoEn,original.actualizadoEn)
+
+            ) {
+
+                throw new Error("El pago cambió o ya fue registrado.");
+
+            }
+
+            if (
+
+                !evento.exists() ||
+
+                evento.data().estado !== "realizado"
+
+            ) {
+
+                throw new Error("La celebración debe estar realizada.");
+
+            }
+
+            if (
+
+                !Number.isFinite(Number(original.importe)) ||
+
+                Number(original.importe) <= 0 ||
+
+                fechaPago < evento.data().fecha
+
+            ) {
+
+                throw new Error("El importe o la fecha del pago no son válidos.");
+
+            }
+
+            transaccion.update(referencia,{
+
+                estado: "pagado",
+
+                metodoPago,
+
+                fechaPago,
+
+                notasPago,
+
+                registradoEn: serverTimestamp(),
+
+                actualizadoEn: serverTimestamp()
+
+            });
+
+            incrementar(transaccion,controlSocios,control);
+
+        });
+
+        guardado = true;
+
+        cambiosPendientes = false;
+
+        ocupado = false;
+
+        modalPago.hide();
+
+        ocupado = true;
+
+        await cargarDatos();
+
+        cambiarPestana("pagos");
+
+        mensaje("mensajeGeneral","Pago al socio registrado correctamente.");
+
+    } catch (error) {
+
+        mensaje(
+
+            guardado ? "mensajeGeneral" : "mensajePago",
+
+            guardado
+
+                ? "El pago se registró. Actualiza la pantalla."
+
+                : errorTexto(error),
+
+            "danger"
+
+        );
+
+    } finally {
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// PROTEGER FORMULARIOS
+// =====================================
+
+["formSocio","formAsignacion","formPago"]
+
+    .forEach(id => {
+
+        $(id).addEventListener("input",() => {
+
+            cambiosPendientes = true;
+
+        });
+
+    });
+
+["modalSocio","modalAsignacion","modalPago"]
+
+    .forEach(id => {
+
+        $(id).addEventListener("hide.bs.modal",evento => {
+
+            if (ocupado) {
+
+                evento.preventDefault();
+
+                return;
+
+            }
+
+            if (cambiosPendientes) {
+
+                if (!confirm("Tienes cambios sin guardar. ¿Deseas salir?")) {
+
+                    evento.preventDefault();
+
+                } else {
+
+                    cambiosPendientes = false;
+
+                }
+
+            }
+
+        });
+
+    });
+
+window.addEventListener("beforeunload",evento => {
+
+    if (ocupado || cambiosPendientes) {
+
+        evento.preventDefault();
+
+        evento.returnValue = "";
+
+    }
+
+});
+
+// =====================================
+// ACTUALIZAR
+// =====================================
+
+$("btnRecargar").addEventListener("click",async () => {
+
+    if (!disponible()) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    try {
+
+        await cargarDatos();
+
+        mensaje("mensajeGeneral","Información actualizada.");
+
+    } catch (error) {
+
+        mensaje("mensajeGeneral",errorTexto(error),"danger");
+
+    } finally {
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// CONEXIÓN
+// =====================================
+
+window.addEventListener("offline",() => {
+
+    actualizarBotones();
+
+    mensaje(
+
+        "mensajeGeneral",
+
+        "Sin conexión. No puedes registrar cambios.",
+
+        "warning"
+
+    );
+
+});
+
+window.addEventListener("online",() => {
+
+    actualizarBotones();
+
+    mensaje(
+
+        "mensajeGeneral",
+
+        "Conexión de red restablecida. Puedes actualizar los datos.",
+
+        "info"
+
+    );
+
+});
+
+// =====================================
+// CERRAR SESIÓN
+// =====================================
+
+$("btnCerrarSesion").addEventListener("click",async () => {
+
+    if (ocupado) return;
+
+    if (!confirm("¿Deseas cerrar sesión?")) return;
+
+    try {
+
+        cambiosPendientes = false;
+
+        await cerrarSesion();
+
+    } catch (error) {
+
+        mensaje("mensajeGeneral",errorTexto(error),"danger");
+
+    }
+
+});
+
+// =====================================
+// INICIALIZACIÓN
+// =====================================
+
+try {
+
+    await protegerPagina();
+
+    modalSocio = new bootstrap.Modal($("modalSocio"));
+
+    modalAsignacion = new bootstrap.Modal($("modalAsignacion"));
+
+    modalPago = new bootstrap.Modal($("modalPago"));
+
+    cambiarPestana("socios");
+
+    await cargarDatos();
+
+    sistemaListo = true;
+
+    $("aplicacion").hidden = false;
+
+    $("pantallaCarga").hidden = true;
+
+    actualizarBotones();
+
+    window.VozAngelicalTema?.aplicar();
+
+    const parametros = new URLSearchParams(location.search);
+
+    if (parametros.get("accion") === "asignar") {
+
+        abrirAsignacion(
+
+            parametros.get("socioId") || "",
+
+            parametros.get("eventoId") || ""
+
+        );
+
+        history.replaceState(null,"",location.pathname);
+
+    }
+
+} catch (error) {
+
+    $("textoCarga").textContent = errorTexto(error);
+
+    $("spinnerCarga").hidden = true;
+
+    $("btnReintentar").hidden = false;
+
+}
+
+</script>
+
+<script src="pwa.js" defer></script>
+
+</body>
+</html>

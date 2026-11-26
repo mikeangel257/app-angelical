@@ -1,0 +1,2322 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F5EFE4">
+
+<title>Mi cuenta | Voz Angelical</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<script src="tema.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --dorado:#B48A42;
+    --acento:#8A632B;
+    --fondo:#F5EFE4;
+    --tarjeta:#FFFFFF;
+    --texto:#30271D;
+    --secundario:#796C59;
+    --borde:#E6D8C1;
+    --campo:#FCFAF6;
+    --suave:#EDE3D1;
+    --verde:#328653;
+    --rojo:#C74D4D;
+    --sidebar:260px;
+}
+
+html[data-tema="oscuro"] {
+    --fondo:#171614;
+    --tarjeta:#252321;
+    --texto:#F5EFE4;
+    --secundario:#C1B6A5;
+    --borde:#413A30;
+    --campo:#1D1B19;
+    --suave:#33291B;
+    --acento:#DCC18A;
+    --verde:#68C78A;
+    --rojo:#F07878;
+}
+
+* {
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body {
+    margin:0;
+    min-height:100dvh;
+    background:var(--fondo);
+    color:var(--texto);
+    font-family:'Poppins',sans-serif;
+}
+
+[hidden] {
+    display:none!important;
+}
+
+a {
+    color:inherit;
+    text-decoration:none;
+}
+
+button:disabled {
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.app-header {
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:var(--tarjeta);
+    border-bottom:1px solid var(--borde);
+    padding:14px 18px;
+    padding-top:max(14px,env(safe-area-inset-top));
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand {
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.brand img {
+    width:45px;
+    height:45px;
+    border-radius:50%;
+}
+
+.brand h1 {
+    font-family:'Cinzel',serif;
+    color:var(--acento);
+    font-size:16px;
+    font-weight:700;
+    margin:0;
+}
+
+.brand small {
+    font-size:10px;
+    color:var(--secundario);
+}
+
+.icon-button {
+    width:44px;
+    height:44px;
+    background:var(--campo);
+    color:var(--acento);
+    border:1px solid var(--borde);
+    border-radius:13px;
+    font-size:19px;
+}
+
+.main-content {
+    padding:22px 16px;
+    padding-bottom:calc(110px + env(safe-area-inset-bottom));
+}
+
+.page-title {
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    color:var(--acento);
+    font-size:26px;
+}
+
+.description {
+    color:var(--secundario);
+    font-size:12px;
+    line-height:1.8;
+}
+
+.profile-card {
+    background:linear-gradient(135deg,#795421,#B48A42);
+    color:white;
+    border-radius:24px;
+    padding:30px 20px;
+    text-align:center;
+    margin:22px 0;
+    overflow-wrap:anywhere;
+}
+
+.avatar {
+    width:90px;
+    height:90px;
+    margin:0 auto 18px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.6);
+    background:rgba(255,255,255,.18);
+    font-size:32px;
+    font-weight:600;
+}
+
+.profile-card h2 {
+    font-size:22px;
+    font-weight:700;
+}
+
+.profile-card p {
+    font-size:12px;
+    opacity:.95;
+}
+
+.role-label {
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.3);
+    border-radius:30px;
+    padding:8px 15px;
+    font-size:11px;
+}
+
+.section-heading {
+    font-family:'Cinzel',serif;
+    font-size:18px;
+    font-weight:700;
+    color:var(--acento);
+    margin:28px 0 15px;
+}
+
+.panel {
+    background:var(--tarjeta);
+    border:1px solid var(--borde);
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:16px;
+    min-width:0;
+}
+
+.panel h3 {
+    font-size:15px;
+    color:var(--acento);
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+.form-label {
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.form-control {
+    background:var(--campo);
+    color:var(--texto);
+    border:1px solid var(--borde);
+    border-radius:12px;
+    min-height:49px;
+    font-size:16px;
+    padding:12px;
+}
+
+.form-control:focus {
+    background:var(--campo);
+    color:var(--texto);
+    border-color:var(--dorado);
+    box-shadow:0 0 0 3px rgba(180,138,66,.15);
+}
+
+.form-control:read-only {
+    background:var(--suave);
+}
+
+.btn-gold {
+    background:linear-gradient(135deg,#8A632B,#B48A42);
+    color:white;
+    border:none;
+    border-radius:13px;
+    min-height:49px;
+    padding:12px 16px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.btn-app {
+    background:var(--campo);
+    color:var(--acento);
+    border:1px solid var(--borde);
+    border-radius:12px;
+    min-height:46px;
+    padding:12px;
+    font-size:12px;
+}
+
+.btn-danger-app {
+    background:transparent;
+    color:var(--rojo);
+    border:1px solid var(--rojo);
+    border-radius:13px;
+    min-height:48px;
+    padding:12px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.info-row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:15px 0;
+    border-bottom:1px solid var(--borde);
+    font-size:12px;
+}
+
+.info-row:last-child {
+    border-bottom:none;
+}
+
+.info-row span {
+    color:var(--secundario);
+}
+
+.info-row strong {
+    text-align:right;
+    overflow-wrap:anywhere;
+}
+
+.security-option {
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:16px 0;
+    border-bottom:1px solid var(--borde);
+}
+
+.security-option:last-child {
+    border-bottom:none;
+}
+
+.security-icon {
+    flex-shrink:0;
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:13px;
+    background:var(--suave);
+    color:var(--acento);
+    font-size:20px;
+}
+
+.security-option h4 {
+    font-size:13px;
+    font-weight:600;
+    margin:0 0 5px;
+}
+
+.security-option p {
+    font-size:11px;
+    color:var(--secundario);
+    margin:0;
+    line-height:1.7;
+}
+
+.status-green {
+    color:var(--verde);
+}
+
+.status-red {
+    color:var(--rojo);
+}
+
+.password-wrapper {
+    position:relative;
+}
+
+.password-wrapper input {
+    padding-right:50px;
+}
+
+.password-toggle {
+    position:absolute;
+    right:6px;
+    top:5px;
+    width:40px;
+    height:40px;
+    background:transparent;
+    color:var(--secundario);
+    border:none;
+}
+
+.password-meter {
+    height:7px;
+    background:var(--suave);
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:12px;
+}
+
+.password-meter div {
+    width:0;
+    height:100%;
+    transition:width .2s;
+}
+
+.theme-grid {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:9px;
+}
+
+.theme-option {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:var(--campo);
+    color:var(--texto);
+    border:1px solid var(--borde);
+    border-radius:14px;
+    min-height:85px;
+    font-size:11px;
+}
+
+.theme-option i {
+    font-size:23px;
+}
+
+.theme-option.activo {
+    border-color:var(--dorado);
+    background:var(--suave);
+    color:var(--acento);
+}
+
+.modal-content {
+    background:var(--tarjeta);
+    color:var(--texto);
+    border:1px solid var(--borde);
+    border-radius:22px;
+}
+
+.modal-header,
+.modal-footer {
+    border-color:var(--borde);
+}
+
+.modal-title {
+    font-size:16px;
+    font-weight:600;
+    color:var(--acento);
+}
+
+.alert {
+    font-size:12px;
+    line-height:1.7;
+    border-radius:12px;
+}
+
+.bottom-nav {
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:200;
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    padding:9px 5px;
+    padding-bottom:calc(9px + env(safe-area-inset-bottom));
+    background:var(--tarjeta);
+    border-top:1px solid var(--borde);
+}
+
+.nav-item-app {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    min-height:52px;
+    border:none;
+    border-radius:12px;
+    background:transparent;
+    color:var(--secundario);
+    font-size:9px;
+}
+
+.nav-item-app i {
+    font-size:21px;
+}
+
+.nav-item-app.active {
+    background:var(--suave);
+    color:var(--acento);
+    font-weight:600;
+}
+
+.offcanvas {
+    background:var(--tarjeta);
+    color:var(--texto);
+}
+
+.offcanvas-bottom {
+    height:auto;
+    max-height:85dvh;
+    border-radius:25px 25px 0 0;
+}
+
+.menu-option {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px;
+    margin-bottom:8px;
+    background:var(--campo);
+    color:var(--texto);
+    border:1px solid var(--borde);
+    border-radius:12px;
+    width:100%;
+    min-height:50px;
+    font-size:13px;
+}
+
+.menu-option i {
+    color:var(--acento);
+    font-size:18px;
+}
+
+.menu-option.active {
+    background:var(--suave);
+    color:var(--acento);
+}
+
+.sidebar {
+    display:none;
+}
+
+.loading-screen {
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:var(--fondo);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    padding:25px;
+    text-align:center;
+}
+
+.loading-screen img {
+    width:110px;
+    height:110px;
+    border-radius:50%;
+}
+
+.loading-screen p {
+    color:var(--secundario);
+    font-size:12px;
+}
+
+.spinner-border {
+    color:var(--dorado);
+}
+
+.app-footer {
+    text-align:center;
+    color:var(--secundario);
+    font-size:10px;
+    line-height:1.9;
+    padding:30px 10px;
+}
+
+.account-grid {
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+}
+
+@media(min-width:850px) {
+
+    .account-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media(min-width:992px) {
+
+    .sidebar {
+        position:fixed;
+        inset:0 auto 0 0;
+        width:var(--sidebar);
+        display:flex;
+        flex-direction:column;
+        padding:20px 15px;
+        background:var(--tarjeta);
+        border-right:1px solid var(--borde);
+        overflow-y:auto;
+    }
+
+    .sidebar-brand {
+        text-align:center;
+        padding:10px 0 25px;
+    }
+
+    .sidebar-brand img {
+        width:95px;
+        height:95px;
+        border-radius:50%;
+    }
+
+    .sidebar-brand h2 {
+        font-family:'Cinzel',serif;
+        font-size:18px;
+        color:var(--acento);
+        margin-top:15px;
+    }
+
+    .sidebar-link {
+        display:flex;
+        align-items:center;
+        gap:12px;
+        padding:13px;
+        margin-bottom:5px;
+        color:var(--secundario);
+        border-radius:12px;
+        font-size:13px;
+    }
+
+    .sidebar-link i {
+        font-size:18px;
+    }
+
+    .sidebar-link.active,
+    .sidebar-link:hover {
+        background:var(--suave);
+        color:var(--acento);
+    }
+
+    .app-header {
+        margin-left:var(--sidebar);
+        padding:15px 30px;
+    }
+
+    .main-content {
+        margin-left:var(--sidebar);
+        padding:30px;
+    }
+
+    .bottom-nav {
+        display:none;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="loading-screen" id="pantallaCarga">
+
+    <img src="icon-192.png" alt="Voz Angelical">
+
+    <div class="spinner-border" id="spinnerCarga"></div>
+
+    <p id="textoCarga">Verificando tu cuenta...</p>
+
+    <button class="btn-app" id="btnReintentar" hidden>
+        Volver a intentar
+    </button>
+
+</div>
+
+<div id="aplicacion" hidden>
+
+<aside class="sidebar">
+
+    <div class="sidebar-brand">
+
+        <img src="logo.png" alt="Voz Angelical">
+
+        <h2>Voz Angelical</h2>
+
+    </div>
+
+    <a href="inicio.html" class="sidebar-link">
+        <i class="bi bi-house-door"></i> Inicio
+    </a>
+
+    <a href="agenda.html" class="sidebar-link">
+        <i class="bi bi-calendar3"></i> Agenda
+    </a>
+
+    <a href="contratos.html" class="sidebar-link">
+        <i class="bi bi-file-earmark-text"></i> Contratos
+    </a>
+
+    <a href="clientes.html" class="sidebar-link">
+        <i class="bi bi-person-lines-fill"></i> Clientes
+    </a>
+
+    <a href="servicios.html" class="sidebar-link">
+        <i class="bi bi-music-note-beamed"></i> Servicios
+    </a>
+
+    <a href="socios.html" class="sidebar-link">
+        <i class="bi bi-people"></i> Socios
+    </a>
+
+    <a href="estadisticas.html" class="sidebar-link">
+        <i class="bi bi-bar-chart-line"></i> Estadísticas
+    </a>
+
+    <a href="configuracion.html" class="sidebar-link">
+        <i class="bi bi-gear"></i> Configuración
+    </a>
+
+    <a href="usuarios.html" class="sidebar-link active">
+        <i class="bi bi-person-circle"></i> Mi cuenta
+    </a>
+
+</aside>
+
+<header class="app-header">
+
+    <div class="brand">
+
+        <img src="logo.png" alt="Voz Angelical">
+
+        <div>
+
+            <h1>Voz Angelical</h1>
+
+            <small>Administración de cuenta</small>
+
+        </div>
+
+    </div>
+
+    <button class="icon-button" data-alternar-tema
+    aria-label="Cambiar tema">
+
+        <i class="bi bi-moon-stars" data-icono-tema></i>
+
+    </button>
+
+</header>
+
+<main class="main-content">
+
+    <h2 class="page-title">Mi cuenta</h2>
+
+    <p class="description">
+
+        Administra tu perfil, preferencias y seguridad.
+
+    </p>
+
+    <div class="alert" id="mensajeGeneral"
+    role="status" hidden></div>
+
+    <section class="profile-card">
+
+        <div class="avatar" id="avatar">VA</div>
+
+        <h2 id="nombrePerfil">Administrador</h2>
+
+        <p id="correoPerfil"></p>
+
+        <span class="role-label">
+
+            <i class="bi bi-shield-lock-fill"></i>
+
+            Administrador principal
+
+        </span>
+
+    </section>
+
+    <div class="account-grid">
+
+        <div>
+
+            <h2 class="section-heading">
+                Información personal
+            </h2>
+
+            <section class="panel">
+
+                <form id="formPerfil">
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="nombre">
+                            Nombre completo
+                        </label>
+
+                        <input type="text" class="form-control"
+                        id="nombre" maxlength="100"
+                        autocomplete="name" required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="telefono">
+                            Teléfono
+                        </label>
+
+                        <input type="tel" class="form-control"
+                        id="telefono" maxlength="10"
+                        inputmode="numeric" autocomplete="tel-national"
+                        placeholder="10 dígitos">
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="correo">
+                            Correo electrónico
+                        </label>
+
+                        <input type="email" class="form-control"
+                        id="correo" readonly>
+
+                        <p class="description mt-2">
+
+                            Este correo corresponde a tu cuenta
+                            de acceso en Firebase.
+
+                        </p>
+
+                    </div>
+
+                    <button class="btn-gold w-100"
+                    id="btnGuardar" type="submit" data-red>
+
+                        <i class="bi bi-floppy me-2"></i>
+
+                        Guardar cambios
+
+                    </button>
+
+                </form>
+
+            </section>
+
+        </div>
+
+        <div>
+
+            <h2 class="section-heading">
+                Información de la cuenta
+            </h2>
+
+            <section class="panel">
+
+                <div class="info-row">
+
+                    <span>Rol</span>
+
+                    <strong>Administrador</strong>
+
+                </div>
+
+                <div class="info-row">
+
+                    <span>Acceso</span>
+
+                    <strong class="status-green">
+                        Autorizado
+                    </strong>
+
+                </div>
+
+                <div class="info-row">
+
+                    <span>Correo electrónico</span>
+
+                    <strong id="estadoCorreo">—</strong>
+
+                </div>
+
+                <div class="info-row">
+
+                    <span>Cuenta creada</span>
+
+                    <strong id="fechaCreacion">—</strong>
+
+                </div>
+
+                <div class="info-row">
+
+                    <span>Último inicio de sesión</span>
+
+                    <strong id="ultimoAcceso">—</strong>
+
+                </div>
+
+                <div class="info-row">
+
+                    <span>Conexión de red</span>
+
+                    <strong data-estado-conexion>—</strong>
+
+                </div>
+
+                <div class="info-row">
+
+                    <span>Método de acceso</span>
+
+                    <strong>Correo y contraseña</strong>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+    <h2 class="section-heading">
+        Seguridad
+    </h2>
+
+    <section class="panel">
+
+        <div class="security-option">
+
+            <div class="security-icon">
+                <i class="bi bi-envelope-check"></i>
+            </div>
+
+            <div class="flex-grow-1">
+
+                <h4>Verificación de correo</h4>
+
+                <p id="descripcionVerificacion">
+
+                    Consulta el estado de tu correo electrónico.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="d-grid gap-2 my-3">
+
+            <button class="btn-app" id="btnVerificar"
+            data-red hidden>
+
+                Enviar correo de verificación
+
+            </button>
+
+            <button class="btn-app" id="btnComprobar" data-red>
+
+                <i class="bi bi-arrow-clockwise me-2"></i>
+
+                Comprobar verificación
+
+            </button>
+
+        </div>
+
+        <div class="security-option">
+
+            <div class="security-icon">
+                <i class="bi bi-key"></i>
+            </div>
+
+            <div class="flex-grow-1">
+
+                <h4>Cambiar contraseña</h4>
+
+                <p>
+
+                    Protege el acceso a la información de tu negocio.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <button class="btn-app w-100 mt-3"
+        data-bs-toggle="modal"
+        data-bs-target="#modalPassword" data-red>
+
+            Cambiar contraseña
+
+        </button>
+
+        <div class="security-option mt-3">
+
+            <div class="security-icon">
+                <i class="bi bi-envelope-arrow-up"></i>
+            </div>
+
+            <div class="flex-grow-1">
+
+                <h4>Recuperar contraseña</h4>
+
+                <p>
+
+                    Recibe un enlace de recuperación en tu correo.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <button class="btn-app w-100 mt-3"
+        id="btnRecuperar" data-red>
+
+            Enviar enlace de recuperación
+
+        </button>
+
+    </section>
+
+    <h2 class="section-heading">
+        Apariencia
+    </h2>
+
+    <section class="panel">
+
+        <h3>Tema de la aplicación</h3>
+
+        <p class="description">
+
+            Elige cómo quieres visualizar Voz Angelical
+            en este dispositivo.
+
+        </p>
+
+        <div class="theme-grid">
+
+            <button class="theme-option"
+            data-elegir-tema="claro">
+
+                <i class="bi bi-sun"></i>
+
+                Claro
+
+            </button>
+
+            <button class="theme-option"
+            data-elegir-tema="oscuro">
+
+                <i class="bi bi-moon-stars"></i>
+
+                Oscuro
+
+            </button>
+
+            <button class="theme-option"
+            data-elegir-tema="sistema">
+
+                <i class="bi bi-phone"></i>
+
+                Automático
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <h2 class="section-heading">
+        Aplicación
+    </h2>
+
+    <section class="panel">
+
+        <div class="info-row">
+
+            <span>Aplicación</span>
+
+            <strong>Voz Angelical</strong>
+
+        </div>
+
+        <div class="info-row">
+
+            <span>Versión</span>
+
+            <strong>2.0.0</strong>
+
+        </div>
+
+        <div class="info-row">
+
+            <span>Almacenamiento</span>
+
+            <strong>Firebase</strong>
+
+        </div>
+
+        <div class="info-row">
+
+            <span>Funcionamiento</span>
+
+            <strong>Internet requerido</strong>
+
+        </div>
+
+        <div class="d-grid gap-2 mt-3">
+
+            <button class="btn-gold"
+            data-instalar-app hidden>
+
+                <i class="bi bi-download me-2"></i>
+
+                Instalar aplicación
+
+            </button>
+
+            <button class="btn-app"
+            data-actualizar-app hidden>
+
+                <i class="bi bi-arrow-repeat me-2"></i>
+
+                Actualizar aplicación
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <h2 class="section-heading">
+        Sesión
+    </h2>
+
+    <section class="panel">
+
+        <h3>Cerrar sesión</h3>
+
+        <p class="description">
+
+            Finaliza tu sesión cuando utilices un dispositivo
+            compartido o cuando ya no necesites acceder al sistema.
+
+        </p>
+
+        <button class="btn-danger-app w-100"
+        id="btnCerrarSesion">
+
+            <i class="bi bi-box-arrow-right me-2"></i>
+
+            Cerrar sesión
+
+        </button>
+
+    </section>
+
+    <footer class="app-footer">
+
+        Voz Angelical · Versión 2.0.0
+
+        <br>
+
+        Sistema Integral de Gestión Musical
+
+        <br>
+
+        Acceso privado para administración
+
+    </footer>
+
+</main>
+
+<nav class="bottom-nav">
+
+    <a href="inicio.html" class="nav-item-app">
+        <i class="bi bi-house-door"></i> Inicio
+    </a>
+
+    <a href="agenda.html" class="nav-item-app">
+        <i class="bi bi-calendar3"></i> Agenda
+    </a>
+
+    <a href="contratos.html" class="nav-item-app">
+        <i class="bi bi-file-earmark-text"></i> Contratos
+    </a>
+
+    <a href="socios.html" class="nav-item-app">
+        <i class="bi bi-people"></i> Socios
+    </a>
+
+    <button class="nav-item-app active"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#menuMas">
+
+        <i class="bi bi-grid-fill"></i> Más
+
+    </button>
+
+</nav>
+
+<div class="offcanvas offcanvas-bottom"
+id="menuMas" tabindex="-1">
+
+    <div class="offcanvas-header">
+
+        <h5>Más opciones</h5>
+
+        <button class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Cerrar"></button>
+
+    </div>
+
+    <div class="offcanvas-body">
+
+        <a href="clientes.html" class="menu-option">
+            <i class="bi bi-person-lines-fill"></i> Clientes
+        </a>
+
+        <a href="servicios.html" class="menu-option">
+            <i class="bi bi-music-note-beamed"></i> Servicios
+        </a>
+
+        <a href="estadisticas.html" class="menu-option">
+            <i class="bi bi-bar-chart-line"></i> Estadísticas
+        </a>
+
+        <a href="configuracion.html" class="menu-option">
+            <i class="bi bi-gear"></i> Configuración
+        </a>
+
+        <a href="usuarios.html" class="menu-option active">
+            <i class="bi bi-person-circle"></i> Mi cuenta
+        </a>
+
+    </div>
+
+</div>
+
+<!-- MODAL CAMBIAR CONTRASEÑA -->
+
+<div class="modal fade" id="modalPassword"
+tabindex="-1" aria-labelledby="tituloPassword">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <form id="formPassword">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="tituloPassword">
+
+                        Cambiar contraseña
+
+                    </h5>
+
+                    <button type="button" class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Cerrar"></button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="alert" id="mensajePassword"
+                    role="status" hidden></div>
+
+                    <p class="description">
+
+                        Confirma tu contraseña actual y establece
+                        una nueva contraseña de al menos 12 caracteres.
+
+                    </p>
+
+                    <div class="mb-3">
+
+                        <label class="form-label"
+                        for="passwordActual">
+
+                            Contraseña actual
+
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input type="password"
+                            class="form-control"
+                            id="passwordActual"
+                            autocomplete="current-password"
+                            required>
+
+                            <button type="button"
+                            class="password-toggle"
+                            data-password="passwordActual"
+                            aria-label="Mostrar contraseña">
+
+                                <i class="bi bi-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label"
+                        for="passwordNueva">
+
+                            Nueva contraseña
+
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input type="password"
+                            class="form-control"
+                            id="passwordNueva"
+                            minlength="12"
+                            autocomplete="new-password"
+                            required>
+
+                            <button type="button"
+                            class="password-toggle"
+                            data-password="passwordNueva"
+                            aria-label="Mostrar contraseña">
+
+                                <i class="bi bi-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                        <div class="password-meter">
+
+                            <div id="barraPassword"></div>
+
+                        </div>
+
+                        <p class="description mt-2"
+                        id="nivelPassword">
+
+                            Utiliza una contraseña larga y única.
+
+                        </p>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label"
+                        for="passwordConfirmar">
+
+                            Confirmar nueva contraseña
+
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input type="password"
+                            class="form-control"
+                            id="passwordConfirmar"
+                            autocomplete="new-password"
+                            required>
+
+                            <button type="button"
+                            class="password-toggle"
+                            data-password="passwordConfirmar"
+                            aria-label="Mostrar contraseña">
+
+                                <i class="bi bi-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <p class="description">
+
+                        Después de cambiar tu contraseña,
+                        deberás iniciar sesión nuevamente.
+
+                    </p>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn-app"
+                    data-bs-dismiss="modal">
+
+                        Cancelar
+
+                    </button>
+
+                    <button type="submit" class="btn-gold"
+                    id="btnCambiarPassword" data-red>
+
+                        Actualizar contraseña
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+
+import {
+    auth,
+    db,
+    ADMIN_UID
+} from "./firebase.js";
+
+import {
+    protegerPagina,
+    cerrarSesion,
+    recuperarContrasena
+} from "./auth.js";
+
+import {
+
+    EmailAuthProvider,
+    reauthenticateWithCredential,
+    updatePassword,
+    sendEmailVerification,
+    reload
+
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+import {
+
+    doc,
+    getDocFromServer,
+    runTransaction,
+    serverTimestamp
+
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+// =====================================
+// VARIABLES
+// =====================================
+
+const $ = id => document.getElementById(id);
+
+let usuario = null;
+
+let perfil = {};
+
+let ocupado = false;
+
+let listo = false;
+
+// =====================================
+// UTILIDADES
+// =====================================
+
+function mensaje(texto,tipo="success"){
+
+    $("mensajeGeneral").className = `alert alert-${tipo}`;
+
+    $("mensajeGeneral").textContent = texto;
+
+    $("mensajeGeneral").hidden = false;
+
+    $("mensajeGeneral").scrollIntoView({
+
+        behavior:"smooth",
+        block:"nearest"
+
+    });
+
+}
+
+function mensajePassword(texto,tipo="danger"){
+
+    $("mensajePassword").className = `alert alert-${tipo}`;
+
+    $("mensajePassword").textContent = texto;
+
+    $("mensajePassword").hidden = false;
+
+}
+
+function errorTexto(error){
+
+    const errores = {
+
+        "auth/invalid-credential":
+            "La contraseña actual es incorrecta o la sesión ya no es válida.",
+
+        "auth/wrong-password":
+            "La contraseña actual es incorrecta.",
+
+        "auth/weak-password":
+            "La nueva contraseña no cumple los requisitos de seguridad.",
+
+        "auth/password-does-not-meet-requirements":
+            "La contraseña no cumple la política de seguridad de Firebase.",
+
+        "auth/too-many-requests":
+            "Demasiados intentos. Inténtalo más tarde.",
+
+        "auth/network-request-failed":
+            "No se pudo conectar con Firebase.",
+
+        "auth/requires-recent-login":
+            "Debes iniciar sesión nuevamente.",
+
+        "auth/user-token-expired":
+            "Tu sesión ha expirado. Inicia sesión nuevamente.",
+
+        "permission-denied":
+            "No tienes permisos para realizar esta operación.",
+
+        "unavailable":
+            "Firebase no está disponible en este momento."
+
+    };
+
+    return errores[error.code] ||
+
+        (error.code
+            ? "No se pudo completar la operación."
+            : error.message) ||
+
+        "Ocurrió un error inesperado.";
+
+}
+
+function formatearFecha(valor){
+
+    if(!valor) return "No disponible";
+
+    const fecha = typeof valor.toDate === "function"
+
+        ? valor.toDate()
+
+        : new Date(valor);
+
+    if(Number.isNaN(fecha.getTime())){
+
+        return "No disponible";
+
+    }
+
+    return new Intl.DateTimeFormat("es-MX",{
+
+        timeZone:"America/Mexico_City",
+        dateStyle:"medium",
+        timeStyle:"short"
+
+    }).format(fecha);
+
+}
+
+function comprobarSesion(){
+
+    if(!auth.currentUser ||
+
+        auth.currentUser.uid !== ADMIN_UID){
+
+        throw new Error("La sesión no está autorizada.");
+
+    }
+
+    return auth.currentUser;
+
+}
+
+function actualizarBotones(){
+
+    document.querySelectorAll("[data-red]").forEach(boton => {
+
+        boton.disabled = ocupado ||
+
+            !listo ||
+
+            !navigator.onLine;
+
+    });
+
+    $("btnCerrarSesion").disabled = ocupado;
+
+}
+
+function actualizarConexion(){
+
+    actualizarBotones();
+
+    document.querySelectorAll("[data-estado-conexion]")
+    .forEach(elemento => {
+
+        elemento.textContent = navigator.onLine
+
+            ? "Red disponible"
+
+            : "Sin conexión";
+
+        elemento.className = navigator.onLine
+
+            ? "status-green"
+
+            : "status-red";
+
+    });
+
+}
+
+// =====================================
+// CARGAR PERFIL
+// =====================================
+
+async function cargarPerfil(){
+
+    usuario = comprobarSesion();
+
+    const referencia = doc(db,"usuarios",usuario.uid);
+
+    const resultado = await getDocFromServer(referencia);
+
+    perfil = resultado.exists()
+
+        ? resultado.data()
+
+        : {};
+
+    mostrarPerfil();
+
+}
+
+function mostrarPerfil(){
+
+    const nombre = perfil.nombre ||
+
+        usuario.displayName ||
+
+        "Administrador";
+
+    $("nombrePerfil").textContent = nombre;
+
+    $("correoPerfil").textContent = usuario.email || "";
+
+    $("nombre").value = perfil.nombre ||
+
+        usuario.displayName || "";
+
+    $("telefono").value = perfil.telefono || "";
+
+    $("correo").value = usuario.email || "";
+
+    const iniciales = nombre.trim()
+
+        .split(/\s+/)
+
+        .slice(0,2)
+
+        .map(palabra => palabra.charAt(0).toUpperCase())
+
+        .join("");
+
+    $("avatar").textContent = iniciales || "VA";
+
+    $("fechaCreacion").textContent = formatearFecha(
+
+        usuario.metadata.creationTime
+
+    );
+
+    $("ultimoAcceso").textContent = formatearFecha(
+
+        usuario.metadata.lastSignInTime
+
+    );
+
+    mostrarVerificacion();
+
+}
+
+function mostrarVerificacion(){
+
+    const verificado = usuario.emailVerified;
+
+    $("estadoCorreo").textContent = verificado
+
+        ? "Verificado"
+
+        : "Sin verificar";
+
+    $("estadoCorreo").className = verificado
+
+        ? "status-green"
+
+        : "status-red";
+
+    $("descripcionVerificacion").textContent = verificado
+
+        ? "Tu dirección de correo electrónico está verificada."
+
+        : "Verifica tu correo para confirmar que tienes acceso a él.";
+
+    $("btnVerificar").hidden = verificado;
+
+}
+
+// =====================================
+// GUARDAR PERFIL
+// =====================================
+
+$("telefono").addEventListener("input",evento => {
+
+    evento.target.value = evento.target.value
+
+        .replace(/\D/g,"")
+
+        .slice(0,10);
+
+});
+
+$("formPerfil").addEventListener("submit",async evento => {
+
+    evento.preventDefault();
+
+    if(ocupado || !listo || !navigator.onLine) return;
+
+    const nombre = $("nombre").value.trim();
+
+    const telefono = $("telefono").value.trim();
+
+    if(!nombre || nombre.length>100){
+
+        mensaje("Ingresa un nombre válido.","warning");
+
+        return;
+
+    }
+
+    if(telefono && !/^\d{10}$/.test(telefono)){
+
+        mensaje("El teléfono debe tener 10 dígitos.","warning");
+
+        return;
+
+    }
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    try{
+
+        const cuenta = comprobarSesion();
+
+        const referencia = doc(db,"usuarios",cuenta.uid);
+
+        await runTransaction(db,async transaccion => {
+
+            const anterior = await transaccion.get(referencia);
+
+            const datos = {
+
+                uid:cuenta.uid,
+
+                nombre,
+
+                telefono,
+
+                correo:cuenta.email || "",
+
+                rol:"administrador",
+
+                activo:true,
+
+                actualizadoEn:serverTimestamp()
+
+            };
+
+            if(!anterior.exists()){
+
+                datos.creadoEn = serverTimestamp();
+
+            }
+
+            transaccion.set(
+
+                referencia,
+
+                datos,
+
+                {merge:true}
+
+            );
+
+        });
+
+        perfil = {
+
+            ...perfil,
+
+            nombre,
+
+            telefono,
+
+            correo:cuenta.email || ""
+
+        };
+
+        mostrarPerfil();
+
+        mensaje("Tu perfil se guardó correctamente.");
+
+    }catch(error){
+
+        mensaje(errorTexto(error),"danger");
+
+    }finally{
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// VERIFICAR CORREO
+// =====================================
+
+$("btnVerificar").addEventListener("click",async () => {
+
+    if(ocupado || !listo || !navigator.onLine) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    try{
+
+        usuario = comprobarSesion();
+
+        await reload(usuario);
+
+        if(usuario.emailVerified){
+
+            mostrarVerificacion();
+
+            mensaje("Tu correo ya está verificado.");
+
+            return;
+
+        }
+
+        await sendEmailVerification(usuario);
+
+        mensaje(
+
+            "Se envió el correo de verificación. Revisa tu bandeja de entrada y correo no deseado."
+
+        );
+
+    }catch(error){
+
+        mensaje(errorTexto(error),"danger");
+
+    }finally{
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+$("btnComprobar").addEventListener("click",async () => {
+
+    if(ocupado || !listo || !navigator.onLine) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    try{
+
+        usuario = comprobarSesion();
+
+        await reload(usuario);
+
+        mostrarVerificacion();
+
+        mensaje(
+
+            usuario.emailVerified
+
+                ? "Tu correo está verificado correctamente."
+
+                : "Tu correo todavía no ha sido verificado.",
+
+            usuario.emailVerified ? "success" : "warning"
+
+        );
+
+    }catch(error){
+
+        mensaje(errorTexto(error),"danger");
+
+    }finally{
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// RECUPERAR CONTRASEÑA
+// =====================================
+
+$("btnRecuperar").addEventListener("click",async () => {
+
+    if(ocupado || !listo || !navigator.onLine) return;
+
+    if(!confirm(
+
+        "¿Deseas recibir un enlace para restablecer tu contraseña?"
+
+    )) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    try{
+
+        const cuenta = comprobarSesion();
+
+        await recuperarContrasena(cuenta.email);
+
+        mensaje(
+
+            "Solicitud enviada. Revisa tu correo electrónico para restablecer tu contraseña."
+
+        );
+
+    }catch(error){
+
+        mensaje(errorTexto(error),"danger");
+
+    }finally{
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// MOSTRAR U OCULTAR CONTRASEÑAS
+// =====================================
+
+document.querySelectorAll("[data-password]")
+.forEach(boton => {
+
+    boton.addEventListener("click",() => {
+
+        const campo = $(boton.dataset.password);
+
+        const mostrar = campo.type === "password";
+
+        campo.type = mostrar ? "text" : "password";
+
+        boton.querySelector("i").className = mostrar
+
+            ? "bi bi-eye-slash"
+
+            : "bi bi-eye";
+
+        boton.setAttribute(
+
+            "aria-label",
+
+            mostrar
+
+                ? "Ocultar contraseña"
+
+                : "Mostrar contraseña"
+
+        );
+
+    });
+
+});
+
+// =====================================
+// INDICADOR DE CONTRASEÑA
+// =====================================
+
+function actualizarIndicador(){
+
+    const password = $("passwordNueva").value;
+
+    let puntos = 0;
+
+    if(password.length>=12) puntos++;
+
+    if(password.length>=16) puntos++;
+
+    if(/[A-Z]/.test(password) && /[a-z]/.test(password)) puntos++;
+
+    if(/\d/.test(password)) puntos++;
+
+    if(/[^A-Za-z0-9]/.test(password)) puntos++;
+
+    const barra = $("barraPassword");
+
+    barra.style.width = password
+
+        ? `${Math.max(1,puntos)*20}%`
+
+        : "0%";
+
+    if(password.length<12){
+
+        barra.style.background = "#C74D4D";
+
+        $("nivelPassword").textContent =
+
+            "Se requieren al menos 12 caracteres.";
+
+    }else if(puntos<4){
+
+        barra.style.background = "#B48A42";
+
+        $("nivelPassword").textContent =
+
+            "Longitud válida. Utiliza una contraseña única.";
+
+    }else{
+
+        barra.style.background = "#328653";
+
+        $("nivelPassword").textContent =
+
+            "Buena combinación de longitud y caracteres.";
+
+    }
+
+}
+
+$("passwordNueva").addEventListener(
+
+    "input",
+
+    actualizarIndicador
+
+);
+
+// =====================================
+// CAMBIAR CONTRASEÑA
+// =====================================
+
+$("formPassword").addEventListener("submit",async evento => {
+
+    evento.preventDefault();
+
+    if(ocupado || !listo || !navigator.onLine) return;
+
+    $("mensajePassword").hidden = true;
+
+    const actual = $("passwordActual").value;
+
+    const nueva = $("passwordNueva").value;
+
+    const confirmar = $("passwordConfirmar").value;
+
+    if(nueva.length<12){
+
+        mensajePassword(
+
+            "La contraseña debe tener al menos 12 caracteres."
+
+        );
+
+        return;
+
+    }
+
+    if(nueva !== confirmar){
+
+        mensajePassword("Las contraseñas no coinciden.");
+
+        return;
+
+    }
+
+    if(actual === nueva){
+
+        mensajePassword(
+
+            "La nueva contraseña debe ser diferente de la actual."
+
+        );
+
+        return;
+
+    }
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    let modificada = false;
+
+    try{
+
+        const cuenta = comprobarSesion();
+
+        const credencial = EmailAuthProvider.credential(
+
+            cuenta.email,
+
+            actual
+
+        );
+
+        await reauthenticateWithCredential(
+
+            cuenta,
+
+            credencial
+
+        );
+
+        await updatePassword(cuenta,nueva);
+
+        modificada = true;
+
+        $("formPassword").reset();
+
+        alert(
+
+            "Contraseña actualizada correctamente. Inicia sesión con tu nueva contraseña."
+
+        );
+
+        await cerrarSesion();
+
+    }catch(error){
+
+        if(modificada){
+
+            mensajePassword(
+
+                "La contraseña fue actualizada, pero no se pudo cerrar la sesión. Cierra sesión manualmente.",
+
+                "warning"
+
+            );
+
+        }else{
+
+            mensajePassword(errorTexto(error));
+
+        }
+
+    }finally{
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// LIMPIAR MODAL
+// =====================================
+
+$("modalPassword").addEventListener(
+
+    "hide.bs.modal",
+
+    evento => {
+
+        if(ocupado) evento.preventDefault();
+
+    }
+
+);
+
+$("modalPassword").addEventListener(
+
+    "hidden.bs.modal",
+
+    () => {
+
+        $("formPassword").reset();
+
+        $("mensajePassword").hidden = true;
+
+        $("barraPassword").style.width = "0%";
+
+        $("nivelPassword").textContent =
+
+            "Utiliza una contraseña larga y única.";
+
+        document.querySelectorAll("[data-password]")
+        .forEach(boton => {
+
+            $(boton.dataset.password).type = "password";
+
+            boton.querySelector("i").className = "bi bi-eye";
+
+            boton.setAttribute(
+
+                "aria-label",
+
+                "Mostrar contraseña"
+
+            );
+
+        });
+
+    }
+
+);
+
+// =====================================
+// CERRAR SESIÓN
+// =====================================
+
+$("btnCerrarSesion").addEventListener("click",async () => {
+
+    if(ocupado) return;
+
+    if(!confirm("¿Deseas cerrar sesión en este dispositivo?")){
+
+        return;
+
+    }
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    try{
+
+        await cerrarSesion();
+
+    }catch(error){
+
+        mensaje(errorTexto(error),"danger");
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// CONEXIÓN
+// =====================================
+
+window.addEventListener("offline",() => {
+
+    actualizarConexion();
+
+    mensaje(
+
+        "Sin conexión. Necesitas internet para modificar tu cuenta.",
+
+        "warning"
+
+    );
+
+});
+
+window.addEventListener("online",() => {
+
+    actualizarConexion();
+
+    mensaje("Conexión de red restablecida.","info");
+
+});
+
+$("btnReintentar").addEventListener("click",() => {
+
+    location.reload();
+
+});
+
+// =====================================
+// INICIALIZACIÓN
+// =====================================
+
+try{
+
+    usuario = await protegerPagina();
+
+    await cargarPerfil();
+
+    listo = true;
+
+    $("aplicacion").hidden = false;
+
+    $("pantallaCarga").hidden = true;
+
+    actualizarConexion();
+
+    window.VozAngelicalTema?.aplicar();
+
+}catch(error){
+
+    $("textoCarga").textContent = errorTexto(error);
+
+    $("spinnerCarga").hidden = true;
+
+    $("btnReintentar").hidden = false;
+
+}
+
+</script>
+
+<script src="pwa.js" defer></script>
+
+</body>
+</html>

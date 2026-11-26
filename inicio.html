@@ -1,0 +1,3200 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="theme-color" content="#F5EFE4">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<title>Inicio | Voz Angelical</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<script src="tema.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =====================================
+   COLORES
+===================================== */
+
+:root {
+
+    --dorado: #B48A42;
+    --dorado-claro: #DCC18A;
+    --dorado-oscuro: #8A632B;
+
+    --fondo: #F5EFE4;
+    --tarjeta: #FFFFFF;
+    --texto: #30271D;
+    --secundario: #796C59;
+    --borde: #E6D8C1;
+    --campo: #FCFAF6;
+    --suave: #EDE3D1;
+    --acento: #8A632B;
+
+    --verde: #328653;
+    --rojo: #C74D4D;
+
+    --sombra: 0 5px 20px rgba(48,39,29,.05);
+
+    --sidebar: 260px;
+
+}
+
+html[data-tema="oscuro"] {
+
+    --fondo: #171614;
+    --tarjeta: #252321;
+    --texto: #F5EFE4;
+    --secundario: #C1B6A5;
+    --borde: #413A30;
+    --campo: #1D1B19;
+    --suave: #33291B;
+    --acento: #DCC18A;
+
+    --verde: #68C78A;
+    --rojo: #F07878;
+
+    --sombra: 0 5px 20px rgba(0,0,0,.15);
+
+}
+
+* {
+
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+
+}
+
+body {
+
+    margin: 0;
+
+    background: var(--fondo);
+    color: var(--texto);
+
+    font-family: 'Poppins', sans-serif;
+
+    min-height: 100dvh;
+
+}
+
+a {
+
+    text-decoration: none;
+    color: inherit;
+
+}
+
+button {
+
+    font-family: inherit;
+
+}
+
+/* =====================================
+   ENCABEZADO
+===================================== */
+
+.app-header {
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 14px 18px;
+
+    padding-top: max(
+        14px,
+        env(safe-area-inset-top)
+    );
+
+    background: var(--tarjeta);
+
+    border-bottom: 1px solid var(--borde);
+
+}
+
+.header-brand {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.header-logo {
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+    object-fit: cover;
+
+    border: 1px solid var(--dorado);
+
+}
+
+.header-brand h1 {
+
+    font-family: 'Cinzel', serif;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: var(--acento);
+
+    margin: 0;
+
+}
+
+.header-brand small {
+
+    color: var(--secundario);
+
+    font-size: 10px;
+
+}
+
+.header-actions {
+
+    display: flex;
+    gap: 8px;
+
+}
+
+.icon-button {
+
+    width: 43px;
+    height: 43px;
+
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+
+    background: var(--campo);
+    color: var(--acento);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+
+}
+
+/* =====================================
+   CONTENIDO
+===================================== */
+
+.main-content {
+
+    max-width: 1400px;
+
+    margin: auto;
+
+    padding: 18px 16px;
+
+    padding-bottom: calc(
+        110px + env(safe-area-inset-bottom)
+    );
+
+}
+
+/* =====================================
+   TARJETA DE BIENVENIDA
+===================================== */
+
+.welcome-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: linear-gradient(
+        135deg,
+        #63451F,
+        #A77B35
+    );
+
+    border-radius: 23px;
+
+    color: white;
+
+    padding: 24px 20px;
+
+    margin-bottom: 24px;
+
+    box-shadow: 0 8px 25px rgba(138,99,43,.18);
+
+}
+
+.welcome-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    border-radius: 50%;
+
+    right: -80px;
+    top: -100px;
+
+    pointer-events: none;
+
+}
+
+.welcome-date {
+
+    font-size: 11px;
+
+    color: #F2E3C9;
+
+    margin-bottom: 12px;
+
+}
+
+.welcome-card h2 {
+
+    font-family: 'Cinzel', serif;
+
+    font-size: 23px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+
+}
+
+.welcome-card p {
+
+    font-size: 12px;
+
+    color: #F5EFE4;
+
+    margin-bottom: 22px;
+
+}
+
+.income-label {
+
+    font-size: 11px;
+
+    color: #F2E3C9;
+
+}
+
+.income-value {
+
+    font-size: 32px;
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
+    overflow-wrap: anywhere;
+
+}
+
+.welcome-footer {
+
+    border-top: 1px solid rgba(255,255,255,.2);
+
+    padding-top: 14px;
+    margin-top: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    font-size: 10px;
+
+}
+
+.connection-dot {
+
+    width: 8px;
+    height: 8px;
+
+    display: inline-block;
+
+    background: #999;
+
+    border-radius: 50%;
+
+}
+
+/* =====================================
+   TÍTULOS
+===================================== */
+
+.section-heading {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin: 25px 0 14px;
+
+}
+
+.section-heading h3 {
+
+    font-size: 15px;
+    font-weight: 600;
+
+    margin: 0;
+
+}
+
+.section-heading a {
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: var(--acento);
+
+}
+
+/* =====================================
+   INDICADORES
+===================================== */
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0,1fr));
+
+    gap: 12px;
+
+}
+
+.stat-card {
+
+    min-width: 0;
+
+    padding: 16px 13px;
+
+    background: var(--tarjeta);
+
+    border: 1px solid var(--borde);
+    border-radius: 18px;
+
+    box-shadow: var(--sombra);
+
+}
+
+.stat-icon {
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--suave);
+    color: var(--acento);
+
+    border-radius: 12px;
+
+    font-size: 19px;
+
+    margin-bottom: 12px;
+
+}
+
+.stat-label {
+
+    font-size: 10px;
+
+    color: var(--secundario);
+
+    line-height: 1.6;
+
+    margin-bottom: 6px;
+
+}
+
+.stat-value {
+
+    font-size: clamp(16px, 5vw, 23px);
+
+    font-weight: 700;
+
+    overflow-wrap: anywhere;
+
+}
+
+.stat-note {
+
+    font-size: 9px;
+
+    color: var(--secundario);
+
+    margin-top: 6px;
+
+}
+
+.text-green {
+
+    color: var(--verde);
+
+}
+
+.text-red {
+
+    color: var(--rojo);
+
+}
+
+/* =====================================
+   ACCESOS RÁPIDOS
+===================================== */
+
+.quick-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2,minmax(0,1fr));
+
+    gap: 12px;
+
+}
+
+.quick-card {
+
+    min-height: 105px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 14px;
+
+    background: var(--tarjeta);
+
+    border: 1px solid var(--borde);
+    border-radius: 18px;
+
+    text-align: center;
+
+    transition: transform .15s;
+
+}
+
+.quick-card:active {
+
+    transform: scale(.97);
+
+}
+
+.quick-card i {
+
+    font-size: 25px;
+
+    color: var(--acento);
+
+}
+
+.quick-card span {
+
+    font-size: 11px;
+    font-weight: 600;
+
+}
+
+.quick-card small {
+
+    color: var(--secundario);
+
+    font-size: 9px;
+
+}
+
+.quick-primary {
+
+    background: var(--suave);
+
+    border-color: var(--dorado);
+
+}
+
+/* =====================================
+   CELEBRACIONES
+===================================== */
+
+.events-list {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+.event-card {
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px;
+
+    background: var(--tarjeta);
+
+    border: 1px solid var(--borde);
+    border-radius: 18px;
+
+    box-shadow: var(--sombra);
+
+}
+
+.event-date {
+
+    min-width: 54px;
+
+    padding: 10px 8px;
+
+    text-align: center;
+
+    border-radius: 13px;
+
+    background: var(--suave);
+    color: var(--acento);
+
+}
+
+.event-day {
+
+    display: block;
+
+    font-size: 23px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+}
+
+.event-month {
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+}
+
+.event-info {
+
+    flex: 1;
+    min-width: 0;
+
+}
+
+.event-title {
+
+    font-size: 12px;
+    font-weight: 600;
+
+    margin-bottom: 5px;
+
+    overflow-wrap: anywhere;
+
+}
+
+.event-detail {
+
+    color: var(--secundario);
+
+    font-size: 10px;
+
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+
+}
+
+.event-price {
+
+    color: var(--acento);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    margin-top: 5px;
+
+}
+
+.event-arrow {
+
+    color: var(--secundario);
+
+    font-size: 15px;
+
+}
+
+.empty-state {
+
+    padding: 30px 15px;
+
+    text-align: center;
+
+    background: var(--tarjeta);
+
+    border: 1px dashed var(--borde);
+    border-radius: 18px;
+
+}
+
+.empty-state i {
+
+    font-size: 30px;
+
+    color: var(--dorado);
+
+}
+
+.empty-state p {
+
+    margin: 12px 0 0;
+
+    color: var(--secundario);
+
+    font-size: 12px;
+
+}
+
+/* =====================================
+   PAQUETES
+===================================== */
+
+.package-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,minmax(0,1fr));
+
+    gap: 9px;
+
+}
+
+.package-card {
+
+    padding: 16px 6px;
+
+    text-align: center;
+
+    background: var(--tarjeta);
+
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+
+}
+
+.package-card i {
+
+    color: var(--acento);
+
+    font-size: 23px;
+
+}
+
+.package-card h4 {
+
+    font-size: 11px;
+    font-weight: 600;
+
+    margin: 10px 0 6px;
+
+}
+
+.package-price {
+
+    font-size: 13px;
+    font-weight: 700;
+
+    color: var(--acento);
+
+}
+
+.package-card small {
+
+    color: var(--secundario);
+
+    font-size: 9px;
+
+}
+
+/* =====================================
+   NAVEGACIÓN INFERIOR
+===================================== */
+
+.bottom-nav {
+
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 200;
+
+    display: grid;
+
+    grid-template-columns: repeat(5,minmax(0,1fr));
+
+    background: var(--tarjeta);
+
+    border-top: 1px solid var(--borde);
+
+    padding: 9px 5px;
+
+    padding-bottom: calc(
+        9px + env(safe-area-inset-bottom)
+    );
+
+    box-shadow: 0 -5px 25px rgba(0,0,0,.04);
+
+}
+
+.nav-item-app {
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    min-height: 52px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: transparent;
+
+    color: var(--secundario);
+
+    font-size: 9px;
+
+}
+
+.nav-item-app i {
+
+    font-size: 21px;
+
+}
+
+.nav-item-app.active {
+
+    color: var(--acento);
+
+    font-weight: 600;
+
+    background: var(--suave);
+
+}
+
+/* =====================================
+   MENÚ ADICIONAL
+===================================== */
+
+.offcanvas {
+
+    background: var(--tarjeta);
+    color: var(--texto);
+
+}
+
+.offcanvas-bottom {
+
+    height: auto;
+
+    max-height: 85dvh;
+
+    border-radius: 25px 25px 0 0;
+
+    border: 1px solid var(--borde);
+
+}
+
+.offcanvas-header {
+
+    border-bottom: 1px solid var(--borde);
+
+}
+
+.offcanvas-title {
+
+    font-family: 'Cinzel', serif;
+
+    color: var(--acento);
+
+    font-size: 18px;
+
+}
+
+.offcanvas-body {
+
+    padding-bottom: calc(
+        25px + env(safe-area-inset-bottom)
+    );
+
+}
+
+.menu-option {
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    width: 100%;
+
+    min-height: 58px;
+
+    padding: 12px;
+
+    margin-bottom: 8px;
+
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+
+    background: var(--campo);
+    color: var(--texto);
+
+    text-align: left;
+
+    font-size: 13px;
+
+}
+
+.menu-option i:first-child {
+
+    color: var(--acento);
+
+    font-size: 20px;
+
+}
+
+.menu-option span {
+
+    flex: 1;
+
+}
+
+.menu-option.logout {
+
+    color: var(--rojo);
+
+}
+
+.menu-option.logout i {
+
+    color: var(--rojo);
+
+}
+
+/* =====================================
+   APARIENCIA
+===================================== */
+
+.theme-options {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 8px;
+
+    margin: 12px 0 20px;
+
+}
+
+.theme-option {
+
+    padding: 13px 5px;
+
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+
+    background: var(--campo);
+    color: var(--texto);
+
+    font-size: 11px;
+
+}
+
+.theme-option i {
+
+    display: block;
+
+    font-size: 20px;
+
+    margin-bottom: 5px;
+
+}
+
+.theme-option.activo {
+
+    background: var(--suave);
+
+    color: var(--acento);
+
+    border-color: var(--dorado);
+
+}
+
+/* =====================================
+   SIDEBAR PARA COMPUTADORAS
+===================================== */
+
+.sidebar {
+
+    display: none;
+
+}
+
+/* =====================================
+   CARGA
+===================================== */
+
+.loading-screen {
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+
+    background: var(--fondo);
+
+}
+
+.loading-screen img {
+
+    width: 110px;
+    height: 110px;
+
+    border-radius: 50%;
+
+}
+
+.loading-screen p {
+
+    color: var(--secundario);
+
+    font-size: 12px;
+
+}
+
+.loading-screen .spinner-border {
+
+    color: var(--dorado);
+
+}
+
+/* =====================================
+   PIE DE PÁGINA
+===================================== */
+
+.app-footer {
+
+    text-align: center;
+
+    padding: 30px 10px 5px;
+
+    color: var(--secundario);
+
+    font-size: 10px;
+
+    line-height: 1.9;
+
+}
+
+[hidden] {
+
+    display: none !important;
+
+}
+
+/* =====================================
+   TABLETAS
+===================================== */
+
+@media (min-width: 600px) {
+
+    .main-content {
+
+        padding-left: 25px;
+        padding-right: 25px;
+
+    }
+
+    .stats-grid {
+
+        grid-template-columns: repeat(3,minmax(0,1fr));
+
+    }
+
+    .quick-grid {
+
+        grid-template-columns: repeat(4,minmax(0,1fr));
+
+    }
+
+}
+
+/* =====================================
+   COMPUTADORAS
+===================================== */
+
+@media (min-width: 992px) {
+
+    .sidebar {
+
+        position: fixed;
+
+        top: 0;
+        bottom: 0;
+        left: 0;
+
+        width: var(--sidebar);
+
+        display: flex;
+        flex-direction: column;
+
+        padding: 20px 15px;
+
+        background: var(--tarjeta);
+
+        border-right: 1px solid var(--borde);
+
+        overflow-y: auto;
+
+    }
+
+    .sidebar-brand {
+
+        text-align: center;
+
+        padding: 10px 0 25px;
+
+    }
+
+    .sidebar-brand img {
+
+        width: 95px;
+        height: 95px;
+
+        border-radius: 50%;
+
+    }
+
+    .sidebar-brand h2 {
+
+        font-family: 'Cinzel', serif;
+
+        font-size: 18px;
+
+        color: var(--acento);
+
+        margin: 15px 0 4px;
+
+    }
+
+    .sidebar-brand small {
+
+        color: var(--secundario);
+
+        font-size: 10px;
+
+    }
+
+    .sidebar-link {
+
+        display: flex;
+        align-items: center;
+
+        gap: 12px;
+
+        padding: 13px;
+
+        margin-bottom: 5px;
+
+        border-radius: 12px;
+
+        color: var(--secundario);
+
+        font-size: 13px;
+
+    }
+
+    .sidebar-link i {
+
+        font-size: 18px;
+
+    }
+
+    .sidebar-link.active {
+
+        background: var(--suave);
+
+        color: var(--acento);
+
+        font-weight: 600;
+
+    }
+
+    .sidebar-link:hover {
+
+        background: var(--suave);
+
+        color: var(--acento);
+
+    }
+
+    .sidebar-label {
+
+        font-size: 10px;
+
+        color: var(--secundario);
+
+        text-transform: uppercase;
+
+        letter-spacing: 1px;
+
+        margin: 20px 12px 10px;
+
+    }
+
+    .app-header {
+
+        margin-left: var(--sidebar);
+
+        padding: 15px 30px;
+
+    }
+
+    .main-content {
+
+        margin-left: var(--sidebar);
+
+        padding: 30px;
+
+    }
+
+    .bottom-nav {
+
+        display: none;
+
+    }
+
+    .stats-grid {
+
+        grid-template-columns: repeat(3,minmax(0,1fr));
+
+    }
+
+    .welcome-card {
+
+        padding: 30px;
+
+    }
+
+    .welcome-card h2 {
+
+        font-size: 30px;
+
+    }
+
+    .income-value {
+
+        font-size: 40px;
+
+    }
+
+    .stat-value {
+
+        font-size: 25px;
+
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    * {
+
+        transition: none !important;
+        animation: none !important;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- PANTALLA DE CARGA -->
+
+<div class="loading-screen" id="pantallaCarga">
+
+    <img src="icon-192.png" alt="Voz Angelical">
+
+    <div class="spinner-border" role="status"></div>
+
+    <p id="textoCarga">
+        Cargando panel administrativo...
+    </p>
+
+</div>
+
+<div id="aplicacion" hidden>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-brand">
+
+        <img src="logo.png" alt="Voz Angelical">
+
+        <h2>Voz Angelical</h2>
+
+        <small>Gestión musical</small>
+
+    </div>
+
+    <a href="inicio.html" class="sidebar-link active">
+        <i class="bi bi-house-door-fill"></i>
+        Inicio
+    </a>
+
+    <a href="agenda.html" class="sidebar-link">
+        <i class="bi bi-calendar3"></i>
+        Agenda
+    </a>
+
+    <a href="contratos.html" class="sidebar-link">
+        <i class="bi bi-file-earmark-text"></i>
+        Contratos
+    </a>
+
+    <a href="clientes.html" class="sidebar-link">
+        <i class="bi bi-person-lines-fill"></i>
+        Clientes
+    </a>
+
+    <a href="servicios.html" class="sidebar-link">
+        <i class="bi bi-music-note-beamed"></i>
+        Servicios
+    </a>
+
+    <a href="socios.html" class="sidebar-link">
+        <i class="bi bi-people"></i>
+        Socios
+    </a>
+
+    <a href="estadisticas.html" class="sidebar-link">
+        <i class="bi bi-bar-chart-line"></i>
+        Estadísticas
+    </a>
+
+    <div class="sidebar-label">
+        Administración
+    </div>
+
+    <a href="configuracion.html" class="sidebar-link">
+        <i class="bi bi-gear"></i>
+        Configuración
+    </a>
+
+    <a href="usuarios.html" class="sidebar-link">
+        <i class="bi bi-person-circle"></i>
+        Mi cuenta
+    </a>
+
+    <div class="mt-auto pt-3">
+
+        <button
+            class="menu-option logout"
+            data-cerrar-sesion
+        >
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            Cerrar sesión
+
+        </button>
+
+    </div>
+
+</aside>
+
+<!-- ENCABEZADO -->
+
+<header class="app-header">
+
+    <div class="header-brand">
+
+        <img
+            src="logo.png"
+            class="header-logo"
+            alt="Voz Angelical"
+        >
+
+        <div>
+
+            <h1>Voz Angelical</h1>
+
+            <small>Panel administrativo</small>
+
+        </div>
+
+    </div>
+
+    <div class="header-actions">
+
+        <button
+            class="icon-button"
+            id="btnRecargar"
+            aria-label="Actualizar información"
+        >
+
+            <i class="bi bi-arrow-clockwise"></i>
+
+        </button>
+
+        <button
+            class="icon-button"
+            data-alternar-tema
+            aria-label="Cambiar tema"
+        >
+
+            <i class="bi bi-moon-stars"
+               data-icono-tema></i>
+
+        </button>
+
+    </div>
+
+</header>
+
+<!-- CONTENIDO PRINCIPAL -->
+
+<main class="main-content">
+
+    <div
+        id="avisoDatos"
+        class="alert alert-warning"
+        role="alert"
+        hidden
+    ></div>
+
+    <!-- BIENVENIDA -->
+
+    <section class="welcome-card">
+
+        <div class="welcome-date" id="fechaActual">
+            Cargando fecha...
+        </div>
+
+        <h2 id="saludo">
+            ¡Bienvenido!
+        </h2>
+
+        <p>
+            Administra tu negocio musical desde un solo lugar.
+        </p>
+
+        <div class="income-label">
+            Ingresos recibidos este mes
+        </div>
+
+        <div class="income-value" id="ingresosMes">
+            —
+        </div>
+
+        <div class="welcome-footer">
+
+            <span>
+
+                <i class="bi bi-calendar3 me-1"></i>
+
+                <span id="mesActual"></span>
+
+            </span>
+
+            <span>
+
+                <span
+                    class="connection-dot"
+                    data-punto-conexion
+                ></span>
+
+                <span data-estado-conexion>
+                    Red disponible
+                </span>
+
+            </span>
+
+        </div>
+
+    </section>
+
+    <!-- INDICADORES -->
+
+    <div class="section-heading">
+
+        <h3>Resumen financiero</h3>
+
+        <a href="estadisticas.html">
+            Ver detalles
+        </a>
+
+    </div>
+
+    <section class="stats-grid">
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-wallet2"></i>
+            </div>
+
+            <div class="stat-label">
+                Ingresos menos pagos a socios
+            </div>
+
+            <div class="stat-value text-green"
+                 id="gananciaMes">
+                —
+            </div>
+
+            <div class="stat-note">
+                Flujo del mes, antes de gastos
+            </div>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-hourglass-split"></i>
+            </div>
+
+            <div class="stat-label">
+                Pendiente por cobrar
+            </div>
+
+            <div class="stat-value"
+                 id="pendienteCobrar">
+                —
+            </div>
+
+            <div class="stat-note">
+                Servicios y penalizaciones
+            </div>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-people"></i>
+            </div>
+
+            <div class="stat-label">
+                Deuda con socios
+            </div>
+
+            <div class="stat-value text-red"
+                 id="pendienteSocios">
+                —
+            </div>
+
+            <div class="stat-note">
+                Celebraciones realizadas
+            </div>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-calendar-check"></i>
+            </div>
+
+            <div class="stat-label">
+                Próximas celebraciones
+            </div>
+
+            <div class="stat-value"
+                 id="totalEventos">
+                —
+            </div>
+
+            <div class="stat-note">
+                Servicios programados
+            </div>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-person-lines-fill"></i>
+            </div>
+
+            <div class="stat-label">
+                Clientes registrados
+            </div>
+
+            <div class="stat-value"
+                 id="totalClientes">
+                —
+            </div>
+
+            <div class="stat-note">
+                Directorio general
+            </div>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-file-earmark-text"></i>
+            </div>
+
+            <div class="stat-label">
+                Contratos registrados
+            </div>
+
+            <div class="stat-value"
+                 id="totalContratos">
+                —
+            </div>
+
+            <div class="stat-note">
+                Historial de contratos
+            </div>
+
+        </article>
+
+    </section>
+
+    <!-- ACCESOS RÁPIDOS -->
+
+    <div class="section-heading">
+
+        <h3>Accesos rápidos</h3>
+
+    </div>
+
+    <section class="quick-grid">
+
+        <a
+            href="contratos.html?accion=nuevo"
+            class="quick-card quick-primary"
+        >
+
+            <i class="bi bi-file-earmark-plus"></i>
+
+            <span>Nuevo contrato</span>
+
+            <small>Generar documento</small>
+
+        </a>
+
+        <a
+            href="agenda.html?accion=nuevo"
+            class="quick-card"
+        >
+
+            <i class="bi bi-calendar-plus"></i>
+
+            <span>Nueva celebración</span>
+
+            <small>Registrar servicio</small>
+
+        </a>
+
+        <a
+            href="clientes.html?accion=nuevo"
+            class="quick-card"
+        >
+
+            <i class="bi bi-person-plus"></i>
+
+            <span>Nuevo cliente</span>
+
+            <small>Agregar al directorio</small>
+
+        </a>
+
+        <a
+            href="socios.html"
+            class="quick-card"
+        >
+
+            <i class="bi bi-cash-coin"></i>
+
+            <span>Pagos a socios</span>
+
+            <small>Administrar pagos</small>
+
+        </a>
+
+    </section>
+
+    <!-- PRÓXIMAS CELEBRACIONES -->
+
+    <div class="section-heading">
+
+        <h3>Próximas celebraciones</h3>
+
+        <a href="agenda.html">
+            Ver agenda
+        </a>
+
+    </div>
+
+    <section class="events-list" id="listaEventos">
+
+        <div class="empty-state">
+
+            <i class="bi bi-calendar3"></i>
+
+            <p>Cargando celebraciones...</p>
+
+        </div>
+
+    </section>
+
+    <!-- PAQUETES MUSICALES -->
+
+    <div class="section-heading">
+
+        <h3>Paquetes musicales</h3>
+
+        <a href="servicios.html">
+            Administrar
+        </a>
+
+    </div>
+
+    <section class="package-grid" id="listaPaquetes">
+
+        <div class="package-card">
+
+            <small>Cargando...</small>
+
+        </div>
+
+    </section>
+
+    <footer class="app-footer">
+
+        Voz Angelical · Versión 2.0.0
+
+        <br>
+
+        Sistema Integral de Gestión Musical
+
+        <br>
+
+        <span id="ultimaActualizacion">
+            Información pendiente de actualizar
+        </span>
+
+    </footer>
+
+</main>
+
+<!-- NAVEGACIÓN INFERIOR -->
+
+<nav class="bottom-nav" aria-label="Navegación principal">
+
+    <a
+        href="inicio.html"
+        class="nav-item-app active"
+        aria-current="page"
+    >
+
+        <i class="bi bi-house-door-fill"></i>
+
+        Inicio
+
+    </a>
+
+    <a href="agenda.html" class="nav-item-app">
+
+        <i class="bi bi-calendar3"></i>
+
+        Agenda
+
+    </a>
+
+    <a href="contratos.html" class="nav-item-app">
+
+        <i class="bi bi-file-earmark-text"></i>
+
+        Contratos
+
+    </a>
+
+    <a href="socios.html" class="nav-item-app">
+
+        <i class="bi bi-people"></i>
+
+        Socios
+
+    </a>
+
+    <button
+        class="nav-item-app"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#menuMas"
+    >
+
+        <i class="bi bi-grid"></i>
+
+        Más
+
+    </button>
+
+</nav>
+
+<!-- MENÚ MÁS -->
+
+<div
+    class="offcanvas offcanvas-bottom"
+    tabindex="-1"
+    id="menuMas"
+    aria-labelledby="tituloMenu"
+>
+
+    <div class="offcanvas-header">
+
+        <h5 class="offcanvas-title" id="tituloMenu">
+            Más opciones
+        </h5>
+
+        <button
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Cerrar"
+        ></button>
+
+    </div>
+
+    <div class="offcanvas-body">
+
+        <a href="clientes.html" class="menu-option">
+
+            <i class="bi bi-person-lines-fill"></i>
+
+            <span>Clientes</span>
+
+            <i class="bi bi-chevron-right"></i>
+
+        </a>
+
+        <a href="servicios.html" class="menu-option">
+
+            <i class="bi bi-music-note-beamed"></i>
+
+            <span>Servicios musicales</span>
+
+            <i class="bi bi-chevron-right"></i>
+
+        </a>
+
+        <a href="estadisticas.html" class="menu-option">
+
+            <i class="bi bi-bar-chart-line"></i>
+
+            <span>Estadísticas</span>
+
+            <i class="bi bi-chevron-right"></i>
+
+        </a>
+
+        <a href="configuracion.html" class="menu-option">
+
+            <i class="bi bi-gear"></i>
+
+            <span>Configuración y firma</span>
+
+            <i class="bi bi-chevron-right"></i>
+
+        </a>
+
+        <a href="usuarios.html" class="menu-option">
+
+            <i class="bi bi-person-circle"></i>
+
+            <span>Mi cuenta</span>
+
+            <i class="bi bi-chevron-right"></i>
+
+        </a>
+
+        <div class="section-heading">
+
+            <h3>Apariencia</h3>
+
+        </div>
+
+        <div class="theme-options">
+
+            <button
+                class="theme-option"
+                data-elegir-tema="claro"
+            >
+
+                <i class="bi bi-sun"></i>
+
+                Claro
+
+            </button>
+
+            <button
+                class="theme-option"
+                data-elegir-tema="oscuro"
+            >
+
+                <i class="bi bi-moon-stars"></i>
+
+                Oscuro
+
+            </button>
+
+            <button
+                class="theme-option"
+                data-elegir-tema="sistema"
+            >
+
+                <i class="bi bi-phone"></i>
+
+                Automático
+
+            </button>
+
+        </div>
+
+        <button
+            class="menu-option"
+            data-instalar-app
+            hidden
+        >
+
+            <i class="bi bi-download"></i>
+
+            <span>Instalar aplicación</span>
+
+        </button>
+
+        <button
+            class="menu-option"
+            data-actualizar-app
+            hidden
+        >
+
+            <i class="bi bi-arrow-repeat"></i>
+
+            <span>Actualizar aplicación</span>
+
+        </button>
+
+        <button
+            class="menu-option logout"
+            data-cerrar-sesion
+        >
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            <span>Cerrar sesión</span>
+
+        </button>
+
+        <div class="text-center mt-3">
+
+            <small
+                id="correoUsuario"
+                style="color:var(--secundario);
+                       font-size:11px;"
+            ></small>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- BOOTSTRAP -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { db } from "./firebase.js";
+
+import {
+    protegerPagina,
+    cerrarSesion
+} from "./auth.js";
+
+import {
+
+    collection,
+    query,
+    where,
+    orderBy,
+    limit,
+    getDocsFromServer,
+    getCountFromServer,
+    getDocFromServer,
+    doc
+
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const $ = id => document.getElementById(id);
+
+const ZONA = "America/Mexico_City";
+
+let cargando = false;
+
+let ultimaCarga = 0;
+
+const INTERVALO_MINIMO = 60000;
+
+// =====================================
+// FORMATO DE MONEDA
+// =====================================
+
+function moneda(valor) {
+
+    return new Intl.NumberFormat("es-MX", {
+
+        style: "currency",
+
+        currency: "MXN"
+
+    }).format(Number(valor) || 0);
+
+}
+
+function numero(valor) {
+
+    const n = Number(valor);
+
+    return Number.isFinite(n) ? n : 0;
+
+}
+
+// =====================================
+// FECHAS DE MÉXICO
+// =====================================
+
+function fechaMexico(fecha = new Date()) {
+
+    const partes = new Intl.DateTimeFormat(
+
+        "en-CA",
+
+        {
+
+            timeZone: ZONA,
+
+            year: "numeric",
+
+            month: "2-digit",
+
+            day: "2-digit"
+
+        }
+
+    ).formatToParts(fecha);
+
+    const obtener = tipo =>
+
+        partes.find(p => p.type === tipo)?.value;
+
+    return `${obtener("year")}-${obtener("month")}-${obtener("day")}`;
+
+}
+
+function fechaRegistro(valor) {
+
+    if (!valor) return "";
+
+    if (typeof valor === "string") {
+
+        return valor.substring(0,10);
+
+    }
+
+    if (typeof valor.toDate === "function") {
+
+        return fechaMexico(valor.toDate());
+
+    }
+
+    if (valor instanceof Date) {
+
+        return fechaMexico(valor);
+
+    }
+
+    return "";
+
+}
+
+function perteneceMes(valor) {
+
+    return fechaRegistro(valor).substring(0,7)
+
+        === fechaMexico().substring(0,7);
+
+}
+
+function normalizar(valor) {
+
+    return String(valor || "")
+
+        .trim()
+
+        .toLowerCase();
+
+}
+
+function cancelado(evento) {
+
+    return normalizar(evento.estado) === "cancelado";
+
+}
+
+// =====================================
+// SALUDO Y FECHA
+// =====================================
+
+function actualizarFecha() {
+
+    const ahora = new Date();
+
+    const hora = Number(
+
+        new Intl.DateTimeFormat("es-MX", {
+
+            timeZone: ZONA,
+
+            hour: "2-digit",
+
+            hourCycle: "h23"
+
+        }).format(ahora)
+
+    );
+
+    let saludo = "¡Buenas noches!";
+
+    if (hora < 12) {
+
+        saludo = "¡Buenos días!";
+
+    } else if (hora < 19) {
+
+        saludo = "¡Buenas tardes!";
+
+    }
+
+    $("saludo").textContent = saludo;
+
+    $("fechaActual").textContent =
+
+        new Intl.DateTimeFormat("es-MX", {
+
+            timeZone: ZONA,
+
+            weekday: "long",
+
+            day: "numeric",
+
+            month: "long",
+
+            year: "numeric"
+
+        }).format(ahora);
+
+    $("mesActual").textContent =
+
+        new Intl.DateTimeFormat("es-MX", {
+
+            timeZone: ZONA,
+
+            month: "long",
+
+            year: "numeric"
+
+        }).format(ahora);
+
+}
+
+// =====================================
+// LEER COLECCIONES
+// =====================================
+
+async function leerColeccion(referencia) {
+
+    const resultado = await getDocsFromServer(
+
+        referencia
+
+    );
+
+    return resultado.docs.map(documento => ({
+
+        ...documento.data(),
+
+        id: documento.id
+
+    }));
+
+}
+
+async function contarColeccion(nombre) {
+
+    const resultado = await getCountFromServer(
+
+        collection(db, nombre)
+
+    );
+
+    return resultado.data().count;
+
+}
+
+// =====================================
+// MOSTRAR MENSAJES
+// =====================================
+
+function mostrarAviso(texto) {
+
+    $("avisoDatos").textContent = texto;
+
+    $("avisoDatos").hidden = false;
+
+}
+
+function ocultarAviso() {
+
+    $("avisoDatos").hidden = true;
+
+}
+
+// =====================================
+// CREAR ELEMENTOS SEGUROS
+// =====================================
+
+function crearElemento(etiqueta, clase, texto) {
+
+    const elemento = document.createElement(etiqueta);
+
+    if (clase) {
+
+        elemento.className = clase;
+
+    }
+
+    if (texto !== undefined) {
+
+        elemento.textContent = texto;
+
+    }
+
+    return elemento;
+
+}
+
+function mostrarVacio(contenedor, icono, mensaje) {
+
+    contenedor.replaceChildren();
+
+    const caja = crearElemento(
+
+        "div",
+
+        "empty-state"
+
+    );
+
+    caja.append(
+
+        crearElemento("i", icono),
+
+        crearElemento("p", "", mensaje)
+
+    );
+
+    contenedor.appendChild(caja);
+
+}
+
+// =====================================
+// MOSTRAR CELEBRACIONES
+// =====================================
+
+function mostrarEventos(eventos) {
+
+    const contenedor = $("listaEventos");
+
+    contenedor.replaceChildren();
+
+    if (!eventos.length) {
+
+        mostrarVacio(
+
+            contenedor,
+
+            "bi bi-calendar-check",
+
+            "No tienes próximas celebraciones registradas."
+
+        );
+
+        return;
+
+    }
+
+    eventos.slice(0,5).forEach(evento => {
+
+        const tarjeta = crearElemento(
+
+            "a",
+
+            "event-card"
+
+        );
+
+        tarjeta.href = evento.contratoId
+
+            ? "contratos.html?contratoId=" +
+
+              encodeURIComponent(evento.contratoId)
+
+            : "agenda.html?eventoId=" +
+
+              encodeURIComponent(evento.id);
+
+        const fecha = fechaRegistro(evento.fecha);
+
+        const partes = fecha.split("-");
+
+        const meses = [
+
+            "ENE", "FEB", "MAR", "ABR",
+
+            "MAY", "JUN", "JUL", "AGO",
+
+            "SEP", "OCT", "NOV", "DIC"
+
+        ];
+
+        const cajaFecha = crearElemento(
+
+            "div",
+
+            "event-date"
+
+        );
+
+        cajaFecha.append(
+
+            crearElemento(
+
+                "span",
+
+                "event-day",
+
+                partes[2] || "--"
+
+            ),
+
+            crearElemento(
+
+                "span",
+
+                "event-month",
+
+                meses[Number(partes[1]) - 1] || "---"
+
+            )
+
+        );
+
+        const informacion = crearElemento(
+
+            "div",
+
+            "event-info"
+
+        );
+
+        informacion.append(
+
+            crearElemento(
+
+                "div",
+
+                "event-title",
+
+                evento.tipoServicio || "Celebración"
+
+            ),
+
+            crearElemento(
+
+                "div",
+
+                "event-detail",
+
+                `${evento.hora || "--:--"} h · ${evento.paqueteNombre || "Servicio musical"}`
+
+            ),
+
+            crearElemento(
+
+                "div",
+
+                "event-detail",
+
+                evento.lugar || "Lugar por confirmar"
+
+            ),
+
+            crearElemento(
+
+                "div",
+
+                "event-price",
+
+                moneda(evento.precio)
+
+            )
+
+        );
+
+        tarjeta.append(
+
+            cajaFecha,
+
+            informacion,
+
+            crearElemento(
+
+                "i",
+
+                "bi bi-chevron-right event-arrow"
+
+            )
+
+        );
+
+        contenedor.appendChild(tarjeta);
+
+    });
+
+}
+
+// =====================================
+// MOSTRAR PAQUETES
+// =====================================
+
+function mostrarPaquetes(paquetes) {
+
+    const contenedor = $("listaPaquetes");
+
+    contenedor.replaceChildren();
+
+    const activos = paquetes
+
+        .filter(p => p.activo !== false)
+
+        .sort((a,b) => numero(a.numero) - numero(b.numero));
+
+    if (!activos.length) {
+
+        mostrarVacio(
+
+            contenedor,
+
+            "bi bi-music-note-beamed",
+
+            "No hay paquetes activos."
+
+        );
+
+        return;
+
+    }
+
+    activos.forEach(paquete => {
+
+        const tarjeta = crearElemento(
+
+            "a",
+
+            "package-card"
+
+        );
+
+        tarjeta.href = "servicios.html";
+
+        const voces = numero(paquete.voces);
+
+        const icono = voces === 1
+
+            ? "bi bi-person"
+
+            : voces === 2
+
+                ? "bi bi-people"
+
+                : "bi bi-people-fill";
+
+        tarjeta.append(
+
+            crearElemento("i", icono),
+
+            crearElemento(
+
+                "h4",
+
+                "",
+
+                paquete.nombre || "Paquete"
+
+            ),
+
+            crearElemento(
+
+                "div",
+
+                "package-price",
+
+                moneda(paquete.precio)
+
+            ),
+
+            crearElemento(
+
+                "small",
+
+                "",
+
+                `${voces} ${voces === 1 ? "voz" : "voces"}`
+
+            )
+
+        );
+
+        contenedor.appendChild(tarjeta);
+
+    });
+
+}
+
+// =====================================
+// CARGAR INFORMACIÓN
+// =====================================
+
+async function cargarDatos(forzar = false) {
+
+    if (cargando) return;
+
+    if (!navigator.onLine) {
+
+        mostrarAviso(
+
+            "Sin conexión. Conéctate a internet para actualizar tus registros."
+
+        );
+
+        return;
+
+    }
+
+    if (
+
+        !forzar &&
+
+        Date.now() - ultimaCarga < INTERVALO_MINIMO
+
+    ) {
+
+        return;
+
+    }
+
+    cargando = true;
+
+    $("btnRecargar").disabled = true;
+
+    ocultarAviso();
+
+    try {
+
+        const hoy = fechaMexico();
+
+        const inicioMes = hoy.substring(0,7) + "-01";
+
+        // Consultas filtradas para reducir lecturas.
+
+        const [
+
+            eventosPagados,
+
+            eventosPendientes,
+
+            eventosProximos,
+
+            contratosCancelados,
+
+            pagosSocios,
+
+            paquetes,
+
+            totalClientes,
+
+            totalContratos
+
+        ] = await Promise.all([
+
+            leerColeccion(
+
+                query(
+
+                    collection(db,"eventos"),
+
+                    where("estadoPago","==","pagado")
+
+                )
+
+            ),
+
+            leerColeccion(
+
+                query(
+
+                    collection(db,"eventos"),
+
+                    where("estadoPago","==","pendiente")
+
+                )
+
+            ),
+
+            leerColeccion(
+
+                query(
+
+                    collection(db,"eventos"),
+
+                    where("fecha",">=",hoy),
+
+                    orderBy("fecha","asc")
+
+                )
+
+            ),
+
+            leerColeccion(
+
+                query(
+
+                    collection(db,"contratos"),
+
+                    where("estado","==","cancelado")
+
+                )
+
+            ),
+
+            leerColeccion(
+
+                collection(db,"pagosSocios")
+
+            ),
+
+            leerColeccion(
+
+                collection(db,"servicios")
+
+            ),
+
+            contarColeccion("clientes"),
+
+            contarColeccion("contratos")
+
+        ]);
+
+        // =================================
+        // INGRESOS POR CELEBRACIONES
+        // =================================
+
+        const ingresosServicios = eventosPagados
+
+            .filter(evento =>
+
+                !cancelado(evento) &&
+
+                perteneceMes(evento.fechaPago)
+
+            )
+
+            .reduce(
+
+                (total, evento) =>
+
+                    total + numero(evento.precio),
+
+                0
+
+            );
+
+        // =================================
+        // INGRESOS POR PENALIZACIONES
+        // =================================
+
+        let ingresosPenalizaciones = 0;
+
+        let penalizacionesPendientes = 0;
+
+        contratosCancelados.forEach(contrato => {
+
+            const penalizacion =
+
+                numero(contrato.penalizacion);
+
+            const pagado = Math.min(
+
+                penalizacion,
+
+                numero(contrato.penalizacionPagada)
+
+            );
+
+            const fechaPago =
+
+                contrato.fechaPagoPenalizacion ||
+
+                contrato.fechaPago;
+
+            if (perteneceMes(fechaPago)) {
+
+                ingresosPenalizaciones += pagado;
+
+            }
+
+            penalizacionesPendientes += Math.max(
+
+                0,
+
+                penalizacion - pagado
+
+            );
+
+        });
+
+        // =================================
+        // PENDIENTES DE CLIENTES
+        // =================================
+
+        const pendienteServicios = eventosPendientes
+
+            .filter(evento => !cancelado(evento))
+
+            .reduce(
+
+                (total, evento) =>
+
+                    total + numero(evento.precio),
+
+                0
+
+            );
+
+        // =================================
+        // PAGOS REALIZADOS A SOCIOS
+        // =================================
+
+        const egresosSocios = pagosSocios
+
+            .filter(pago =>
+
+                normalizar(pago.estado) === "pagado" &&
+
+                perteneceMes(pago.fechaPago)
+
+            )
+
+            .reduce(
+
+                (total, pago) =>
+
+                    total + numero(pago.importe),
+
+                0
+
+            );
+
+        // =================================
+        // DEUDAS CON SOCIOS
+        // =================================
+
+        const pendientes = pagosSocios.filter(
+
+            pago =>
+
+                normalizar(pago.estado) === "pendiente"
+
+                && pago.eventoId
+
+        );
+
+        const mapaEventos = new Map();
+
+        [
+
+            ...eventosPagados,
+
+            ...eventosPendientes,
+
+            ...eventosProximos
+
+        ].forEach(evento => {
+
+            mapaEventos.set(evento.id, evento);
+
+        });
+
+        const faltantes = [
+
+            ...new Set(
+
+                pendientes
+
+                    .map(pago => pago.eventoId)
+
+                    .filter(id => !mapaEventos.has(id))
+
+            )
+
+        ];
+
+        await Promise.all(
+
+            faltantes.map(async id => {
+
+                const resultado = await getDocFromServer(
+
+                    doc(db,"eventos",id)
+
+                );
+
+                if (resultado.exists()) {
+
+                    mapaEventos.set(
+
+                        id,
+
+                        resultado.data()
+
+                    );
+
+                }
+
+            })
+
+        );
+
+        const deudaSocios = pendientes
+
+            .filter(pago => {
+
+                const evento = mapaEventos.get(
+
+                    pago.eventoId
+
+                );
+
+                return evento &&
+
+                    normalizar(evento.estado) === "realizado";
+
+            })
+
+            .reduce(
+
+                (total,pago) =>
+
+                    total + numero(pago.importe),
+
+                0
+
+            );
+
+        // =================================
+        // PRÓXIMAS CELEBRACIONES
+        // =================================
+
+        const proximos = eventosProximos
+
+            .filter(evento =>
+
+                !cancelado(evento) &&
+
+                normalizar(evento.estado) !== "realizado"
+
+            )
+
+            .sort((a,b) => {
+
+                const fechaA =
+
+                    fechaRegistro(a.fecha) + " " +
+
+                    (a.hora || "");
+
+                const fechaB =
+
+                    fechaRegistro(b.fecha) + " " +
+
+                    (b.hora || "");
+
+                return fechaA.localeCompare(fechaB);
+
+            });
+
+        // =================================
+        // ACTUALIZAR INDICADORES
+        // =================================
+
+        const ingresos =
+
+            ingresosServicios +
+
+            ingresosPenalizaciones;
+
+        const ganancia =
+
+            ingresos - egresosSocios;
+
+        $("ingresosMes").textContent =
+
+            moneda(ingresos);
+
+        $("gananciaMes").textContent =
+
+            moneda(ganancia);
+
+        $("gananciaMes").classList.toggle(
+
+            "text-red",
+
+            ganancia < 0
+
+        );
+
+        $("gananciaMes").classList.toggle(
+
+            "text-green",
+
+            ganancia >= 0
+
+        );
+
+        $("pendienteCobrar").textContent =
+
+            moneda(
+
+                pendienteServicios +
+
+                penalizacionesPendientes
+
+            );
+
+        $("pendienteSocios").textContent =
+
+            moneda(deudaSocios);
+
+        $("totalEventos").textContent =
+
+            proximos.length;
+
+        $("totalClientes").textContent =
+
+            totalClientes;
+
+        $("totalContratos").textContent =
+
+            totalContratos;
+
+        mostrarEventos(proximos);
+
+        mostrarPaquetes(paquetes);
+
+        ultimaCarga = Date.now();
+
+        $("ultimaActualizacion").textContent =
+
+            "Actualizado: " +
+
+            new Intl.DateTimeFormat("es-MX", {
+
+                timeZone: ZONA,
+
+                hour: "numeric",
+
+                minute: "2-digit"
+
+            }).format(new Date());
+
+    } catch (error) {
+
+        console.error(error);
+
+        if (error.code === "permission-denied") {
+
+            mostrarAviso(
+
+                "No hay permisos para consultar todos los módulos. Revisa las reglas de Firestore, incluyendo socios y pagosSocios."
+
+            );
+
+        } else {
+
+            mostrarAviso(
+
+                "No se pudo actualizar la información. Comprueba tu conexión e inténtalo nuevamente."
+
+            );
+
+        }
+
+        if (!ultimaCarga) {
+
+            mostrarVacio(
+
+                $("listaEventos"),
+
+                "bi bi-exclamation-circle",
+
+                "Información no disponible."
+
+            );
+
+            mostrarVacio(
+
+                $("listaPaquetes"),
+
+                "bi bi-exclamation-circle",
+
+                "Información no disponible."
+
+            );
+
+        }
+
+    } finally {
+
+        cargando = false;
+
+        $("btnRecargar").disabled = false;
+
+    }
+
+}
+
+// =====================================
+// ACTUALIZACIÓN MANUAL
+// =====================================
+
+$("btnRecargar").addEventListener(
+
+    "click",
+
+    () => cargarDatos(true)
+
+);
+
+// =====================================
+// RECUPERAR CONEXIÓN
+// =====================================
+
+window.addEventListener("online", () => {
+
+    cargarDatos(true);
+
+});
+
+window.addEventListener("offline", () => {
+
+    mostrarAviso(
+
+        "Sin conexión. Los datos mostrados corresponden a la última consulta."
+
+    );
+
+});
+
+// Actualizar al regresar a la aplicación,
+// evitando consultas continuas.
+
+document.addEventListener(
+
+    "visibilitychange",
+
+    () => {
+
+        if (document.visibilityState === "visible") {
+
+            actualizarFecha();
+
+            cargarDatos();
+
+        }
+
+    }
+
+);
+
+// =====================================
+// CERRAR SESIÓN
+// =====================================
+
+document.querySelectorAll(
+
+    "[data-cerrar-sesion]"
+
+).forEach(boton => {
+
+    boton.addEventListener("click", async () => {
+
+        if (!confirm("¿Deseas cerrar sesión?")) {
+
+            return;
+
+        }
+
+        try {
+
+            boton.disabled = true;
+
+            await cerrarSesion();
+
+        } catch (error) {
+
+            console.error(error);
+
+            boton.disabled = false;
+
+            mostrarAviso(
+
+                "No se pudo cerrar la sesión. Inténtalo nuevamente."
+
+            );
+
+        }
+
+    });
+
+});
+
+// =====================================
+// INICIAR PANEL ADMINISTRATIVO
+// =====================================
+
+try {
+
+    const usuario = await protegerPagina();
+
+    $("correoUsuario").textContent =
+
+        usuario.email || "Administrador";
+
+    actualizarFecha();
+
+    $("aplicacion").hidden = false;
+
+    $("pantallaCarga").hidden = true;
+
+    await cargarDatos(true);
+
+} catch (error) {
+
+    console.error(error);
+
+    $("textoCarga").textContent =
+
+        "No se pudo verificar tu sesión.";
+
+}
+
+</script>
+
+<script src="pwa.js" defer></script>
+
+</body>
+</html>

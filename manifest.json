@@ -1,0 +1,64 @@
+
+{
+    "id": "./",
+    "name": "Voz Angelical",
+    "short_name": "Voz Angelical",
+    "description": "Sistema Integral de Gestión Musical de Voz Angelical",
+    "lang": "es-MX",
+    "dir": "ltr",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "display_override": [
+        "standalone"
+    ],
+    "orientation": "any",
+    "background_color": "#F5EFE4",
+    "theme_color": "#B48A42",
+    "prefer_related_applications": false,
+    "categories": [
+        "business",
+        "productivity",
+        "music"
+    ],
+    "icons": [
+        {
+            "src": "./icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "./icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Nuevo contrato",
+            "short_name": "Contrato",
+            "description": "Registrar un nuevo contrato musical",
+            "url": "./contratos.html?accion=nuevo"
+        },
+        {
+            "name": "Nueva celebración",
+            "short_name": "Celebración",
+            "description": "Registrar una celebración en la agenda",
+            "url": "./agenda.html?accion=nuevo"
+        },
+        {
+            "name": "Nuevo cliente",
+            "short_name": "Cliente",
+            "description": "Registrar un nuevo cliente",
+            "url": "./clientes.html?accion=nuevo"
+        },
+        {
+            "name": "Agenda musical",
+            "short_name": "Agenda",
+            "description": "Consultar las próximas celebraciones",
+            "url": "./agenda.html"
+        }
+    ]
+}

@@ -1,0 +1,3106 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F5EFE4">
+
+<title>Estadísticas | Voz Angelical</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<script src="tema.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --dorado:#B48A42;
+    --acento:#8A632B;
+    --fondo:#F5EFE4;
+    --tarjeta:#FFFFFF;
+    --texto:#30271D;
+    --secundario:#796C59;
+    --borde:#E6D8C1;
+    --campo:#FCFAF6;
+    --suave:#EDE3D1;
+    --verde:#328653;
+    --rojo:#C74D4D;
+    --sidebar:260px;
+}
+
+html[data-tema="oscuro"] {
+    --fondo:#171614;
+    --tarjeta:#252321;
+    --texto:#F5EFE4;
+    --secundario:#C1B6A5;
+    --borde:#413A30;
+    --campo:#1D1B19;
+    --suave:#33291B;
+    --acento:#DCC18A;
+    --verde:#68C78A;
+    --rojo:#F07878;
+}
+
+* {
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body {
+    margin:0;
+    min-height:100dvh;
+    background:var(--fondo);
+    color:var(--texto);
+    font-family:'Poppins',sans-serif;
+}
+
+[hidden] {
+    display:none!important;
+}
+
+a {
+    color:inherit;
+    text-decoration:none;
+}
+
+.app-header {
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:var(--tarjeta);
+    border-bottom:1px solid var(--borde);
+    padding:14px 18px;
+    padding-top:max(14px,env(safe-area-inset-top));
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand {
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.brand img {
+    width:45px;
+    height:45px;
+    border-radius:50%;
+}
+
+.brand h1 {
+    font-family:'Cinzel',serif;
+    color:var(--acento);
+    font-size:16px;
+    font-weight:700;
+    margin:0;
+}
+
+.brand small {
+    font-size:10px;
+    color:var(--secundario);
+}
+
+.icon-button {
+    width:44px;
+    height:44px;
+    background:var(--campo);
+    color:var(--acento);
+    border:1px solid var(--borde);
+    border-radius:13px;
+    font-size:19px;
+}
+
+.main-content {
+    padding:22px 16px;
+    padding-bottom:calc(110px + env(safe-area-inset-bottom));
+}
+
+.page-title {
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    color:var(--acento);
+    font-size:26px;
+}
+
+.description {
+    color:var(--secundario);
+    font-size:12px;
+    line-height:1.8;
+}
+
+.filters {
+    background:var(--tarjeta);
+    border:1px solid var(--borde);
+    padding:18px;
+    border-radius:18px;
+    margin:20px 0;
+}
+
+.form-label {
+    font-size:12px;
+    font-weight:600;
+}
+
+.form-select {
+    background-color:var(--campo);
+    color:var(--texto);
+    border:1px solid var(--borde);
+    border-radius:12px;
+    min-height:48px;
+    font-size:16px;
+}
+
+.form-select:focus {
+    border-color:var(--dorado);
+    box-shadow:0 0 0 3px rgba(180,138,66,.15);
+}
+
+.summary-grid {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+}
+
+.stat-card {
+    background:var(--tarjeta);
+    border:1px solid var(--borde);
+    border-radius:18px;
+    padding:17px;
+    min-width:0;
+}
+
+.stat-icon {
+    width:43px;
+    height:43px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:var(--suave);
+    color:var(--acento);
+    border-radius:13px;
+    font-size:21px;
+    margin-bottom:14px;
+}
+
+.stat-card h3 {
+    font-size:clamp(15px,4vw,24px);
+    font-weight:700;
+    margin-bottom:5px;
+    overflow-wrap:anywhere;
+}
+
+.stat-card p {
+    color:var(--secundario);
+    font-size:11px;
+    margin:0;
+}
+
+.stat-card small {
+    display:block;
+    color:var(--secundario);
+    font-size:9px;
+    margin-top:7px;
+}
+
+.profit-card {
+    grid-column:1/-1;
+    background:linear-gradient(135deg,#795421,#B48A42);
+    color:white;
+    padding:25px;
+    border-radius:22px;
+}
+
+.profit-card h2 {
+    font-size:clamp(26px,7vw,40px);
+    font-weight:700;
+    margin:10px 0;
+    overflow-wrap:anywhere;
+}
+
+.profit-card p {
+    font-size:12px;
+    margin:0;
+    color:#FFFFFF;
+}
+
+.profit-card small {
+    font-size:10px;
+    opacity:.9;
+}
+
+.section-heading {
+    font-family:'Cinzel',serif;
+    font-size:18px;
+    color:var(--acento);
+    font-weight:700;
+    margin:30px 0 15px;
+}
+
+.chart-grid {
+    display:grid;
+    grid-template-columns:1fr;
+    gap:15px;
+}
+
+.panel {
+    background:var(--tarjeta);
+    border:1px solid var(--borde);
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:15px;
+    min-width:0;
+}
+
+.panel h3 {
+    color:var(--acento);
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:7px;
+}
+
+.panel p {
+    color:var(--secundario);
+    font-size:11px;
+}
+
+.chart-container {
+    position:relative;
+    height:280px;
+    width:100%;
+}
+
+.chart-container canvas {
+    max-width:100%;
+}
+
+.finance-row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:14px 0;
+    border-bottom:1px solid var(--borde);
+    font-size:12px;
+}
+
+.finance-row:last-child {
+    border-bottom:none;
+}
+
+.finance-row strong {
+    text-align:right;
+    overflow-wrap:anywhere;
+}
+
+.text-green {
+    color:var(--verde);
+}
+
+.text-red {
+    color:var(--rojo);
+}
+
+.text-gold {
+    color:var(--acento);
+}
+
+.progress {
+    height:9px;
+    background:var(--suave);
+    border-radius:20px;
+}
+
+.progress-bar {
+    background:var(--dorado);
+    border-radius:20px;
+}
+
+.ranking-item {
+    margin:18px 0;
+}
+
+.ranking-header {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.btn-gold {
+    background:linear-gradient(135deg,#8A632B,#B48A42);
+    color:white;
+    border:none;
+    border-radius:13px;
+    min-height:48px;
+    padding:12px 16px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.btn-app {
+    background:var(--campo);
+    color:var(--acento);
+    border:1px solid var(--borde);
+    border-radius:12px;
+    min-height:44px;
+    padding:10px 12px;
+    font-size:12px;
+}
+
+.alert {
+    font-size:12px;
+    line-height:1.7;
+    border-radius:12px;
+}
+
+.bottom-nav {
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:200;
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    padding:9px 5px;
+    padding-bottom:calc(9px + env(safe-area-inset-bottom));
+    background:var(--tarjeta);
+    border-top:1px solid var(--borde);
+}
+
+.nav-item-app {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    min-height:52px;
+    border:none;
+    border-radius:12px;
+    background:transparent;
+    color:var(--secundario);
+    font-size:9px;
+}
+
+.nav-item-app i {
+    font-size:21px;
+}
+
+.nav-item-app.active {
+    background:var(--suave);
+    color:var(--acento);
+    font-weight:600;
+}
+
+.offcanvas {
+    background:var(--tarjeta);
+    color:var(--texto);
+}
+
+.offcanvas-bottom {
+    height:auto;
+    max-height:85dvh;
+    border-radius:25px 25px 0 0;
+}
+
+.menu-option {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px;
+    margin-bottom:8px;
+    background:var(--campo);
+    color:var(--texto);
+    border:1px solid var(--borde);
+    border-radius:12px;
+    width:100%;
+    min-height:50px;
+    font-size:13px;
+    text-align:left;
+}
+
+.menu-option i {
+    color:var(--acento);
+    font-size:18px;
+}
+
+.menu-option.active {
+    background:var(--suave);
+    color:var(--acento);
+}
+
+.sidebar {
+    display:none;
+}
+
+.loading-screen {
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:var(--fondo);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    padding:25px;
+    text-align:center;
+}
+
+.loading-screen img {
+    width:110px;
+    height:110px;
+    border-radius:50%;
+}
+
+.loading-screen p {
+    color:var(--secundario);
+    font-size:12px;
+}
+
+.spinner-border {
+    color:var(--dorado);
+}
+
+.app-footer {
+    text-align:center;
+    color:var(--secundario);
+    font-size:10px;
+    line-height:1.9;
+    padding:30px 10px;
+}
+
+@media(min-width:700px) {
+
+    .summary-grid {
+        grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .chart-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media(min-width:992px) {
+
+    .sidebar {
+        position:fixed;
+        inset:0 auto 0 0;
+        width:var(--sidebar);
+        display:flex;
+        flex-direction:column;
+        padding:20px 15px;
+        background:var(--tarjeta);
+        border-right:1px solid var(--borde);
+        overflow-y:auto;
+    }
+
+    .sidebar-brand {
+        text-align:center;
+        padding:10px 0 25px;
+    }
+
+    .sidebar-brand img {
+        width:95px;
+        height:95px;
+        border-radius:50%;
+    }
+
+    .sidebar-brand h2 {
+        font-family:'Cinzel',serif;
+        font-size:18px;
+        color:var(--acento);
+        margin-top:15px;
+    }
+
+    .sidebar-link {
+        display:flex;
+        align-items:center;
+        gap:12px;
+        padding:13px;
+        margin-bottom:5px;
+        color:var(--secundario);
+        border-radius:12px;
+        font-size:13px;
+    }
+
+    .sidebar-link i {
+        font-size:18px;
+    }
+
+    .sidebar-link.active,
+    .sidebar-link:hover {
+        background:var(--suave);
+        color:var(--acento);
+    }
+
+    .app-header {
+        margin-left:var(--sidebar);
+        padding:15px 30px;
+    }
+
+    .main-content {
+        margin-left:var(--sidebar);
+        padding:30px;
+    }
+
+    .bottom-nav {
+        display:none;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="loading-screen" id="pantallaCarga">
+
+    <img src="icon-192.png" alt="Voz Angelical">
+
+    <div class="spinner-border" id="spinnerCarga"></div>
+
+    <p id="textoCarga">Calculando estadísticas...</p>
+
+    <button class="btn-app" id="btnReintentar" hidden>
+        Volver a intentar
+    </button>
+
+</div>
+
+<div id="aplicacion" hidden>
+
+<aside class="sidebar">
+
+    <div class="sidebar-brand">
+        <img src="logo.png" alt="Voz Angelical">
+        <h2>Voz Angelical</h2>
+    </div>
+
+    <a href="inicio.html" class="sidebar-link">
+        <i class="bi bi-house-door"></i> Inicio
+    </a>
+
+    <a href="agenda.html" class="sidebar-link">
+        <i class="bi bi-calendar3"></i> Agenda
+    </a>
+
+    <a href="contratos.html" class="sidebar-link">
+        <i class="bi bi-file-earmark-text"></i> Contratos
+    </a>
+
+    <a href="clientes.html" class="sidebar-link">
+        <i class="bi bi-person-lines-fill"></i> Clientes
+    </a>
+
+    <a href="servicios.html" class="sidebar-link">
+        <i class="bi bi-music-note-beamed"></i> Servicios
+    </a>
+
+    <a href="socios.html" class="sidebar-link">
+        <i class="bi bi-people"></i> Socios
+    </a>
+
+    <a href="estadisticas.html" class="sidebar-link active">
+        <i class="bi bi-bar-chart-line"></i> Estadísticas
+    </a>
+
+    <a href="configuracion.html" class="sidebar-link">
+        <i class="bi bi-gear"></i> Configuración
+    </a>
+
+    <a href="usuarios.html" class="sidebar-link">
+        <i class="bi bi-person-circle"></i> Mi cuenta
+    </a>
+
+</aside>
+
+<header class="app-header">
+
+    <div class="brand">
+
+        <img src="logo.png" alt="Voz Angelical">
+
+        <div>
+            <h1>Voz Angelical</h1>
+            <small>Estadísticas financieras</small>
+        </div>
+
+    </div>
+
+    <div class="d-flex gap-2">
+
+        <button class="icon-button" id="btnActualizar"
+        aria-label="Actualizar">
+            <i class="bi bi-arrow-clockwise"></i>
+        </button>
+
+        <button class="icon-button" data-alternar-tema
+        aria-label="Cambiar tema">
+            <i class="bi bi-moon-stars" data-icono-tema></i>
+        </button>
+
+    </div>
+
+</header>
+
+<main class="main-content">
+
+    <h2 class="page-title">Estadísticas</h2>
+
+    <p class="description">
+        Consulta el rendimiento financiero de Voz Angelical
+        y conoce cuánto dinero estás generando.
+    </p>
+
+    <div class="alert" id="mensajeGeneral" hidden></div>
+
+    <section class="filters">
+
+        <div class="row g-3">
+
+            <div class="col-6">
+
+                <label class="form-label" for="mes">
+                    Mes
+                </label>
+
+                <select class="form-select" id="mes">
+
+                    <option value="todos">Todo el año</option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+
+                </select>
+
+            </div>
+
+            <div class="col-6">
+
+                <label class="form-label" for="anio">
+                    Año
+                </label>
+
+                <select class="form-select" id="anio"></select>
+
+            </div>
+
+            <div class="col-12">
+
+                <button class="btn-app w-100" id="btnMesActual">
+                    <i class="bi bi-calendar-event me-1"></i>
+                    Consultar mes actual
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="summary-grid">
+
+        <article class="profit-card">
+
+            <p>
+                <i class="bi bi-wallet2 me-2"></i>
+                Balance de ingresos y pagos a socios
+            </p>
+
+            <h2 id="gananciaNeta">—</h2>
+
+            <small>
+                Ingresos reconocidos menos pagos realizados a socios.
+                No incluye otros gastos.
+            </small>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-cash-stack"></i>
+            </div>
+
+            <h3 class="text-green" id="ingresos">—</h3>
+
+            <p>Ingresos cobrados</p>
+
+            <small>Incluye penalizaciones reconocidas</small>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-hourglass-split"></i>
+            </div>
+
+            <h3 id="pendientes">—</h3>
+
+            <p>Servicios por cobrar</p>
+
+            <small>Celebraciones del periodo</small>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-people"></i>
+            </div>
+
+            <h3 class="text-red" id="pagosSocios">—</h3>
+
+            <p>Pagos a socios</p>
+
+            <small>Pagados durante el periodo</small>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-person-exclamation"></i>
+            </div>
+
+            <h3 id="deudaSocios">—</h3>
+
+            <p>Deudas con socios</p>
+
+            <small>Celebraciones realizadas del periodo</small>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-calendar-check"></i>
+            </div>
+
+            <h3 id="serviciosRealizados">—</h3>
+
+            <p>Celebraciones realizadas</p>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-file-earmark-check"></i>
+            </div>
+
+            <h3 id="contratosGenerados">—</h3>
+
+            <p>Contratos registrados</p>
+
+            <small>Según fecha de creación</small>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-exclamation-circle"></i>
+            </div>
+
+            <h3 id="penalizacionesCobradas">—</h3>
+
+            <p>Penalizaciones cobradas</p>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-calendar-x"></i>
+            </div>
+
+            <h3 id="cancelaciones">—</h3>
+
+            <p>Cancelaciones registradas</p>
+
+        </article>
+
+        <article class="stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-arrow-return-left"></i>
+            </div>
+
+            <h3 id="reembolsosPendientes">—</h3>
+
+            <p>Reembolsos pendientes</p>
+
+            <small>Cancelaciones del periodo</small>
+
+        </article>
+
+    </section>
+
+    <h2 class="section-heading">Rendimiento financiero</h2>
+
+    <div class="alert alert-warning" id="avisoGraficas" hidden></div>
+
+    <section class="chart-grid">
+
+        <article class="panel">
+
+            <h3>Ingresos y pagos mensuales</h3>
+
+            <p>Comparación durante el año seleccionado.</p>
+
+            <div class="chart-container">
+                <canvas id="graficaIngresos"
+                aria-label="Ingresos y pagos mensuales"></canvas>
+            </div>
+
+        </article>
+
+        <article class="panel">
+
+            <h3>Estado de las celebraciones</h3>
+
+            <p>Distribución de servicios del periodo.</p>
+
+            <div class="chart-container">
+                <canvas id="graficaEventos"
+                aria-label="Estado de las celebraciones"></canvas>
+            </div>
+
+        </article>
+
+        <article class="panel">
+
+            <h3>Paquetes musicales</h3>
+
+            <p>Servicios no cancelados por paquete.</p>
+
+            <div class="chart-container">
+                <canvas id="graficaPaquetes"
+                aria-label="Paquetes musicales contratados"></canvas>
+            </div>
+
+        </article>
+
+        <article class="panel">
+
+            <h3>Ingresos reconocidos</h3>
+
+            <p>Distribución de ingresos del periodo.</p>
+
+            <div class="chart-container">
+                <canvas id="graficaDistribucion"
+                aria-label="Distribución de ingresos"></canvas>
+            </div>
+
+        </article>
+
+    </section>
+
+    <h2 class="section-heading">Resumen económico</h2>
+
+    <section class="panel" id="resumenFinanciero"></section>
+
+    <h2 class="section-heading">Saldos pendientes generales</h2>
+
+    <p class="description">
+        Estos importes incluyen todos los periodos.
+    </p>
+
+    <section class="panel" id="saldosGenerales"></section>
+
+    <h2 class="section-heading">Servicios más solicitados</h2>
+
+    <section class="panel" id="rankingServicios"></section>
+
+    <h2 class="section-heading">Pagos por socio</h2>
+
+    <section class="panel" id="rankingSocios"></section>
+
+    <h2 class="section-heading">Reportes</h2>
+
+    <section class="panel">
+
+        <h3>Exportar reporte financiero</h3>
+
+        <p>
+            Guarda un resumen del periodo seleccionado.
+            El reporte contiene información privada del negocio.
+        </p>
+
+        <div class="d-grid gap-2">
+
+            <button class="btn-gold" id="btnPDF">
+
+                <i class="bi bi-file-earmark-pdf me-2"></i>
+                Generar reporte PDF
+
+            </button>
+
+            <button class="btn-app" id="btnCSV">
+
+                <i class="bi bi-file-earmark-spreadsheet me-2"></i>
+                Exportar resumen CSV
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <p class="description" id="ultimaActualizacion"></p>
+
+    <footer class="app-footer">
+
+        Voz Angelical · Versión 2.0.0
+
+        <br>
+
+        Sistema Integral de Gestión Musical
+
+    </footer>
+
+</main>
+
+<nav class="bottom-nav">
+
+    <a href="inicio.html" class="nav-item-app">
+        <i class="bi bi-house-door"></i> Inicio
+    </a>
+
+    <a href="agenda.html" class="nav-item-app">
+        <i class="bi bi-calendar3"></i> Agenda
+    </a>
+
+    <a href="contratos.html" class="nav-item-app">
+        <i class="bi bi-file-earmark-text"></i> Contratos
+    </a>
+
+    <a href="socios.html" class="nav-item-app">
+        <i class="bi bi-people"></i> Socios
+    </a>
+
+    <button class="nav-item-app active"
+    data-bs-toggle="offcanvas" data-bs-target="#menuMas">
+        <i class="bi bi-grid-fill"></i> Más
+    </button>
+
+</nav>
+
+<div class="offcanvas offcanvas-bottom" id="menuMas" tabindex="-1">
+
+    <div class="offcanvas-header">
+
+        <h5>Más opciones</h5>
+
+        <button class="btn-close"
+        data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+
+    </div>
+
+    <div class="offcanvas-body">
+
+        <a href="clientes.html" class="menu-option">
+            <i class="bi bi-person-lines-fill"></i> Clientes
+        </a>
+
+        <a href="servicios.html" class="menu-option">
+            <i class="bi bi-music-note-beamed"></i> Servicios
+        </a>
+
+        <a href="estadisticas.html" class="menu-option active">
+            <i class="bi bi-bar-chart-line"></i> Estadísticas
+        </a>
+
+        <a href="configuracion.html" class="menu-option">
+            <i class="bi bi-gear"></i> Configuración
+        </a>
+
+        <a href="usuarios.html" class="menu-option">
+            <i class="bi bi-person-circle"></i> Mi cuenta
+        </a>
+
+        <button class="menu-option" id="btnCerrarSesion">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+
+import {db} from "./firebase.js";
+
+import {
+    protegerPagina,
+    cerrarSesion
+} from "./auth.js";
+
+import {
+    collection,
+    getDocsFromServer
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+// =====================================
+// VARIABLES
+// =====================================
+
+const $ = id => document.getElementById(id);
+
+const ZONA = "America/Mexico_City";
+
+let eventos = [];
+let contratos = [];
+let pagos = [];
+let socios = [];
+
+let mapaEventos = new Map();
+
+let graficas = [];
+
+let resumenActual = null;
+
+let datosValidos = false;
+
+let ocupado = false;
+
+let promesaChart = null;
+
+let promesaPDF = null;
+
+const MESES = [
+
+    "Enero","Febrero","Marzo","Abril",
+    "Mayo","Junio","Julio","Agosto",
+    "Septiembre","Octubre","Noviembre","Diciembre"
+
+];
+
+// =====================================
+// UTILIDADES
+// =====================================
+
+function fechaLocal(valor){
+
+    if(!valor) return "";
+
+    if(typeof valor === "string" &&
+        /^\d{4}-\d{2}-\d{2}$/.test(valor)){
+
+        return valor;
+
+    }
+
+    let fecha;
+
+    if(typeof valor.toDate === "function"){
+
+        fecha = valor.toDate();
+
+    }else{
+
+        fecha = new Date(valor);
+
+    }
+
+    if(Number.isNaN(fecha.getTime())) return "";
+
+    const partes = new Intl.DateTimeFormat("en-CA",{
+
+        timeZone:ZONA,
+        year:"numeric",
+        month:"2-digit",
+        day:"2-digit"
+
+    }).formatToParts(fecha);
+
+    const obtener = tipo =>
+        partes.find(p => p.type === tipo)?.value;
+
+    return `${obtener("year")}-${obtener("month")}-${obtener("day")}`;
+
+}
+
+function hoy(){
+
+    return fechaLocal(new Date());
+
+}
+
+function numero(valor){
+
+    const n = Number(valor);
+
+    return Number.isFinite(n) ? n : 0;
+
+}
+
+function moneda(valor){
+
+    return new Intl.NumberFormat("es-MX",{
+
+        style:"currency",
+        currency:"MXN"
+
+    }).format(numero(valor));
+
+}
+
+function sumar(lista,funcion){
+
+    return lista.reduce(
+        (total,elemento) => total+numero(funcion(elemento)),
+        0
+    );
+
+}
+
+function pertenece(fecha,anio,mes){
+
+    const valor = fechaLocal(fecha);
+
+    if(!valor) return false;
+
+    return valor.startsWith(
+
+        mes === "todos"
+            ? String(anio)+"-"
+            : `${anio}-${mes}-`
+
+    );
+
+}
+
+function crear(etiqueta,clase,texto){
+
+    const elemento = document.createElement(etiqueta);
+
+    if(clase) elemento.className = clase;
+
+    if(texto !== undefined){
+
+        elemento.textContent = texto;
+
+    }
+
+    return elemento;
+
+}
+
+function mensaje(texto,tipo="success"){
+
+    $("mensajeGeneral").className = `alert alert-${tipo}`;
+
+    $("mensajeGeneral").textContent = texto;
+
+    $("mensajeGeneral").hidden = false;
+
+}
+
+function errorTexto(error){
+
+    if(error.code === "permission-denied"){
+
+        return "No se pudieron consultar las estadísticas. Revisa las reglas de Firestore.";
+
+    }
+
+    if(error.code === "unavailable"){
+
+        return "No se pudo conectar con Firebase.";
+
+    }
+
+    return error.message || "Ocurrió un error inesperado.";
+
+}
+
+function actualizarBotones(){
+
+    $("btnActualizar").disabled =
+        ocupado || !navigator.onLine;
+
+    $("btnPDF").disabled =
+        ocupado || !datosValidos || !navigator.onLine;
+
+    $("btnCSV").disabled =
+        ocupado || !datosValidos || !navigator.onLine;
+
+    $("mes").disabled = ocupado || !datosValidos;
+
+    $("anio").disabled = ocupado || !datosValidos;
+
+    $("btnMesActual").disabled = ocupado || !datosValidos;
+
+}
+
+// =====================================
+// CONSULTAR FIREBASE
+// =====================================
+
+async function cargarDatos(){
+
+    datosValidos = false;
+
+    actualizarBotones();
+
+    const resultados = await Promise.all([
+
+        getDocsFromServer(collection(db,"eventos")),
+
+        getDocsFromServer(collection(db,"contratos")),
+
+        getDocsFromServer(collection(db,"pagosSocios")),
+
+        getDocsFromServer(collection(db,"socios"))
+
+    ]);
+
+    const convertir = resultado => resultado.docs.map(d => ({
+
+        ...d.data(),
+        id:d.id
+
+    }));
+
+    eventos = convertir(resultados[0]);
+
+    contratos = convertir(resultados[1]);
+
+    pagos = convertir(resultados[2]);
+
+    socios = convertir(resultados[3]);
+
+    mapaEventos = new Map(
+
+        eventos.map(e => [e.id,e])
+
+    );
+
+    datosValidos = true;
+
+    $("ultimaActualizacion").textContent =
+
+        "Última consulta: "+
+
+        new Intl.DateTimeFormat("es-MX",{
+
+            timeZone:ZONA,
+            dateStyle:"medium",
+            timeStyle:"short"
+
+        }).format(new Date());
+
+}
+
+// =====================================
+// FILTROS
+// =====================================
+
+function cargarAnios(){
+
+    const actual = Number(hoy().slice(0,4));
+
+    const seleccionado = $("anio").value;
+
+    const anios = new Set([actual,actual-1,actual+1]);
+
+    const fechas = [
+
+        ...eventos.flatMap(e => [
+            e.fecha,
+            e.fechaPago,
+            e.fechaCancelacion
+        ]),
+
+        ...contratos.flatMap(c => [
+            c.fecha,
+            c.creadoEn,
+            c.fechaCancelacion,
+            c.fechaPagoPenalizacion,
+            c.fechaCobroPenalizacion,
+            c.fechaReembolso
+        ]),
+
+        ...pagos.flatMap(p => [
+            p.fecha,
+            p.fechaPago
+        ])
+
+    ];
+
+    fechas.forEach(fecha => {
+
+        const valor = fechaLocal(fecha);
+
+        if(valor){
+
+            anios.add(Number(valor.slice(0,4)));
+
+        }
+
+    });
+
+    $("anio").replaceChildren();
+
+    [...anios].sort((a,b) => b-a).forEach(anio => {
+
+        const opcion = crear("option","",String(anio));
+
+        opcion.value = String(anio);
+
+        $("anio").append(opcion);
+
+    });
+
+    $("anio").value = anios.has(Number(seleccionado))
+
+        ? seleccionado
+
+        : String(actual);
+
+}
+
+function seleccionarMesActual(){
+
+    const fecha = hoy();
+
+    $("anio").value = fecha.slice(0,4);
+
+    $("mes").value = fecha.slice(5,7);
+
+}
+
+function nombrePeriodo(){
+
+    const anio = $("anio").value;
+
+    const mes = $("mes").value;
+
+    return mes === "todos"
+
+        ? `Año ${anio}`
+
+        : `${MESES[Number(mes)-1]} de ${anio}`;
+
+}
+
+// =====================================
+// MOVIMIENTOS FINANCIEROS
+// =====================================
+
+function obtenerIngresos(){
+
+    const movimientos = [];
+
+    const incidencias = [];
+
+    // Se utilizan los eventos como fuente de ingresos
+    // normales para no duplicar los contratos.
+
+    eventos.forEach(e => {
+
+        if(e.estado === "cancelado") return;
+
+        if(e.estadoPago !== "pagado") return;
+
+        if(!fechaLocal(e.fechaPago)){
+
+            incidencias.push(
+                "Existe un servicio pagado sin fecha de pago."
+            );
+
+            return;
+
+        }
+
+        movimientos.push({
+
+            tipo:"servicio",
+            fecha:fechaLocal(e.fechaPago),
+            importe:numero(e.precio)
+
+        });
+
+    });
+
+    // Penalizaciones de contratos cancelados.
+
+    contratos.filter(c =>
+        c.estado === "cancelado"
+    ).forEach(c => {
+
+        const penalizacion = Math.max(
+            0,numero(c.penalizacion)
+        );
+
+        const pagada = Math.min(
+
+            penalizacion,
+
+            Math.max(0,numero(c.penalizacionPagada))
+
+        );
+
+        const recibidoOriginal = c.estadoPago === "pagado"
+
+            ? numero(c.precio)
+
+            : 0;
+
+        const aplicado = Math.min(
+            recibidoOriginal,pagada
+        );
+
+        const cobroPosterior = Math.max(
+            0,pagada-aplicado
+        );
+
+        if(aplicado>0){
+
+            // El pago original se reconoce como
+            // penalización en la fecha de cancelación.
+
+            const fecha = fechaLocal(c.fechaCancelacion);
+
+            if(fecha){
+
+                movimientos.push({
+
+                    tipo:"penalizacion",
+                    fecha,
+                    importe:aplicado
+
+                });
+
+            }else{
+
+                incidencias.push(
+                    "Existe una penalización aplicada sin fecha de cancelación."
+                );
+
+            }
+
+        }
+
+        if(cobroPosterior>0){
+
+            const fecha = fechaLocal(
+
+                c.fechaCobroPenalizacion ||
+
+                c.fechaPagoPenalizacion
+
+            );
+
+            if(fecha){
+
+                movimientos.push({
+
+                    tipo:"penalizacion",
+                    fecha,
+                    importe:cobroPosterior
+
+                });
+
+            }else{
+
+                incidencias.push(
+                    "Existe una penalización cobrada sin fecha de pago."
+                );
+
+            }
+
+        }
+
+    });
+
+    // Cancelaciones manuales que requieren revisión.
+
+    eventos.filter(e =>
+
+        e.estado === "cancelado" &&
+        e.estadoPago === "pagado" &&
+        !e.contratoId
+
+    ).forEach(() => {
+
+        incidencias.push(
+            "Existe una celebración cancelada y pagada sin contrato. Revisa su reembolso."
+        );
+
+    });
+
+    return {movimientos,incidencias};
+
+}
+
+function estadoPagoSocio(p){
+
+    if(p.estado === "pagado") return "pagado";
+
+    if(p.estado === "cancelado") return "cancelado";
+
+    const evento = mapaEventos.get(p.eventoId);
+
+    if(!evento) return "sinEvento";
+
+    if(evento.estado === "cancelado") return "cancelado";
+
+    if(evento.estado === "realizado") return "pendiente";
+
+    return "programado";
+
+}
+
+// =====================================
+// CALCULAR ESTADÍSTICAS
+// =====================================
+
+function calcular(anio,mes){
+
+    const {movimientos,incidencias} = obtenerIngresos();
+
+    const movimientosPeriodo = movimientos.filter(m =>
+        pertenece(m.fecha,anio,mes)
+    );
+
+    const eventosPeriodo = eventos.filter(e =>
+        pertenece(e.fecha,anio,mes)
+    );
+
+    const contratosPeriodo = contratos.filter(c =>
+        pertenece(c.creadoEn,anio,mes)
+    );
+
+    const canceladosPeriodo = eventos.filter(e =>
+
+        e.estado === "cancelado" &&
+
+        pertenece(e.fechaCancelacion,anio,mes)
+
+    );
+
+    const contratosCancelados = contratos.filter(c =>
+
+        c.estado === "cancelado" &&
+
+        pertenece(c.fechaCancelacion,anio,mes)
+
+    );
+
+    const pagosPeriodo = pagos.filter(p =>
+
+        p.estado === "pagado" &&
+
+        pertenece(p.fechaPago,anio,mes)
+
+    );
+
+    const deudasPeriodo = pagos.filter(p =>
+
+        estadoPagoSocio(p) === "pendiente" &&
+
+        pertenece(
+            mapaEventos.get(p.eventoId)?.fecha,
+            anio,
+            mes
+        )
+
+    );
+
+    const compromisosPeriodo = pagos.filter(p =>
+
+        estadoPagoSocio(p) === "programado" &&
+
+        pertenece(
+            mapaEventos.get(p.eventoId)?.fecha,
+            anio,
+            mes
+        )
+
+    );
+
+    const serviciosCobrados = sumar(
+
+        movimientosPeriodo.filter(m => m.tipo === "servicio"),
+
+        m => m.importe
+
+    );
+
+    const penalizacionesCobradas = sumar(
+
+        movimientosPeriodo.filter(m => m.tipo === "penalizacion"),
+
+        m => m.importe
+
+    );
+
+    const ingresos = serviciosCobrados+penalizacionesCobradas;
+
+    const pagadoSocios = sumar(pagosPeriodo,p => p.importe);
+
+    const deudaSocios = sumar(deudasPeriodo,p => p.importe);
+
+    const serviciosPendientes = sumar(
+
+        eventosPeriodo.filter(e =>
+
+            e.estado !== "cancelado" &&
+
+            e.estadoPago !== "pagado"
+
+        ),
+
+        e => e.precio
+
+    );
+
+    const penalizacionesPendientes = sumar(
+
+        contratosCancelados,
+
+        c => Math.max(
+
+            0,
+
+            numero(c.penalizacion)-numero(c.penalizacionPagada)
+
+        )
+
+    );
+
+    const reembolsosPendientes = sumar(
+
+        contratosCancelados,
+
+        c => c.reembolsoPendiente
+
+    );
+
+    const reembolsosRealizados = sumar(
+
+        contratos.filter(c =>
+
+            pertenece(c.fechaReembolso,anio,mes)
+
+        ),
+
+        c => c.reembolsoRealizado
+
+    );
+
+    const realizados = eventosPeriodo.filter(
+        e => e.estado === "realizado"
+    ).length;
+
+    const programados = eventosPeriodo.filter(
+        e => e.estado === "programado"
+    ).length;
+
+    const cancelados = eventosPeriodo.filter(
+        e => e.estado === "cancelado"
+    ).length;
+
+    const paquetes = {};
+
+    const tipos = {};
+
+    eventosPeriodo.filter(e =>
+
+        e.estado !== "cancelado"
+
+    ).forEach(e => {
+
+        const paquete = e.paqueteNombre || "Sin paquete";
+
+        const tipo = e.tipoServicio || "Otro servicio";
+
+        paquetes[paquete] = (paquetes[paquete]||0)+1;
+
+        tipos[tipo] = (tipos[tipo]||0)+1;
+
+    });
+
+    const rankingSocios = new Map();
+
+    pagosPeriodo.forEach(p => {
+
+        const id = p.socioId || p.socioNombre || "sinSocio";
+
+        const nombre = socios.find(s => s.id === id)?.nombre
+
+            || p.socioNombre
+
+            || "Socio";
+
+        const actual = rankingSocios.get(id) || {
+
+            nombre,
+            importe:0,
+            servicios:0
+
+        };
+
+        actual.importe += numero(p.importe);
+
+        actual.servicios++;
+
+        rankingSocios.set(id,actual);
+
+    });
+
+    if(pagos.some(p =>
+
+        p.estado === "pagado" && !fechaLocal(p.fechaPago)
+
+    )){
+
+        incidencias.push(
+            "Hay pagos a socios sin fecha registrada."
+        );
+
+    }
+
+    if(pagos.some(p => estadoPagoSocio(p) === "sinEvento")){
+
+        incidencias.push(
+            "Hay asignaciones a socios sin celebración vinculada."
+        );
+
+    }
+
+    if(contratos.some(c => !fechaLocal(c.creadoEn))){
+
+        incidencias.push(
+            "Hay contratos sin fecha de creación."
+        );
+
+    }
+
+    return {
+
+        ingresos,
+        serviciosCobrados,
+        penalizacionesCobradas,
+
+        pagadoSocios,
+        deudaSocios,
+
+        compromisosSocios:sumar(
+            compromisosPeriodo,p => p.importe
+        ),
+
+        ganancia:ingresos-pagadoSocios,
+
+        serviciosPendientes,
+        penalizacionesPendientes,
+        reembolsosPendientes,
+        reembolsosRealizados,
+
+        realizados,
+        programados,
+        cancelados,
+
+        cancelacionesRegistradas:canceladosPeriodo.length,
+
+        contratos:contratosPeriodo.length,
+
+        paquetes,
+        tipos,
+
+        rankingSocios:[...rankingSocios.values()].sort(
+            (a,b) => b.importe-a.importe
+        ),
+
+        incidencias:[...new Set(incidencias)]
+
+    };
+
+}
+
+// =====================================
+// MOSTRAR RESUMEN
+// =====================================
+
+function filaFinanciera(nombre,valor,clase=""){
+
+    const fila = crear("div","finance-row");
+
+    fila.append(
+
+        crear("span","",nombre),
+
+        crear("strong",clase,valor)
+
+    );
+
+    return fila;
+
+}
+
+function filasReporte(r){
+
+    return [
+
+        ["Ingresos por servicios",r.serviciosCobrados],
+
+        ["Penalizaciones reconocidas",r.penalizacionesCobradas],
+
+        ["Total de ingresos",r.ingresos],
+
+        ["Pagos realizados a socios",r.pagadoSocios],
+
+        ["Balance después de pagos a socios",r.ganancia],
+
+        ["Servicios pendientes de cobro",r.serviciosPendientes],
+
+        ["Penalizaciones pendientes",r.penalizacionesPendientes],
+
+        ["Deudas pendientes con socios",r.deudaSocios],
+
+        ["Compromisos futuros con socios",r.compromisosSocios],
+
+        ["Reembolsos pendientes",r.reembolsosPendientes],
+
+        ["Reembolsos registrados",r.reembolsosRealizados]
+
+    ];
+
+}
+
+function mostrarResumen(r){
+
+    $("gananciaNeta").textContent = moneda(r.ganancia);
+
+    $("ingresos").textContent = moneda(r.ingresos);
+
+    $("pendientes").textContent = moneda(r.serviciosPendientes);
+
+    $("pagosSocios").textContent = moneda(r.pagadoSocios);
+
+    $("deudaSocios").textContent = moneda(r.deudaSocios);
+
+    $("serviciosRealizados").textContent = r.realizados;
+
+    $("contratosGenerados").textContent = r.contratos;
+
+    $("penalizacionesCobradas").textContent =
+        moneda(r.penalizacionesCobradas);
+
+    $("cancelaciones").textContent =
+        r.cancelacionesRegistradas;
+
+    $("reembolsosPendientes").textContent =
+        moneda(r.reembolsosPendientes);
+
+    const panel = $("resumenFinanciero");
+
+    panel.replaceChildren();
+
+    filasReporte(r).forEach(([nombre,valor]) => {
+
+        panel.append(
+
+            filaFinanciera(nombre,moneda(valor))
+
+        );
+
+    });
+
+    panel.append(
+
+        crear(
+
+            "p",
+
+            "description mt-3 mb-0",
+
+            "El balance no incluye transporte, equipo ni otros gastos. Los reembolsos se muestran por separado porque los pagos de contratos cancelados no se consideran ingresos ordinarios."
+
+        )
+
+    );
+
+    if(r.incidencias.length){
+
+        mensaje(
+
+            "Revisión necesaria: "+r.incidencias.join(" "),
+
+            "warning"
+
+        );
+
+    }
+
+}
+
+function mostrarSaldosGenerales(){
+
+    const pendientes = sumar(
+
+        eventos.filter(e =>
+
+            e.estado !== "cancelado" &&
+            e.estadoPago !== "pagado"
+
+        ),
+
+        e => e.precio
+
+    );
+
+    const deuda = sumar(
+
+        pagos.filter(p =>
+            estadoPagoSocio(p) === "pendiente"
+        ),
+
+        p => p.importe
+
+    );
+
+    const penalizaciones = sumar(
+
+        contratos.filter(c =>
+            c.estado === "cancelado"
+        ),
+
+        c => Math.max(
+
+            0,
+
+            numero(c.penalizacion)-numero(c.penalizacionPagada)
+
+        )
+
+    );
+
+    const reembolsos = sumar(
+
+        contratos.filter(c =>
+            c.estado === "cancelado"
+        ),
+
+        c => c.reembolsoPendiente
+
+    );
+
+    $("saldosGenerales").replaceChildren(
+
+        filaFinanciera(
+            "Servicios por cobrar",
+            moneda(pendientes),
+            "text-gold"
+        ),
+
+        filaFinanciera(
+            "Penalizaciones por cobrar",
+            moneda(penalizaciones),
+            "text-gold"
+        ),
+
+        filaFinanciera(
+            "Deuda total con socios",
+            moneda(deuda),
+            "text-red"
+        ),
+
+        filaFinanciera(
+            "Reembolsos por entregar",
+            moneda(reembolsos),
+            "text-red"
+        )
+
+    );
+
+}
+
+// =====================================
+// RANKINGS
+// =====================================
+
+function mostrarRankingServicios(r){
+
+    const contenedor = $("rankingServicios");
+
+    contenedor.replaceChildren();
+
+    const lista = Object.entries(r.tipos).sort(
+        (a,b) => b[1]-a[1]
+    );
+
+    if(!lista.length){
+
+        contenedor.append(
+
+            crear("p","description mb-0",
+            "No hay celebraciones registradas en este periodo.")
+
+        );
+
+        return;
+
+    }
+
+    const total = sumar(lista,e => e[1]);
+
+    lista.forEach(([nombre,cantidad]) => {
+
+        const item = crear("div","ranking-item");
+
+        const encabezado = crear("div","ranking-header");
+
+        encabezado.append(
+
+            crear("span","",nombre),
+
+            crear("strong","text-gold",
+                `${cantidad} · ${Math.round(cantidad/total*100)}%`
+            )
+
+        );
+
+        const progreso = crear("div","progress");
+
+        const barra = crear("div","progress-bar");
+
+        barra.style.width = `${cantidad/total*100}%`;
+
+        progreso.append(barra);
+
+        item.append(encabezado,progreso);
+
+        contenedor.append(item);
+
+    });
+
+}
+
+function mostrarRankingSocios(r){
+
+    const contenedor = $("rankingSocios");
+
+    contenedor.replaceChildren();
+
+    if(!r.rankingSocios.length){
+
+        contenedor.append(
+
+            crear("p","description mb-0",
+            "No hay pagos a socios durante este periodo.")
+
+        );
+
+        return;
+
+    }
+
+    r.rankingSocios.forEach(socio => {
+
+        const fila = crear("div","finance-row");
+
+        const datos = crear("div");
+
+        datos.append(
+
+            crear("strong","",socio.nombre),
+
+            crear("div","description",
+                `${socio.servicios} participaciones pagadas`
+            )
+
+        );
+
+        fila.append(
+
+            datos,
+
+            crear("strong","text-gold",
+                moneda(socio.importe)
+            )
+
+        );
+
+        contenedor.append(fila);
+
+    });
+
+}
+
+// =====================================
+// CARGAR CHART.JS
+// =====================================
+
+function cargarChart(){
+
+    if(window.Chart){
+
+        return Promise.resolve(window.Chart);
+
+    }
+
+    if(promesaChart) return promesaChart;
+
+    promesaChart = new Promise((resolve,reject) => {
+
+        const script = document.createElement("script");
+
+        script.src =
+
+            "https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js";
+
+        script.onload = () => {
+
+            if(window.Chart){
+
+                resolve(window.Chart);
+
+            }else{
+
+                reject(new Error("Chart.js no está disponible."));
+
+            }
+
+        };
+
+        script.onerror = () => {
+
+            script.remove();
+
+            reject(new Error("No se pudieron cargar las gráficas."));
+
+        };
+
+        document.head.append(script);
+
+    }).catch(error => {
+
+        promesaChart = null;
+
+        throw error;
+
+    });
+
+    return promesaChart;
+
+}
+
+function destruirGraficas(){
+
+    graficas.forEach(grafica => grafica.destroy());
+
+    graficas = [];
+
+}
+
+function dibujarGraficas(r){
+
+    if(!window.Chart || !datosValidos) return;
+
+    destruirGraficas();
+
+    const Chart = window.Chart;
+
+    const estilos = getComputedStyle(document.documentElement);
+
+    const texto = estilos.getPropertyValue("--secundario").trim();
+
+    const borde = estilos.getPropertyValue("--borde").trim();
+
+    const anio = $("anio").value;
+
+    const ingresosMensuales = [];
+
+    const pagosMensuales = [];
+
+    const movimientos = obtenerIngresos().movimientos;
+
+    for(let i=1;i<=12;i++){
+
+        const mes = String(i).padStart(2,"0");
+
+        ingresosMensuales.push(
+
+            sumar(
+
+                movimientos.filter(m =>
+                    pertenece(m.fecha,anio,mes)
+                ),
+
+                m => m.importe
+
+            )
+
+        );
+
+        pagosMensuales.push(
+
+            sumar(
+
+                pagos.filter(p =>
+
+                    p.estado === "pagado" &&
+
+                    pertenece(p.fechaPago,anio,mes)
+
+                ),
+
+                p => p.importe
+
+            )
+
+        );
+
+    }
+
+    const colores = [
+
+        "#B48A42",
+        "#328653",
+        "#C74D4D",
+        "#7C8EA3",
+        "#DCC18A",
+        "#8872A5"
+
+    ];
+
+    const opcionesBase = {
+
+        responsive:true,
+
+        maintainAspectRatio:false,
+
+        animation:false,
+
+        plugins:{
+
+            legend:{
+
+                position:"bottom",
+
+                labels:{
+
+                    color:texto,
+
+                    boxWidth:12,
+
+                    font:{size:10}
+
+                }
+
+            }
+
+        }
+
+    };
+
+    graficas.push(
+
+        new Chart($("graficaIngresos"),{
+
+            type:"bar",
+
+            data:{
+
+                labels:MESES.map(m => m.slice(0,3)),
+
+                datasets:[
+
+                    {
+
+                        label:"Ingresos",
+
+                        data:ingresosMensuales,
+
+                        backgroundColor:"#B48A42",
+
+                        borderRadius:5
+
+                    },
+
+                    {
+
+                        label:"Pagos a socios",
+
+                        data:pagosMensuales,
+
+                        backgroundColor:"#C74D4D",
+
+                        borderRadius:5
+
+                    }
+
+                ]
+
+            },
+
+            options:{
+
+                ...opcionesBase,
+
+                scales:{
+
+                    x:{
+
+                        ticks:{color:texto},
+
+                        grid:{display:false}
+
+                    },
+
+                    y:{
+
+                        beginAtZero:true,
+
+                        ticks:{
+
+                            color:texto,
+
+                            callback:valor => "$"+valor
+
+                        },
+
+                        grid:{color:borde}
+
+                    }
+
+                }
+
+            }
+
+        })
+
+    );
+
+    function circular(id,etiquetas,valores){
+
+        graficas.push(
+
+            new Chart($(id),{
+
+                type:"doughnut",
+
+                data:{
+
+                    labels:etiquetas,
+
+                    datasets:[{
+
+                        data:valores,
+
+                        backgroundColor:etiquetas.map(
+                            (_,i) => colores[i%colores.length]
+                        ),
+
+                        borderWidth:0
+
+                    }]
+
+                },
+
+                options:{
+
+                    ...opcionesBase,
+
+                    cutout:"65%"
+
+                }
+
+            })
+
+        );
+
+    }
+
+    circular(
+
+        "graficaEventos",
+
+        ["Programados","Realizados","Cancelados"],
+
+        [r.programados,r.realizados,r.cancelados]
+
+    );
+
+    circular(
+
+        "graficaPaquetes",
+
+        Object.keys(r.paquetes),
+
+        Object.values(r.paquetes)
+
+    );
+
+    circular(
+
+        "graficaDistribucion",
+
+        ["Servicios","Penalizaciones"],
+
+        [r.serviciosCobrados,r.penalizacionesCobradas]
+
+    );
+
+}
+
+// =====================================
+// ACTUALIZAR PANTALLA
+// =====================================
+
+function renderizar(){
+
+    if(!datosValidos) return;
+
+    $("mensajeGeneral").hidden = true;
+
+    resumenActual = calcular(
+
+        $("anio").value,
+
+        $("mes").value
+
+    );
+
+    mostrarResumen(resumenActual);
+
+    mostrarSaldosGenerales();
+
+    mostrarRankingServicios(resumenActual);
+
+    mostrarRankingSocios(resumenActual);
+
+    dibujarGraficas(resumenActual);
+
+}
+
+$("mes").addEventListener("change",renderizar);
+
+$("anio").addEventListener("change",renderizar);
+
+$("btnMesActual").addEventListener("click",() => {
+
+    seleccionarMesActual();
+
+    renderizar();
+
+});
+
+window.addEventListener("temaCambiado",() => {
+
+    if(resumenActual && datosValidos){
+
+        dibujarGraficas(resumenActual);
+
+    }
+
+});
+
+// =====================================
+// EXPORTAR CSV
+// =====================================
+
+function escaparCSV(valor){
+
+    return '"'+String(valor ?? "").replace(/"/g,'""')+'"';
+
+}
+
+$("btnCSV").addEventListener("click",() => {
+
+    if(!datosValidos || !resumenActual || ocupado) return;
+
+    const filas = [
+
+        ["VOZ ANGELICAL","REPORTE FINANCIERO"],
+
+        ["Periodo",nombrePeriodo()],
+
+        ["Concepto","Importe MXN"],
+
+        ...filasReporte(resumenActual).map(
+
+            ([nombre,valor]) => [
+
+                nombre,
+
+                numero(valor).toFixed(2)
+
+            ]
+
+        ),
+
+        ["Celebraciones realizadas",resumenActual.realizados],
+
+        ["Celebraciones programadas",resumenActual.programados],
+
+        ["Contratos registrados",resumenActual.contratos],
+
+        ["Cancelaciones registradas",resumenActual.cancelacionesRegistradas],
+
+        ["Nota","Balance antes de otros gastos"],
+
+        ["Incidencias",resumenActual.incidencias.join(" ")]
+
+    ];
+
+    const contenido = "\uFEFF"+filas.map(
+
+        fila => fila.map(escaparCSV).join(",")
+
+    ).join("\r\n");
+
+    const blob = new Blob(
+
+        [contenido],
+
+        {type:"text/csv;charset=utf-8;"}
+
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const enlace = document.createElement("a");
+
+    enlace.href = url;
+
+    enlace.download =
+
+        `Voz-Angelical-${$("anio").value}-${$("mes").value}.csv`;
+
+    document.body.append(enlace);
+
+    enlace.click();
+
+    enlace.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url),1000);
+
+});
+
+// =====================================
+// EXPORTAR PDF
+// =====================================
+
+function cargarPDF(){
+
+    if(window.jspdf?.jsPDF){
+
+        return Promise.resolve(window.jspdf.jsPDF);
+
+    }
+
+    if(promesaPDF) return promesaPDF;
+
+    promesaPDF = new Promise((resolve,reject) => {
+
+        const script = document.createElement("script");
+
+        script.src =
+
+            "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js";
+
+        script.onload = () => {
+
+            if(window.jspdf?.jsPDF){
+
+                resolve(window.jspdf.jsPDF);
+
+            }else{
+
+                reject(new Error("No se pudo iniciar el generador PDF."));
+
+            }
+
+        };
+
+        script.onerror = () => {
+
+            script.remove();
+
+            reject(new Error("No se pudo cargar el generador PDF."));
+
+        };
+
+        document.head.append(script);
+
+    }).catch(error => {
+
+        promesaPDF = null;
+
+        throw error;
+
+    });
+
+    return promesaPDF;
+
+}
+
+$("btnPDF").addEventListener("click",async () => {
+
+    if(!datosValidos || !resumenActual || ocupado) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    const r = resumenActual;
+
+    const periodo = nombrePeriodo();
+
+    try{
+
+        const jsPDF = await cargarPDF();
+
+        const pdf = new jsPDF({
+
+            orientation:"portrait",
+
+            unit:"mm",
+
+            format:"letter"
+
+        });
+
+        const ancho = pdf.internal.pageSize.getWidth();
+
+        const alto = pdf.internal.pageSize.getHeight();
+
+        const margen = 18;
+
+        pdf.setFillColor(180,138,66);
+
+        pdf.rect(0,0,ancho,5,"F");
+
+        pdf.setFont("times","bold");
+
+        pdf.setFontSize(25);
+
+        pdf.setTextColor(138,99,43);
+
+        pdf.text(
+
+            "VOZ ANGELICAL",
+
+            ancho/2,25,
+
+            {align:"center"}
+
+        );
+
+        pdf.setFont("helvetica","normal");
+
+        pdf.setFontSize(11);
+
+        pdf.setTextColor(48,39,29);
+
+        pdf.text(
+
+            "REPORTE FINANCIERO INTERNO",
+
+            ancho/2,35,
+
+            {align:"center"}
+
+        );
+
+        pdf.text(periodo,ancho/2,43,{align:"center"});
+
+        pdf.setDrawColor(180,138,66);
+
+        pdf.line(margen,49,ancho-margen,49);
+
+        let y = 58;
+
+        filasReporte(r).forEach(([nombre,valor],i) => {
+
+            if(i%2===0){
+
+                pdf.setFillColor(245,239,228);
+
+                pdf.rect(
+
+                    margen,y-5,
+
+                    ancho-margen*2,10,"F"
+
+                );
+
+            }
+
+            pdf.setFontSize(9);
+
+            pdf.setFont(
+
+                "helvetica",
+
+                nombre.startsWith("Balance") ? "bold" : "normal"
+
+            );
+
+            pdf.text(nombre,margen+3,y+1);
+
+            pdf.text(
+
+                moneda(valor),
+
+                ancho-margen-3,y+1,
+
+                {align:"right"}
+
+            );
+
+            y += 11;
+
+        });
+
+        y += 7;
+
+        pdf.setFont("helvetica","bold");
+
+        pdf.setFontSize(12);
+
+        pdf.setTextColor(138,99,43);
+
+        pdf.text("ACTIVIDAD MUSICAL",margen,y);
+
+        y += 10;
+
+        pdf.setFont("helvetica","normal");
+
+        pdf.setFontSize(10);
+
+        pdf.setTextColor(48,39,29);
+
+        [
+
+            `Celebraciones realizadas: ${r.realizados}`,
+
+            `Celebraciones programadas: ${r.programados}`,
+
+            `Contratos registrados: ${r.contratos}`,
+
+            `Cancelaciones registradas: ${r.cancelacionesRegistradas}`
+
+        ].forEach(texto => {
+
+            pdf.text(texto,margen,y);
+
+            y += 7;
+
+        });
+
+        pdf.setFontSize(8);
+
+        const nota =
+
+            "Reporte administrativo. El balance no representa la utilidad neta fiscal y no incluye gastos de transporte, equipo u otros costos.";
+
+        pdf.text(
+
+            pdf.splitTextToSize(nota,ancho-margen*2),
+
+            margen,y+3
+
+        );
+
+        if(r.incidencias.length){
+
+            pdf.addPage();
+
+            pdf.setFontSize(14);
+
+            pdf.setTextColor(138,99,43);
+
+            pdf.text("DATOS QUE REQUIEREN REVISIÓN",margen,25);
+
+            pdf.setFontSize(10);
+
+            pdf.setTextColor(48,39,29);
+
+            let posicion = 40;
+
+            r.incidencias.forEach(texto => {
+
+                const lineas = pdf.splitTextToSize(
+
+                    texto,ancho-margen*2
+
+                );
+
+                pdf.text(lineas,margen,posicion);
+
+                posicion += lineas.length*5+5;
+
+            });
+
+        }
+
+        const paginas = pdf.getNumberOfPages();
+
+        for(let i=1;i<=paginas;i++){
+
+            pdf.setPage(i);
+
+            pdf.setFontSize(8);
+
+            pdf.setTextColor(110,95,75);
+
+            pdf.text(
+
+                `Documento privado | ${hoy()} | Página ${i} de ${paginas}`,
+
+                ancho/2,alto-10,
+
+                {align:"center"}
+
+            );
+
+        }
+
+        pdf.save(
+
+            `Reporte-VA-${$("anio").value}-${$("mes").value}.pdf`
+
+        );
+
+    }catch(error){
+
+        mensaje(errorTexto(error),"danger");
+
+    }finally{
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// ACTUALIZAR INFORMACIÓN
+// =====================================
+
+function limpiarPantalla(){
+
+    datosValidos = false;
+
+    resumenActual = null;
+
+    destruirGraficas();
+
+    [
+
+        "gananciaNeta",
+        "ingresos",
+        "pendientes",
+        "pagosSocios",
+        "deudaSocios",
+        "serviciosRealizados",
+        "contratosGenerados",
+        "penalizacionesCobradas",
+        "cancelaciones",
+        "reembolsosPendientes"
+
+    ].forEach(id => {
+
+        $(id).textContent = "—";
+
+    });
+
+    [
+
+        "resumenFinanciero",
+        "saldosGenerales",
+        "rankingServicios",
+        "rankingSocios"
+
+    ].forEach(id => $(id).replaceChildren());
+
+    actualizarBotones();
+
+}
+
+$("btnActualizar").addEventListener("click",async () => {
+
+    if(ocupado || !navigator.onLine) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    try{
+
+        await cargarDatos();
+
+        cargarAnios();
+
+        renderizar();
+
+        if(!resumenActual.incidencias.length){
+
+            mensaje("Estadísticas actualizadas.");
+
+        }
+
+    }catch(error){
+
+        limpiarPantalla();
+
+        mensaje(errorTexto(error),"danger");
+
+    }finally{
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+window.addEventListener("offline",() => {
+
+    limpiarPantalla();
+
+    mensaje(
+
+        "Sin conexión. Conéctate a internet y actualiza para consultar las estadísticas.",
+
+        "warning"
+
+    );
+
+});
+
+window.addEventListener("online",() => {
+
+    actualizarBotones();
+
+    mensaje(
+
+        "Conexión de red restablecida. Presiona actualizar.",
+
+        "info"
+
+    );
+
+});
+
+$("btnCerrarSesion").addEventListener("click",async () => {
+
+    if(ocupado) return;
+
+    if(!confirm("¿Deseas cerrar sesión?")) return;
+
+    try{
+
+        await cerrarSesion();
+
+    }catch(error){
+
+        mensaje(errorTexto(error),"danger");
+
+    }
+
+});
+
+$("btnReintentar").addEventListener("click",() => {
+
+    location.reload();
+
+});
+
+// =====================================
+// INICIALIZACIÓN
+// =====================================
+
+try{
+
+    await protegerPagina();
+
+    await cargarDatos();
+
+    cargarAnios();
+
+    seleccionarMesActual();
+
+    $("aplicacion").hidden = false;
+
+    $("pantallaCarga").hidden = true;
+
+    actualizarBotones();
+
+    renderizar();
+
+    window.VozAngelicalTema?.aplicar();
+
+    // Las gráficas se cargan después de mostrar
+    // las estadísticas principales.
+
+    cargarChart().then(() => {
+
+        if(datosValidos && resumenActual){
+
+            dibujarGraficas(resumenActual);
+
+        }
+
+    }).catch(error => {
+
+        $("avisoGraficas").textContent =
+
+            error.message+
+
+            " Los importes y reportes siguen disponibles.";
+
+        $("avisoGraficas").hidden = false;
+
+    });
+
+}catch(error){
+
+    $("textoCarga").textContent = errorTexto(error);
+
+    $("spinnerCarga").hidden = true;
+
+    $("btnReintentar").hidden = false;
+
+}
+
+</script>
+
+<script src="pwa.js" defer></script>
+
+</body>
+</html>

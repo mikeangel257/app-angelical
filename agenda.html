@@ -1,0 +1,4816 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F5EFE4">
+
+<title>Agenda | Voz Angelical</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<script src="tema.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --dorado: #B48A42;
+    --dorado-oscuro: #8A632B;
+    --fondo: #F5EFE4;
+    --tarjeta: #FFFFFF;
+    --texto: #30271D;
+    --secundario: #796C59;
+    --borde: #E6D8C1;
+    --campo: #FCFAF6;
+    --suave: #EDE3D1;
+    --acento: #8A632B;
+    --verde: #328653;
+    --rojo: #C74D4D;
+    --azul: #3976B5;
+    --sidebar: 260px;
+}
+
+html[data-tema="oscuro"] {
+    --fondo: #171614;
+    --tarjeta: #252321;
+    --texto: #F5EFE4;
+    --secundario: #C1B6A5;
+    --borde: #413A30;
+    --campo: #1D1B19;
+    --suave: #33291B;
+    --acento: #DCC18A;
+    --verde: #68C78A;
+    --rojo: #F07878;
+    --azul: #8BB9F0;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ENCABEZADO */
+
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    padding-top: max(14px,env(safe-area-inset-top));
+    background: var(--tarjeta);
+    border-bottom: 1px solid var(--borde);
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--dorado);
+}
+
+.header-brand h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--acento);
+    margin: 0;
+}
+
+.header-brand small {
+    font-size: 10px;
+    color: var(--secundario);
+}
+
+.icon-button {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    background: var(--campo);
+    color: var(--acento);
+    font-size: 19px;
+}
+
+/* CONTENIDO */
+
+.main-content {
+    max-width: 1500px;
+    margin: auto;
+    padding: 22px 16px;
+    padding-bottom: calc(110px + env(safe-area-inset-bottom));
+}
+
+.page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--acento);
+}
+
+.page-description {
+    font-size: 12px;
+    color: var(--secundario);
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+/* RESUMEN */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    min-width: 0;
+    padding: 17px;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 18px;
+}
+
+.summary-card i {
+    font-size: 23px;
+    color: var(--acento);
+}
+
+.summary-card strong {
+    display: block;
+    font-size: 24px;
+    margin-top: 10px;
+    overflow-wrap: anywhere;
+}
+
+.summary-card span {
+    font-size: 10px;
+    color: var(--secundario);
+}
+
+/* BOTONES */
+
+.btn-gold {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(135deg,#8A632B,#A77B35);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.btn-outline-app {
+    min-height: 46px;
+    padding: 10px 13px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--campo);
+    color: var(--acento);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+button:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+/* CALENDARIO */
+
+.calendar-card {
+    margin: 20px 0;
+    padding: 16px;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.calendar-title {
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: var(--acento);
+    text-align: center;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7,minmax(0,1fr));
+    gap: 4px;
+}
+
+.calendar-weekday {
+    text-align: center;
+    padding: 8px 0;
+    color: var(--secundario);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.calendar-day {
+    min-width: 0;
+    min-height: 49px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: var(--campo);
+    color: var(--texto);
+    font-size: 12px;
+}
+
+.calendar-day.today {
+    border-color: var(--dorado);
+}
+
+.calendar-day.selected {
+    background: var(--dorado-oscuro);
+    color: white;
+}
+
+.calendar-day.has-events {
+    font-weight: 600;
+}
+
+.calendar-count {
+    min-width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: var(--dorado);
+    color: #171614;
+    font-size: 9px;
+}
+
+.calendar-day.selected .calendar-count {
+    background: white;
+}
+
+.calendar-legend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+    color: var(--secundario);
+    font-size: 10px;
+}
+
+/* FILTROS */
+
+.filters-card {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.form-control,
+.form-select {
+    min-height: 48px;
+    background-color: var(--campo);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--campo);
+    color: var(--texto);
+    border-color: var(--dorado);
+    box-shadow: 0 0 0 3px rgba(180,138,66,.15);
+}
+
+.form-text {
+    color: var(--secundario);
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+textarea.form-control {
+    min-height: 90px;
+}
+
+/* CELEBRACIONES */
+
+.events-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.event-card {
+    min-width: 0;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-left: 5px solid var(--dorado);
+    border-radius: 18px;
+    padding: 18px;
+}
+
+.event-card.realizado {
+    border-left-color: var(--verde);
+}
+
+.event-card.cancelado {
+    border-left-color: var(--rojo);
+}
+
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.event-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    overflow-wrap: anywhere;
+}
+
+.event-client {
+    font-size: 12px;
+    color: var(--secundario);
+    overflow-wrap: anywhere;
+}
+
+.status-label {
+    display: inline-block;
+    padding: 6px 9px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.status-programado {
+    color: var(--azul);
+    background: rgba(57,118,181,.12);
+}
+
+.status-realizado,
+.status-pagado {
+    color: var(--verde);
+    background: rgba(50,134,83,.12);
+}
+
+.status-cancelado {
+    color: var(--rojo);
+    background: rgba(199,77,77,.12);
+}
+
+.status-pendiente {
+    color: var(--acento);
+    background: var(--suave);
+}
+
+.event-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--borde);
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.event-info i {
+    color: var(--acento);
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.event-finance {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 15px 0;
+    padding: 14px;
+    background: var(--campo);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+}
+
+.event-finance strong {
+    font-size: 20px;
+    color: var(--acento);
+}
+
+.event-finance small {
+    display: block;
+    font-size: 10px;
+    color: var(--secundario);
+}
+
+.event-actions {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 8px;
+}
+
+.event-action {
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 9px;
+    border: 1px solid var(--borde);
+    border-radius: 11px;
+    background: var(--campo);
+    color: var(--acento);
+    font-size: 11px;
+    text-align: center;
+}
+
+.event-action.success {
+    color: var(--verde);
+}
+
+.event-action.danger {
+    color: var(--rojo);
+}
+
+.event-action i {
+    font-size: 15px;
+}
+
+.event-note {
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 12px;
+    background: var(--suave);
+    color: var(--secundario);
+    font-size: 11px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* ESTADO VACÍO */
+
+.empty-state {
+    background: var(--tarjeta);
+    border: 1px dashed var(--borde);
+    border-radius: 20px;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 42px;
+    color: var(--acento);
+}
+
+.empty-state h3 {
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.empty-state p {
+    font-size: 12px;
+    color: var(--secundario);
+}
+
+/* MODALES */
+
+.modal-content {
+    background: var(--tarjeta);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 22px;
+}
+
+.modal-header,
+.modal-footer {
+    border-color: var(--borde);
+}
+
+.modal-title {
+    font-family: 'Cinzel', serif;
+    color: var(--acento);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.form-section {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--acento);
+    padding: 12px 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.info-box {
+    background: var(--suave);
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.alert {
+    font-size: 12px;
+    line-height: 1.8;
+    border-radius: 12px;
+}
+
+/* NAVEGACIÓN INFERIOR */
+
+.bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    display: grid;
+    grid-template-columns: repeat(5,minmax(0,1fr));
+    background: var(--tarjeta);
+    border-top: 1px solid var(--borde);
+    padding: 9px 5px;
+    padding-bottom: calc(9px + env(safe-area-inset-bottom));
+}
+
+.nav-item-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-height: 52px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--secundario);
+    font-size: 9px;
+}
+
+.nav-item-app i {
+    font-size: 21px;
+}
+
+.nav-item-app.active {
+    background: var(--suave);
+    color: var(--acento);
+    font-weight: 600;
+}
+
+.offcanvas {
+    background: var(--tarjeta);
+    color: var(--texto);
+}
+
+.offcanvas-bottom {
+    height: auto;
+    max-height: 85dvh;
+    border-radius: 25px 25px 0 0;
+}
+
+.offcanvas-title {
+    font-family: 'Cinzel', serif;
+    color: var(--acento);
+    font-size: 18px;
+}
+
+.menu-option {
+    width: 100%;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px;
+    margin-bottom: 8px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--campo);
+    color: var(--texto);
+    font-size: 13px;
+    text-align: left;
+}
+
+.menu-option i {
+    color: var(--acento);
+    font-size: 18px;
+}
+
+.sidebar {
+    display: none;
+}
+
+/* PANTALLA DE CARGA */
+
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 25px;
+    background: var(--fondo);
+    text-align: center;
+}
+
+.loading-screen img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+
+.loading-screen p {
+    font-size: 12px;
+    color: var(--secundario);
+}
+
+.spinner-border {
+    color: var(--dorado);
+}
+
+.app-footer {
+    text-align: center;
+    color: var(--secundario);
+    font-size: 10px;
+    padding: 30px 10px;
+    line-height: 1.9;
+}
+
+/* DISEÑO RESPONSIVO */
+
+@media(min-width:700px) {
+
+    .summary-grid {
+        grid-template-columns: repeat(4,minmax(0,1fr));
+    }
+
+    .events-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .calendar-day {
+        min-height: 70px;
+    }
+
+}
+
+@media(min-width:992px) {
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: var(--sidebar);
+        display: flex;
+        flex-direction: column;
+        padding: 20px 15px;
+        background: var(--tarjeta);
+        border-right: 1px solid var(--borde);
+        overflow-y: auto;
+    }
+
+    .sidebar-brand {
+        text-align: center;
+        padding: 10px 0 25px;
+    }
+
+    .sidebar-brand img {
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+    }
+
+    .sidebar-brand h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 18px;
+        color: var(--acento);
+        margin-top: 15px;
+    }
+
+    .sidebar-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px;
+        margin-bottom: 5px;
+        border-radius: 12px;
+        color: var(--secundario);
+        font-size: 13px;
+    }
+
+    .sidebar-link.active,
+    .sidebar-link:hover {
+        background: var(--suave);
+        color: var(--acento);
+    }
+
+    .sidebar-link i {
+        font-size: 18px;
+    }
+
+    .app-header {
+        margin-left: var(--sidebar);
+        padding: 15px 30px;
+    }
+
+    .main-content {
+        margin-left: var(--sidebar);
+        padding: 30px;
+    }
+
+    .bottom-nav {
+        display: none;
+    }
+
+}
+
+@media(min-width:1400px) {
+
+    .events-grid {
+        grid-template-columns: repeat(3,minmax(0,1fr));
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- PANTALLA DE CARGA -->
+
+<div class="loading-screen" id="pantallaCarga">
+
+    <img src="icon-192.png" alt="Voz Angelical">
+
+    <div class="spinner-border" role="status"></div>
+
+    <p id="textoCarga">
+        Cargando agenda musical...
+    </p>
+
+    <button class="btn-outline-app"
+    id="btnReintentar"
+    onclick="location.reload()"
+    hidden>
+
+        Volver a intentar
+
+    </button>
+
+</div>
+
+<div id="aplicacion" hidden>
+
+<!-- MENÚ LATERAL -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-brand">
+
+        <img src="logo.png" alt="Voz Angelical">
+
+        <h2>Voz Angelical</h2>
+
+    </div>
+
+    <a href="inicio.html" class="sidebar-link">
+        <i class="bi bi-house-door"></i> Inicio
+    </a>
+
+    <a href="agenda.html" class="sidebar-link active">
+        <i class="bi bi-calendar3"></i> Agenda
+    </a>
+
+    <a href="contratos.html" class="sidebar-link">
+        <i class="bi bi-file-earmark-text"></i> Contratos
+    </a>
+
+    <a href="clientes.html" class="sidebar-link">
+        <i class="bi bi-person-lines-fill"></i> Clientes
+    </a>
+
+    <a href="servicios.html" class="sidebar-link">
+        <i class="bi bi-music-note-beamed"></i> Servicios
+    </a>
+
+    <a href="socios.html" class="sidebar-link">
+        <i class="bi bi-people"></i> Socios
+    </a>
+
+    <a href="estadisticas.html" class="sidebar-link">
+        <i class="bi bi-bar-chart-line"></i> Estadísticas
+    </a>
+
+    <a href="configuracion.html" class="sidebar-link">
+        <i class="bi bi-gear"></i> Configuración
+    </a>
+
+    <a href="usuarios.html" class="sidebar-link">
+        <i class="bi bi-person-circle"></i> Mi cuenta
+    </a>
+
+</aside>
+
+<!-- ENCABEZADO -->
+
+<header class="app-header">
+
+    <div class="header-brand">
+
+        <img src="logo.png"
+        class="header-logo"
+        alt="Voz Angelical">
+
+        <div>
+
+            <h1>Voz Angelical</h1>
+
+            <small>Agenda musical</small>
+
+        </div>
+
+    </div>
+
+    <div class="d-flex gap-2">
+
+        <button class="icon-button"
+        id="btnRecargar"
+        aria-label="Actualizar agenda">
+
+            <i class="bi bi-arrow-clockwise"></i>
+
+        </button>
+
+        <button class="icon-button"
+        data-alternar-tema
+        aria-label="Cambiar tema">
+
+            <i class="bi bi-moon-stars"
+            data-icono-tema></i>
+
+        </button>
+
+    </div>
+
+</header>
+
+<main class="main-content">
+
+    <h2 class="page-title">Agenda musical</h2>
+
+    <p class="page-description">
+
+        Organiza tus celebraciones, horarios,
+        servicios contratados y pagos.
+
+    </p>
+
+    <div id="mensajeGeneral"
+    class="alert"
+    role="alert"
+    hidden></div>
+
+    <!-- RESUMEN -->
+
+    <section class="summary-grid">
+
+        <article class="summary-card">
+
+            <i class="bi bi-calendar-event"></i>
+
+            <strong id="totalProgramados">0</strong>
+
+            <span>Programados</span>
+
+        </article>
+
+        <article class="summary-card">
+
+            <i class="bi bi-check-circle"></i>
+
+            <strong id="totalRealizados">0</strong>
+
+            <span>Realizados</span>
+
+        </article>
+
+        <article class="summary-card">
+
+            <i class="bi bi-wallet2"></i>
+
+            <strong id="totalPendiente">$0</strong>
+
+            <span>Por cobrar</span>
+
+        </article>
+
+        <article class="summary-card">
+
+            <i class="bi bi-cash-stack"></i>
+
+            <strong id="totalCobrado">$0</strong>
+
+            <span>Cobrado en servicios activos</span>
+
+        </article>
+
+    </section>
+
+    <button class="btn-gold" id="btnNuevoEvento">
+
+        <i class="bi bi-calendar-plus me-2"></i>
+
+        Registrar celebración
+
+    </button>
+
+    <!-- CALENDARIO -->
+
+    <section class="calendar-card">
+
+        <div class="calendar-header">
+
+            <button class="icon-button"
+            id="mesAnterior"
+            aria-label="Mes anterior">
+
+                <i class="bi bi-chevron-left"></i>
+
+            </button>
+
+            <div class="calendar-title"
+            id="tituloCalendario"></div>
+
+            <button class="icon-button"
+            id="mesSiguiente"
+            aria-label="Mes siguiente">
+
+                <i class="bi bi-chevron-right"></i>
+
+            </button>
+
+        </div>
+
+        <div class="calendar-grid"
+        id="calendario"></div>
+
+        <div class="calendar-legend">
+
+            <span class="calendar-count">1</span>
+
+            Celebraciones registradas en el día,
+            sin contar cancelaciones.
+
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+
+            <button class="btn-outline-app flex-fill"
+            id="btnHoy">
+
+                Hoy
+
+            </button>
+
+            <button class="btn-outline-app flex-fill"
+            id="btnTodas">
+
+                Ver todas
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- FILTROS -->
+
+    <section class="filters-card">
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+
+                <label class="form-label" for="buscador">
+
+                    Buscar celebración
+
+                </label>
+
+                <input type="search"
+                class="form-control"
+                id="buscador"
+                placeholder="Cliente, iglesia o servicio">
+
+            </div>
+
+            <div class="col-6 col-md-3">
+
+                <label class="form-label" for="filtroEstado">
+
+                    Estado
+
+                </label>
+
+                <select class="form-select"
+                id="filtroEstado">
+
+                    <option value="">Todos</option>
+                    <option value="programado">Programados</option>
+                    <option value="realizado">Realizados</option>
+                    <option value="cancelado">Cancelados</option>
+
+                </select>
+
+            </div>
+
+            <div class="col-6 col-md-3">
+
+                <label class="form-label" for="filtroPago">
+
+                    Pago
+
+                </label>
+
+                <select class="form-select"
+                id="filtroPago">
+
+                    <option value="">Todos</option>
+                    <option value="pendiente">Pendientes</option>
+                    <option value="pagado">Pagados</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="form-text mt-3"
+        id="textoResultados"></div>
+
+    </section>
+
+    <!-- CELEBRACIONES -->
+
+    <section class="events-grid"
+    id="listaEventos"></section>
+
+    <section class="empty-state"
+    id="estadoVacio"
+    hidden>
+
+        <i class="bi bi-calendar2-x"></i>
+
+        <h3>No hay celebraciones</h3>
+
+        <p>No se encontraron eventos con estos filtros.</p>
+
+    </section>
+
+    <button class="btn-outline-app w-100 mt-3"
+    id="btnMostrarMas"
+    hidden>
+
+        Mostrar más celebraciones
+
+    </button>
+
+    <footer class="app-footer">
+
+        Voz Angelical · Versión 2.0.0
+
+        <br>
+
+        Sistema Integral de Gestión Musical
+
+    </footer>
+
+</main>
+
+<!-- NAVEGACIÓN INFERIOR -->
+
+<nav class="bottom-nav">
+
+    <a href="inicio.html" class="nav-item-app">
+        <i class="bi bi-house-door"></i>
+        Inicio
+    </a>
+
+    <a href="agenda.html" class="nav-item-app active">
+        <i class="bi bi-calendar3"></i>
+        Agenda
+    </a>
+
+    <a href="contratos.html" class="nav-item-app">
+        <i class="bi bi-file-earmark-text"></i>
+        Contratos
+    </a>
+
+    <a href="socios.html" class="nav-item-app">
+        <i class="bi bi-people"></i>
+        Socios
+    </a>
+
+    <button class="nav-item-app"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#menuMas">
+
+        <i class="bi bi-grid-fill"></i>
+        Más
+
+    </button>
+
+</nav>
+
+<!-- MENÚ MÁS -->
+
+<div class="offcanvas offcanvas-bottom"
+id="menuMas"
+tabindex="-1"
+aria-labelledby="tituloMenu">
+
+    <div class="offcanvas-header">
+
+        <h5 class="offcanvas-title" id="tituloMenu">
+            Más opciones
+        </h5>
+
+        <button class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Cerrar"></button>
+
+    </div>
+
+    <div class="offcanvas-body">
+
+        <a href="clientes.html" class="menu-option">
+            <i class="bi bi-person-lines-fill"></i>
+            Clientes
+        </a>
+
+        <a href="servicios.html" class="menu-option">
+            <i class="bi bi-music-note-beamed"></i>
+            Servicios musicales
+        </a>
+
+        <a href="estadisticas.html" class="menu-option">
+            <i class="bi bi-bar-chart-line"></i>
+            Estadísticas
+        </a>
+
+        <a href="configuracion.html" class="menu-option">
+            <i class="bi bi-gear"></i>
+            Configuración
+        </a>
+
+        <a href="usuarios.html" class="menu-option">
+            <i class="bi bi-person-circle"></i>
+            Mi cuenta
+        </a>
+
+        <button class="menu-option" id="btnCerrarSesion">
+            <i class="bi bi-box-arrow-right"></i>
+            Cerrar sesión
+        </button>
+
+    </div>
+
+</div>
+
+<!-- MODAL CELEBRACIÓN -->
+
+<div class="modal fade"
+id="modalEvento"
+tabindex="-1"
+aria-labelledby="tituloModalEvento">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="tituloModalEvento">
+                    Nueva celebración
+                </h5>
+
+                <button class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar"></button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div id="mensajeFormulario"
+                class="alert"
+                role="alert"
+                hidden></div>
+
+                <form id="formEvento">
+
+                    <input type="hidden" id="eventoId">
+
+                    <div class="form-section">
+
+                        <i class="bi bi-person me-2"></i>
+                        Datos del cliente
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="clienteId">
+                            Cliente *
+                        </label>
+
+                        <select class="form-select"
+                        id="clienteId"
+                        required></select>
+
+                        <a href="clientes.html?accion=nuevo"
+                        class="form-text d-inline-block mt-2">
+
+                            <i class="bi bi-person-plus"></i>
+
+                            Registrar nuevo cliente
+
+                        </a>
+
+                    </div>
+
+                    <div class="form-section">
+
+                        <i class="bi bi-calendar-event me-2"></i>
+                        Datos de la celebración
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="tipoServicio">
+                            Tipo de celebración *
+                        </label>
+
+                        <select class="form-select"
+                        id="tipoServicio"
+                        required>
+
+                            <option value="">Seleccionar</option>
+                            <option>Misa de difunto</option>
+                            <option>Misa de aniversario</option>
+                            <option>Misa de boda</option>
+                            <option>Misa de XV años</option>
+                            <option>Misa de bautizo</option>
+                            <option>Misa de primera comunión</option>
+                            <option>Misa de confirmación</option>
+                            <option>Misa de acción de gracias</option>
+                            <option>Misa dominical</option>
+                            <option>Rosario</option>
+                            <option>Novena</option>
+                            <option>Otro servicio</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="row g-3 mb-3">
+
+                        <div class="col-6">
+
+                            <label class="form-label" for="fecha">
+                                Fecha *
+                            </label>
+
+                            <input type="date"
+                            class="form-control"
+                            id="fecha"
+                            required>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <label class="form-label" for="hora">
+                                Hora *
+                            </label>
+
+                            <input type="time"
+                            class="form-control"
+                            id="hora"
+                            required>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <label class="form-label" for="duracion">
+                                Duración (minutos)
+                            </label>
+
+                            <input type="number"
+                            class="form-control"
+                            id="duracion"
+                            min="1"
+                            max="1440"
+                            value="60"
+                            required>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <label class="form-label" for="traslado">
+                                Traslado (minutos)
+                            </label>
+
+                            <input type="number"
+                            class="form-control"
+                            id="traslado"
+                            min="0"
+                            max="1440"
+                            value="30"
+                            required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="lugar">
+                            Iglesia o lugar *
+                        </label>
+
+                        <input class="form-control"
+                        id="lugar"
+                        maxlength="200"
+                        required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="direccion">
+                            Dirección o localidad *
+                        </label>
+
+                        <input class="form-control"
+                        id="direccion"
+                        maxlength="300"
+                        required>
+
+                    </div>
+
+                    <div class="form-section">
+
+                        <i class="bi bi-music-note-beamed me-2"></i>
+                        Servicio musical
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="paqueteId">
+                            Paquete contratado *
+                        </label>
+
+                        <select class="form-select"
+                        id="paqueteId"
+                        required></select>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="precio">
+                            Precio acordado (MXN) *
+                        </label>
+
+                        <input type="number"
+                        class="form-control"
+                        id="precio"
+                        min="1"
+                        max="1000000"
+                        step="0.01"
+                        required>
+
+                        <div class="form-text">
+
+                            Puedes ajustar el precio dependiendo
+                            de la ubicación y las condiciones del servicio.
+
+                        </div>
+
+                    </div>
+
+                    <div class="info-box mb-3">
+
+                        <div class="d-flex justify-content-between">
+
+                            <span>Pago estimado a socios</span>
+
+                            <strong id="previewSocios">$0</strong>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-2">
+
+                            <span>Tu ganancia estimada</span>
+
+                            <strong id="previewGanancia">$0</strong>
+
+                        </div>
+
+                        <div class="form-text">
+
+                            Antes de transporte y otros gastos.
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-section">
+
+                        <i class="bi bi-wallet2 me-2"></i>
+                        Información del pago
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="metodoPago">
+                            Método de pago
+                        </label>
+
+                        <select class="form-select"
+                        id="metodoPago">
+
+                            <option value="efectivo">Efectivo</option>
+                            <option value="transferencia">Transferencia bancaria</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="estadoPago">
+                            Estado del pago
+                        </label>
+
+                        <select class="form-select"
+                        id="estadoPago">
+
+                            <option value="pendiente">Pendiente</option>
+                            <option value="pagado">Pagado</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="mb-3"
+                    id="contenedorFechaPago"
+                    hidden>
+
+                        <label class="form-label" for="fechaPago">
+                            Fecha de pago
+                        </label>
+
+                        <input type="date"
+                        class="form-control"
+                        id="fechaPago">
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="observaciones">
+                            Observaciones
+                        </label>
+
+                        <textarea class="form-control"
+                        id="observaciones"
+                        maxlength="1500"></textarea>
+
+                    </div>
+
+                    <div class="alert alert-warning"
+                    id="avisoConflicto"
+                    hidden></div>
+
+                    <button type="submit"
+                    class="btn-gold"
+                    id="btnGuardar">
+
+                        <i class="bi bi-floppy me-2"></i>
+
+                        Guardar celebración
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MODAL REGISTRAR PAGO -->
+
+<div class="modal fade"
+id="modalPago"
+tabindex="-1"
+aria-labelledby="tituloPago">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="tituloPago">
+                    Registrar pago
+                </h5>
+
+                <button class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar"></button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="alert"
+                id="mensajePago"
+                hidden></div>
+
+                <div class="info-box mb-3"
+                id="resumenPago"></div>
+
+                <form id="formPago">
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="pagoMetodo">
+                            Método de pago
+                        </label>
+
+                        <select class="form-select"
+                        id="pagoMetodo">
+
+                            <option value="efectivo">Efectivo</option>
+                            <option value="transferencia">Transferencia bancaria</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="pagoFecha">
+                            Fecha de pago
+                        </label>
+
+                        <input type="date"
+                        class="form-control"
+                        id="pagoFecha"
+                        required>
+
+                    </div>
+
+                    <button type="submit"
+                    class="btn-gold"
+                    id="btnConfirmarPago">
+
+                        Confirmar pago completo
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+
+import { db, APP_CONFIG } from "./firebase.js";
+
+import {
+    protegerPagina,
+    cerrarSesion
+} from "./auth.js";
+
+import {
+    collection,
+    doc,
+    getDocsFromServer,
+    getDocFromServer,
+    runTransaction,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const $ = id => document.getElementById(id);
+
+const refEventos = collection(db,"eventos");
+
+const controlAgenda = doc(db,"contadores","agenda");
+
+const controlClientes = doc(db,"contadores","clientes");
+
+const ZONA = "America/Mexico_City";
+
+let eventos = [];
+let clientes = [];
+let paquetes = [];
+
+let configuracion = {};
+
+let eventoEditado = null;
+let eventoPago = null;
+
+let modalEvento;
+let modalPago;
+
+let sistemaListo = false;
+let ocupado = false;
+let cambiosPendientes = false;
+
+let fechaSeleccionada = "";
+let limiteVisible = 24;
+
+const camposFormulario = [
+    "clienteId",
+    "tipoServicio",
+    "fecha",
+    "hora",
+    "duracion",
+    "traslado",
+    "lugar",
+    "direccion",
+    "paqueteId",
+    "precio",
+    "metodoPago",
+    "estadoPago",
+    "fechaPago",
+    "observaciones"
+];
+
+// =====================================
+// FECHAS Y MONEDA
+// =====================================
+
+function hoy() {
+
+    const partes = new Intl.DateTimeFormat("en-CA",{
+
+        timeZone: ZONA,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+
+    }).formatToParts(new Date());
+
+    const obtener = tipo =>
+
+        partes.find(p => p.type === tipo).value;
+
+    return `${obtener("year")}-${obtener("month")}-${obtener("day")}`;
+
+}
+
+const fechaInicial = hoy().split("-").map(Number);
+
+let anioCalendario = fechaInicial[0];
+
+let mesCalendario = fechaInicial[1] - 1;
+
+function fechaISO(anio,mes,dia) {
+
+    return `${anio}-${String(mes + 1).padStart(2,"0")}-${String(dia).padStart(2,"0")}`;
+
+}
+
+function fechaBonita(fecha) {
+
+    if (!fecha) return "Sin fecha";
+
+    const valor = new Date(fecha + "T12:00:00Z");
+
+    if (Number.isNaN(valor.getTime())) return fecha;
+
+    return new Intl.DateTimeFormat("es-MX",{
+
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC"
+
+    }).format(valor);
+
+}
+
+function horaBonita(hora) {
+
+    if (!/^\d{2}:\d{2}$/.test(hora || "")) {
+
+        return hora || "Sin hora";
+
+    }
+
+    const [h,m] = hora.split(":").map(Number);
+
+    return `${h % 12 || 12}:${String(m).padStart(2,"0")} ${h < 12 ? "a. m." : "p. m."}`;
+
+}
+
+function moneda(valor) {
+
+    return new Intl.NumberFormat("es-MX",{
+
+        style: "currency",
+        currency: "MXN"
+
+    }).format(Number(valor) || 0);
+
+}
+
+function normalizar(texto) {
+
+    return String(texto || "")
+
+        .normalize("NFD")
+
+        .replace(/[\u0300-\u036f]/g,"")
+
+        .toLowerCase()
+
+        .trim();
+
+}
+
+// =====================================
+// FUNCIONES GENERALES
+// =====================================
+
+function crear(etiqueta,clase,texto) {
+
+    const elemento = document.createElement(etiqueta);
+
+    if (clase) elemento.className = clase;
+
+    if (texto !== undefined) {
+
+        elemento.textContent = texto;
+
+    }
+
+    return elemento;
+
+}
+
+function mensaje(id,texto,tipo = "success") {
+
+    const elemento = $(id);
+
+    elemento.className = `alert alert-${tipo}`;
+
+    elemento.textContent = texto;
+
+    elemento.hidden = false;
+
+}
+
+function mensajeError(error) {
+
+    if (error.code === "permission-denied") {
+
+        return "No tienes permisos para realizar esta operación.";
+
+    }
+
+    if (error.code === "unavailable") {
+
+        return "Verifica tu conexión a internet.";
+
+    }
+
+    return error.message || "Ocurrió un error inesperado.";
+
+}
+
+function versionDocumento(resultado) {
+
+    return resultado.exists()
+
+        ? Number(resultado.data().version) || 0
+
+        : 0;
+
+}
+
+function mismaFecha(a,b) {
+
+    if (!a && !b) return true;
+
+    if (!a || !b) return false;
+
+    return a.seconds === b.seconds &&
+
+        a.nanoseconds === b.nanoseconds;
+
+}
+
+function incrementarAgenda(transaccion,version) {
+
+    transaccion.set(
+
+        controlAgenda,
+
+        {
+
+            version: version + 1,
+
+            actualizadoEn: serverTimestamp()
+
+        },
+
+        { merge: true }
+
+    );
+
+}
+
+function actualizarBotones() {
+
+    const bloqueado =
+
+        ocupado ||
+
+        !sistemaListo ||
+
+        !navigator.onLine;
+
+    [
+
+        "btnNuevoEvento",
+        "btnRecargar",
+        "btnGuardar",
+        "btnConfirmarPago"
+
+    ].forEach(id => {
+
+        $(id).disabled = bloqueado;
+
+    });
+
+    camposFormulario.forEach(id => {
+
+        $(id).disabled = ocupado;
+
+    });
+
+    $("pagoMetodo").disabled = ocupado;
+
+    $("pagoFecha").disabled = ocupado;
+
+    document.querySelectorAll("[data-operacion]")
+
+        .forEach(elemento => {
+
+            elemento.disabled = bloqueado;
+
+        });
+
+}
+
+// =====================================
+// CARGAR DATOS
+// =====================================
+
+async function cargarEventos() {
+
+    const resultado = await getDocsFromServer(refEventos);
+
+    eventos = resultado.docs.map(documento => ({
+
+        ...documento.data(),
+
+        id: documento.id
+
+    }));
+
+    actualizarResumen();
+
+    mostrarCalendario();
+
+    mostrarEventos();
+
+}
+
+async function cargarCatalogos() {
+
+    const [resultadoClientes,resultadoPaquetes,config] =
+
+        await Promise.all([
+
+            getDocsFromServer(collection(db,"clientes")),
+
+            getDocsFromServer(collection(db,"servicios")),
+
+            getDocFromServer(doc(db,"configuracion","general"))
+
+        ]);
+
+    clientes = resultadoClientes.docs.map(documento => ({
+
+        ...documento.data(),
+
+        id: documento.id
+
+    }));
+
+    paquetes = resultadoPaquetes.docs.map(documento => ({
+
+        ...documento.data(),
+
+        id: documento.id
+
+    }));
+
+    clientes.sort((a,b) =>
+
+        String(a.nombre || "").localeCompare(
+
+            String(b.nombre || ""),"es"
+
+        )
+
+    );
+
+    paquetes.sort((a,b) =>
+
+        Number(a.numero) - Number(b.numero)
+
+    );
+
+    configuracion = config.exists() ? config.data() : {};
+
+}
+
+// =====================================
+// RESUMEN FINANCIERO
+// =====================================
+
+function actualizarResumen() {
+
+    const activos = eventos.filter(
+
+        evento => evento.estado !== "cancelado"
+
+    );
+
+    $("totalProgramados").textContent =
+
+        activos.filter(e => e.estado === "programado").length;
+
+    $("totalRealizados").textContent =
+
+        activos.filter(e => e.estado === "realizado").length;
+
+    const pendiente = activos
+
+        .filter(e => e.estadoPago !== "pagado")
+
+        .reduce((total,e) => total + (Number(e.precio) || 0),0);
+
+    const cobrado = activos
+
+        .filter(e => e.estadoPago === "pagado")
+
+        .reduce((total,e) => total + (Number(e.precio) || 0),0);
+
+    $("totalPendiente").textContent = moneda(pendiente);
+
+    $("totalCobrado").textContent = moneda(cobrado);
+
+}
+
+// =====================================
+// CALENDARIO MENSUAL
+// =====================================
+
+function mostrarCalendario() {
+
+    const contenedor = $("calendario");
+
+    contenedor.replaceChildren();
+
+    const primerDia = new Date(
+
+        Date.UTC(anioCalendario,mesCalendario,1)
+
+    );
+
+    const diasMes = new Date(
+
+        Date.UTC(anioCalendario,mesCalendario + 1,0)
+
+    ).getUTCDate();
+
+    $("tituloCalendario").textContent =
+
+        new Intl.DateTimeFormat("es-MX",{
+
+            month: "long",
+            year: "numeric",
+            timeZone: "UTC"
+
+        }).format(primerDia);
+
+    ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"]
+
+        .forEach(dia => {
+
+            contenedor.append(
+
+                crear("div","calendar-weekday",dia)
+
+            );
+
+        });
+
+    const espacios = (primerDia.getUTCDay() + 6) % 7;
+
+    for (let i = 0; i < espacios; i++) {
+
+        contenedor.append(crear("div"));
+
+    }
+
+    const conteos = new Map();
+
+    eventos.forEach(evento => {
+
+        if (evento.estado === "cancelado") return;
+
+        conteos.set(
+
+            evento.fecha,
+
+            (conteos.get(evento.fecha) || 0) + 1
+
+        );
+
+    });
+
+    const fechaHoy = hoy();
+
+    for (let dia = 1; dia <= diasMes; dia++) {
+
+        const fecha = fechaISO(
+
+            anioCalendario,
+
+            mesCalendario,
+
+            dia
+
+        );
+
+        const cantidad = conteos.get(fecha) || 0;
+
+        const boton = crear("button","calendar-day");
+
+        boton.type = "button";
+
+        boton.setAttribute(
+
+            "aria-label",
+
+            `${fechaBonita(fecha)}, ${cantidad} celebraciones`
+
+        );
+
+        boton.setAttribute(
+
+            "aria-pressed",
+
+            String(fechaSeleccionada === fecha)
+
+        );
+
+        boton.append(crear("span","",dia));
+
+        if (fecha === fechaHoy) {
+
+            boton.classList.add("today");
+
+        }
+
+        if (fecha === fechaSeleccionada) {
+
+            boton.classList.add("selected");
+
+        }
+
+        if (cantidad) {
+
+            boton.classList.add("has-events");
+
+            boton.append(
+
+                crear("span","calendar-count",cantidad)
+
+            );
+
+        }
+
+        boton.addEventListener("click",() => {
+
+            fechaSeleccionada = fecha;
+
+            limiteVisible = 24;
+
+            mostrarCalendario();
+
+            mostrarEventos();
+
+        });
+
+        contenedor.append(boton);
+
+    }
+
+}
+
+function cambiarMes(cantidad) {
+
+    const nuevaFecha = new Date(
+
+        Date.UTC(anioCalendario,mesCalendario + cantidad,1)
+
+    );
+
+    anioCalendario = nuevaFecha.getUTCFullYear();
+
+    mesCalendario = nuevaFecha.getUTCMonth();
+
+    fechaSeleccionada = "";
+
+    mostrarCalendario();
+
+    mostrarEventos();
+
+}
+
+$("mesAnterior").addEventListener(
+
+    "click",() => cambiarMes(-1)
+
+);
+
+$("mesSiguiente").addEventListener(
+
+    "click",() => cambiarMes(1)
+
+);
+
+$("btnHoy").addEventListener("click",() => {
+
+    fechaSeleccionada = hoy();
+
+    const [anio,mes] = fechaSeleccionada.split("-").map(Number);
+
+    anioCalendario = anio;
+
+    mesCalendario = mes - 1;
+
+    limiteVisible = 24;
+
+    mostrarCalendario();
+
+    mostrarEventos();
+
+});
+
+$("btnTodas").addEventListener("click",() => {
+
+    fechaSeleccionada = "";
+
+    $("buscador").value = "";
+
+    $("filtroEstado").value = "";
+
+    $("filtroPago").value = "";
+
+    limiteVisible = 24;
+
+    mostrarCalendario();
+
+    mostrarEventos();
+
+});
+
+// =====================================
+// FILTRAR CELEBRACIONES
+// =====================================
+
+function eventosFiltrados() {
+
+    const busqueda = normalizar($("buscador").value);
+
+    const estado = $("filtroEstado").value;
+
+    const pago = $("filtroPago").value;
+
+    return eventos.filter(evento => {
+
+        if (
+
+            fechaSeleccionada &&
+
+            evento.fecha !== fechaSeleccionada
+
+        ) return false;
+
+        if (estado && evento.estado !== estado) return false;
+
+        if (pago && evento.estadoPago !== pago) return false;
+
+        const contenido = normalizar([
+
+            evento.clienteNombre,
+
+            evento.clienteTelefono,
+
+            evento.tipoServicio,
+
+            evento.lugar,
+
+            evento.direccion,
+
+            evento.paqueteNombre,
+
+            evento.folioContrato
+
+        ].join(" "));
+
+        return busqueda.split(/\s+/)
+
+            .every(palabra => contenido.includes(palabra));
+
+    }).sort((a,b) => {
+
+        const fechaHoy = hoy();
+
+        const futuroA = a.fecha >= fechaHoy;
+
+        const futuroB = b.fecha >= fechaHoy;
+
+        if (futuroA !== futuroB) {
+
+            return futuroA ? -1 : 1;
+
+        }
+
+        const orden =
+
+            `${a.fecha} ${a.hora}`.localeCompare(
+
+                `${b.fecha} ${b.hora}`
+
+            );
+
+        return futuroA ? orden : -orden;
+
+    });
+
+}
+
+// =====================================
+// TARJETAS
+// =====================================
+
+function filaInformacion(icono,texto) {
+
+    const fila = crear("div","event-info");
+
+    fila.append(
+
+        crear("i",icono),
+
+        crear("span","",texto)
+
+    );
+
+    return fila;
+
+}
+
+function botonEvento(texto,icono,clase,accion) {
+
+    const boton = crear("button","event-action " + clase);
+
+    boton.type = "button";
+
+    boton.dataset.operacion = "true";
+
+    boton.append(
+
+        crear("i",icono),
+
+        document.createTextNode(texto)
+
+    );
+
+    boton.addEventListener("click",accion);
+
+    return boton;
+
+}
+
+function enlaceEvento(texto,icono,url) {
+
+    const enlace = crear("a","event-action");
+
+    enlace.href = url;
+
+    enlace.append(
+
+        crear("i",icono),
+
+        document.createTextNode(texto)
+
+    );
+
+    enlace.addEventListener("click",evento => {
+
+        if (ocupado || !navigator.onLine) {
+
+            evento.preventDefault();
+
+        }
+
+    });
+
+    return enlace;
+
+}
+
+function mostrarEventos() {
+
+    const resultado = eventosFiltrados();
+
+    const visibles = resultado.slice(0,limiteVisible);
+
+    const contenedor = $("listaEventos");
+
+    contenedor.replaceChildren();
+
+    $("estadoVacio").hidden = resultado.length !== 0;
+
+    $("btnMostrarMas").hidden = resultado.length <= limiteVisible;
+
+    $("textoResultados").textContent =
+
+        `${visibles.length} de ${resultado.length} celebraciones` +
+
+        (fechaSeleccionada
+
+            ? ` · ${fechaBonita(fechaSeleccionada)}`
+
+            : " · Todas las fechas");
+
+    visibles.forEach(evento => {
+
+        const estado = ["programado","realizado","cancelado"]
+
+            .includes(evento.estado)
+
+            ? evento.estado
+
+            : "programado";
+
+        const tarjeta = crear("article","event-card " + estado);
+
+        const encabezado = crear("div","event-header");
+
+        const datos = crear("div");
+
+        datos.style.minWidth = "0";
+
+        datos.append(
+
+            crear(
+
+                "h3",
+
+                "event-title",
+
+                evento.tipoServicio || "Celebración"
+
+            ),
+
+            crear(
+
+                "div",
+
+                "event-client",
+
+                evento.clienteNombre || "Sin cliente"
+
+            )
+
+        );
+
+        const nombresEstado = {
+
+            programado: "Programado",
+
+            realizado: "Realizado",
+
+            cancelado: "Cancelado"
+
+        };
+
+        encabezado.append(
+
+            datos,
+
+            crear(
+
+                "span",
+
+                "status-label status-" + estado,
+
+                nombresEstado[estado]
+
+            )
+
+        );
+
+        tarjeta.append(
+
+            encabezado,
+
+            filaInformacion(
+
+                "bi bi-calendar3",
+
+                fechaBonita(evento.fecha)
+
+            ),
+
+            filaInformacion(
+
+                "bi bi-clock",
+
+                `${horaBonita(evento.hora)} · ${evento.duracion || 60} min`
+
+            ),
+
+            filaInformacion(
+
+                "bi bi-geo-alt",
+
+                [evento.lugar,evento.direccion]
+
+                    .filter(Boolean).join(" · ")
+
+            ),
+
+            filaInformacion(
+
+                "bi bi-music-note-beamed",
+
+                evento.paqueteNombre || "Sin paquete"
+
+            )
+
+        );
+
+        if (evento.folioContrato) {
+
+            tarjeta.append(
+
+                filaInformacion(
+
+                    "bi bi-file-earmark-text",
+
+                    "Contrato " + evento.folioContrato
+
+                )
+
+            );
+
+        }
+
+        const finanzas = crear("div","event-finance");
+
+        const importe = crear("div");
+
+        importe.append(
+
+            crear("small","","Precio acordado"),
+
+            crear("strong","",moneda(evento.precio))
+
+        );
+
+        const pagado = evento.estadoPago === "pagado";
+
+        const estadoPago = estado === "cancelado"
+
+            ? (pagado ? "Pago por revisar" : "Cancelado")
+
+            : (pagado ? "Pagado" : "Pendiente");
+
+        finanzas.append(
+
+            importe,
+
+            crear(
+
+                "span",
+
+                "status-label status-" +
+
+                (estado === "cancelado"
+
+                    ? "cancelado"
+
+                    : pagado ? "pagado" : "pendiente"),
+
+                estadoPago
+
+            )
+
+        );
+
+        tarjeta.append(finanzas);
+
+        if (evento.conflictoAutorizado) {
+
+            tarjeta.append(
+
+                crear(
+
+                    "div",
+
+                    "alert alert-warning",
+
+                    "Esta celebración se registró con un conflicto de horario autorizado."
+
+                )
+
+            );
+
+        }
+
+        if (evento.observaciones) {
+
+            tarjeta.append(
+
+                crear("div","event-note",evento.observaciones)
+
+            );
+
+        }
+
+        if (evento.motivoCancelacion) {
+
+            tarjeta.append(
+
+                crear(
+
+                    "div",
+
+                    "event-note",
+
+                    "Cancelación: " + evento.motivoCancelacion
+
+                )
+
+            );
+
+        }
+
+        const acciones = crear("div","event-actions mt-3");
+
+        if (evento.contratoId) {
+
+            acciones.append(
+
+                enlaceEvento(
+
+                    "Ver contrato",
+
+                    "bi bi-file-earmark-text",
+
+                    "contratos.html?contratoId=" +
+
+                    encodeURIComponent(evento.contratoId)
+
+                )
+
+            );
+
+        } else if (estado !== "cancelado") {
+
+            acciones.append(
+
+                botonEvento(
+
+                    "Editar",
+
+                    "bi bi-pencil-square",
+
+                    "",
+
+                    () => abrirEditor(evento.id)
+
+                ),
+
+                enlaceEvento(
+
+                    "Crear contrato",
+
+                    "bi bi-file-earmark-plus",
+
+                    "contratos.html?accion=nuevo&eventoId=" +
+
+                    encodeURIComponent(evento.id)
+
+                )
+
+            );
+
+        }
+
+        if (estado !== "cancelado" && !pagado) {
+
+            acciones.append(
+
+                botonEvento(
+
+                    "Registrar pago",
+
+                    "bi bi-cash-coin",
+
+                    "success",
+
+                    () => abrirPago(evento.id)
+
+                )
+
+            );
+
+        }
+
+        if (estado === "programado") {
+
+            acciones.append(
+
+                botonEvento(
+
+                    "Realizado",
+
+                    "bi bi-check-circle",
+
+                    "success",
+
+                    () => marcarRealizado(evento.id)
+
+                ),
+
+                botonEvento(
+
+                    "Cancelar",
+
+                    "bi bi-x-circle",
+
+                    "danger",
+
+                    () => cancelarEvento(evento.id)
+
+                )
+
+            );
+
+        }
+
+        const telefono = String(evento.clienteTelefono || "");
+
+        if (/^\d{10}$/.test(telefono)) {
+
+            const texto =
+
+                `Hola, ${evento.clienteNombre}. ` +
+
+                `Te saludamos de Voz Angelical respecto a tu celebración del ${fechaBonita(evento.fecha)} a las ${horaBonita(evento.hora)}.`;
+
+            const whatsapp = enlaceEvento(
+
+                "WhatsApp",
+
+                "bi bi-whatsapp",
+
+                `https://wa.me/52${telefono}?text=${encodeURIComponent(texto)}`
+
+            );
+
+            whatsapp.target = "_blank";
+
+            whatsapp.rel = "noopener noreferrer";
+
+            acciones.append(whatsapp);
+
+        }
+
+        tarjeta.append(acciones);
+
+        contenedor.append(tarjeta);
+
+    });
+
+    actualizarBotones();
+
+}
+
+["buscador","filtroEstado","filtroPago"].forEach(id => {
+
+    $(id).addEventListener(
+
+        id === "buscador" ? "input" : "change",
+
+        () => {
+
+            limiteVisible = 24;
+
+            mostrarEventos();
+
+        }
+
+    );
+
+});
+
+$("btnMostrarMas").addEventListener("click",() => {
+
+    limiteVisible += 24;
+
+    mostrarEventos();
+
+});
+
+// =====================================
+// SELECTORES DE CLIENTES Y PAQUETES
+// =====================================
+
+function agregarOpcion(select,valor,texto) {
+
+    const opcion = document.createElement("option");
+
+    opcion.value = valor;
+
+    opcion.textContent = texto;
+
+    select.append(opcion);
+
+}
+
+function prepararSelectores(original = null) {
+
+    $("clienteId").replaceChildren();
+
+    $("paqueteId").replaceChildren();
+
+    agregarOpcion(
+
+        $("clienteId"),
+
+        "",
+
+        "Seleccionar cliente"
+
+    );
+
+    clientes.forEach(cliente => {
+
+        agregarOpcion(
+
+            $("clienteId"),
+
+            cliente.id,
+
+            `${cliente.nombre} · ${cliente.telefono || ""}`
+
+        );
+
+    });
+
+    if (
+
+        original?.clienteId &&
+
+        !clientes.some(c => c.id === original.clienteId)
+
+    ) {
+
+        agregarOpcion(
+
+            $("clienteId"),
+
+            original.clienteId,
+
+            original.clienteNombre + " (histórico)"
+
+        );
+
+    }
+
+    agregarOpcion(
+
+        $("paqueteId"),
+
+        "",
+
+        "Seleccionar paquete"
+
+    );
+
+    paquetes.filter(paquete =>
+
+        paquete.activo !== false ||
+
+        paquete.id === original?.paqueteId
+
+    ).forEach(paquete => {
+
+        agregarOpcion(
+
+            $("paqueteId"),
+
+            paquete.id,
+
+            `${paquete.nombre} · ${moneda(paquete.precio)}` +
+
+            (paquete.activo === false ? " (inactivo)" : "")
+
+        );
+
+    });
+
+    if (
+
+        original?.paqueteId &&
+
+        !paquetes.some(p => p.id === original.paqueteId)
+
+    ) {
+
+        agregarOpcion(
+
+            $("paqueteId"),
+
+            original.paqueteId,
+
+            original.paqueteNombre + " (histórico)"
+
+        );
+
+    }
+
+}
+
+// =====================================
+// NUEVA CELEBRACIÓN
+// =====================================
+
+function abrirNuevoEvento(clienteId = "") {
+
+    if (ocupado || !sistemaListo || !navigator.onLine) return;
+
+    eventoEditado = null;
+
+    $("formEvento").reset();
+
+    prepararSelectores();
+
+    $("eventoId").value = "";
+
+    $("clienteId").value = clienteId;
+
+    $("fecha").value = fechaSeleccionada || hoy();
+
+    $("hora").value =
+
+        configuracion.horaPredeterminada || "12:00";
+
+    $("duracion").value =
+
+        configuracion.duracionPredeterminada || 60;
+
+    $("traslado").value =
+
+        configuracion.margenTraslado ?? 30;
+
+    $("precio").value = "";
+
+    $("estadoPago").value = "pendiente";
+
+    $("metodoPago").value = "efectivo";
+
+    $("tituloModalEvento").textContent = "Nueva celebración";
+
+    $("mensajeFormulario").hidden = true;
+
+    $("avisoConflicto").hidden = true;
+
+    cambiosPendientes = false;
+
+    actualizarFechaPago();
+
+    actualizarGanancia();
+
+    revisarConflictosFormulario();
+
+    modalEvento.show();
+
+}
+
+$("btnNuevoEvento").addEventListener(
+
+    "click",() => abrirNuevoEvento()
+
+);
+
+// =====================================
+// EDITAR CELEBRACIÓN
+// =====================================
+
+function abrirEditor(id) {
+
+    if (ocupado || !navigator.onLine) return;
+
+    const evento = eventos.find(e => e.id === id);
+
+    if (!evento || evento.estado === "cancelado") return;
+
+    if (evento.contratoId) {
+
+        location.href =
+
+            "contratos.html?contratoId=" +
+
+            encodeURIComponent(evento.contratoId);
+
+        return;
+
+    }
+
+    eventoEditado = { ...evento };
+
+    prepararSelectores(evento);
+
+    $("eventoId").value = evento.id;
+
+    camposFormulario.forEach(campo => {
+
+        $(campo).value = evento[campo] ?? "";
+
+    });
+
+    $("tituloModalEvento").textContent = "Editar celebración";
+
+    $("mensajeFormulario").hidden = true;
+
+    cambiosPendientes = false;
+
+    actualizarFechaPago();
+
+    actualizarGanancia();
+
+    revisarConflictosFormulario();
+
+    modalEvento.show();
+
+}
+
+// =====================================
+// CALCULAR GANANCIAS
+// =====================================
+
+function paqueteSeleccionado() {
+
+    const id = $("paqueteId").value;
+
+    if (
+
+        eventoEditado &&
+
+        eventoEditado.paqueteId === id &&
+
+        eventoEditado.paqueteDetalle
+
+    ) {
+
+        return eventoEditado.paqueteDetalle;
+
+    }
+
+    return paquetes.find(paquete => paquete.id === id);
+
+}
+
+function numeroVoces(paquete) {
+
+    if (!paquete) return 1;
+
+    const voces = Number(paquete.voces);
+
+    return Number.isInteger(voces) && voces >= 1 && voces <= 3
+
+        ? voces
+
+        : 1;
+
+}
+
+function actualizarGanancia() {
+
+    const paquete = paqueteSeleccionado();
+
+    const socios = Math.max(0,numeroVoces(paquete) - 1);
+
+    const costo = socios * APP_CONFIG.pagoPorSocio;
+
+    const precio = Number($("precio").value) || 0;
+
+    $("previewSocios").textContent = moneda(costo);
+
+    $("previewGanancia").textContent = moneda(precio - costo);
+
+    $("previewGanancia").style.color =
+
+        precio < costo ? "var(--rojo)" : "var(--verde)";
+
+}
+
+$("paqueteId").addEventListener("change",() => {
+
+    const paquete = paqueteSeleccionado();
+
+    $("precio").value = paquete
+
+        ? (
+
+            eventoEditado?.paqueteId === $("paqueteId").value
+
+                ? eventoEditado.precio
+
+                : paquete.precio ?? paquete.precioBase
+
+        )
+
+        : "";
+
+    actualizarGanancia();
+
+});
+
+$("precio").addEventListener("input",actualizarGanancia);
+
+function actualizarFechaPago() {
+
+    const pagado = $("estadoPago").value === "pagado";
+
+    $("contenedorFechaPago").hidden = !pagado;
+
+    $("fechaPago").required = pagado;
+
+    $("fechaPago").max = hoy();
+
+    if (pagado && !$("fechaPago").value) {
+
+        $("fechaPago").value = hoy();
+
+    }
+
+    if (!pagado) {
+
+        $("fechaPago").value = "";
+
+    }
+
+}
+
+$("estadoPago").addEventListener(
+
+    "change",actualizarFechaPago
+
+);
+
+// =====================================
+// DETECTAR CONFLICTOS DE HORARIO
+// =====================================
+
+// Se comparan fechas y horas civiles de Tlaxcala.
+// UTC se usa únicamente como escala para comparar
+// los horarios, no como zona real de la celebración.
+
+function inicioEvento(evento) {
+
+    return Date.parse(
+
+        `${evento.fecha}T${evento.hora}:00Z`
+
+    );
+
+}
+
+function buscarConflictos(nuevo,lista,idExcluir = "") {
+
+    const inicio = inicioEvento(nuevo);
+
+    const fin = inicio + Number(nuevo.duracion) * 60000;
+
+    if (!Number.isFinite(inicio) || !Number.isFinite(fin)) {
+
+        return [];
+
+    }
+
+    return lista.filter(evento => {
+
+        if (
+
+            evento.id === idExcluir ||
+
+            evento.estado === "cancelado"
+
+        ) return false;
+
+        const otroInicio = inicioEvento(evento);
+
+        const otroFin = otroInicio +
+
+            (Number(evento.duracion) || 60) * 60000;
+
+        const margen = Math.max(
+
+            Number(nuevo.traslado) || 0,
+
+            Number(evento.traslado) || 0
+
+        ) * 60000;
+
+        return inicio < otroFin + margen &&
+
+            fin + margen > otroInicio;
+
+    });
+
+}
+
+function revisarConflictosFormulario() {
+
+    const datos = {
+
+        fecha: $("fecha").value,
+
+        hora: $("hora").value,
+
+        duracion: Number($("duracion").value),
+
+        traslado: Number($("traslado").value)
+
+    };
+
+    const conflictos = buscarConflictos(
+
+        datos,
+
+        eventos,
+
+        eventoEditado?.id || ""
+
+    );
+
+    $("avisoConflicto").hidden = conflictos.length === 0;
+
+    $("avisoConflicto").textContent = conflictos.length
+
+        ? "Conflicto de horario o traslado con: " +
+
+          conflictos.map(e =>
+
+              `${e.tipoServicio} (${e.fecha}, ${horaBonita(e.hora)})`
+
+          ).join("; ")
+
+        : "";
+
+}
+
+["fecha","hora","duracion","traslado"].forEach(id => {
+
+    $(id).addEventListener(
+
+        "input",revisarConflictosFormulario
+
+    );
+
+});
+
+$("formEvento").addEventListener("input",() => {
+
+    cambiosPendientes = true;
+
+});
+
+// =====================================
+// GUARDAR CELEBRACIÓN
+// =====================================
+
+$("formEvento").addEventListener("submit",async evento => {
+
+    evento.preventDefault();
+
+    if (ocupado || !sistemaListo || !navigator.onLine) return;
+
+    const original = eventoEditado
+
+        ? { ...eventoEditado }
+
+        : null;
+
+    const clienteId = $("clienteId").value;
+
+    const paqueteId = $("paqueteId").value;
+
+    const datos = {
+
+        clienteId,
+
+        paqueteId,
+
+        tipoServicio: $("tipoServicio").value,
+
+        fecha: $("fecha").value,
+
+        hora: $("hora").value,
+
+        duracion: Number($("duracion").value),
+
+        traslado: Number($("traslado").value),
+
+        lugar: $("lugar").value.trim(),
+
+        direccion: $("direccion").value.trim(),
+
+        precio: Math.round(Number($("precio").value) * 100) / 100,
+
+        metodoPago: $("metodoPago").value,
+
+        estadoPago: $("estadoPago").value,
+
+        fechaPago: $("estadoPago").value === "pagado"
+
+            ? $("fechaPago").value
+
+            : "",
+
+        observaciones: $("observaciones").value.trim(),
+
+        estado: original?.estado || "programado"
+
+    };
+
+    if (
+
+        !clienteId ||
+
+        !paqueteId ||
+
+        !datos.tipoServicio ||
+
+        !datos.fecha ||
+
+        !datos.hora ||
+
+        !datos.lugar ||
+
+        !datos.direccion ||
+
+        !Number.isFinite(inicioEvento(datos))
+
+    ) {
+
+        mensaje(
+
+            "mensajeFormulario",
+
+            "Completa todos los campos obligatorios.",
+
+            "danger"
+
+        );
+
+        return;
+
+    }
+
+    if (
+
+        !Number.isFinite(datos.precio) ||
+
+        datos.precio <= 0 ||
+
+        datos.precio > 1000000 ||
+
+        !Number.isInteger(datos.duracion) ||
+
+        datos.duracion < 1 ||
+
+        datos.duracion > 1440 ||
+
+        !Number.isInteger(datos.traslado) ||
+
+        datos.traslado < 0 ||
+
+        datos.traslado > 1440
+
+    ) {
+
+        mensaje(
+
+            "mensajeFormulario",
+
+            "Verifica el precio, duración y tiempo de traslado.",
+
+            "danger"
+
+        );
+
+        return;
+
+    }
+
+    if (
+
+        datos.estadoPago === "pagado" &&
+
+        (!datos.fechaPago || datos.fechaPago > hoy())
+
+    ) {
+
+        mensaje(
+
+            "mensajeFormulario",
+
+            "Ingresa una fecha de pago válida.",
+
+            "danger"
+
+        );
+
+        return;
+
+    }
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    $("btnGuardar").textContent = "Verificando disponibilidad...";
+
+    let guardado = false;
+
+    try {
+
+        const [control,controlDirectorio] = await Promise.all([
+
+            getDocFromServer(controlAgenda),
+
+            getDocFromServer(controlClientes)
+
+        ]);
+
+        const version = versionDocumento(control);
+
+        const versionClientes = versionDocumento(controlDirectorio);
+
+        const resultado = await getDocsFromServer(refEventos);
+
+        const listaActual = resultado.docs.map(documento => ({
+
+            ...documento.data(),
+
+            id: documento.id
+
+        }));
+
+        const conflictos = buscarConflictos(
+
+            datos,
+
+            listaActual,
+
+            original?.id || ""
+
+        );
+
+        if (conflictos.length) {
+
+            const detalle = conflictos.map(e =>
+
+                `${e.tipoServicio} · ${e.fecha} · ${horaBonita(e.hora)}`
+
+            ).join("\n");
+
+            const autorizado = confirm(
+
+                "Se detectaron conflictos de horario o traslado:\n\n" +
+
+                detalle +
+
+                "\n\n¿Confirmas que cuentas con músicos y equipo suficientes para cubrir ambas celebraciones?"
+
+            );
+
+            if (!autorizado) return;
+
+        }
+
+        datos.conflictoAutorizado = conflictos.length > 0;
+
+        datos.conflictosIds = conflictos.map(e => e.id);
+
+        const referencia = original
+
+            ? doc(db,"eventos",original.id)
+
+            : doc(refEventos);
+
+        await runTransaction(db,async transaccion => {
+
+            const agendaActual = await transaccion.get(controlAgenda);
+
+            const directorioActual = await transaccion.get(controlClientes);
+
+            const actual = await transaccion.get(referencia);
+
+            const cliente = await transaccion.get(
+
+                doc(db,"clientes",clienteId)
+
+            );
+
+            const paquete = await transaccion.get(
+
+                doc(db,"servicios",paqueteId)
+
+            );
+
+            // Revisar asignaciones de socios existentes.
+
+            const referenciasSocios = [1,2].map(numero =>
+
+                doc(
+
+                    db,
+
+                    "pagosSocios",
+
+                    `${referencia.id}_socio_${numero}`
+
+                )
+
+            );
+
+            const asignaciones = original
+
+                ? await Promise.all(
+
+                    referenciasSocios.map(ref => transaccion.get(ref))
+
+                )
+
+                : [];
+
+            if (
+
+                versionDocumento(agendaActual) !== version ||
+
+                versionDocumento(directorioActual) !== versionClientes
+
+            ) {
+
+                throw new Error(
+
+                    "La agenda o los clientes cambiaron. Intenta guardar nuevamente."
+
+                );
+
+            }
+
+            if (original) {
+
+                if (
+
+                    !actual.exists() ||
+
+                    !mismaFecha(
+
+                        actual.data().actualizadoEn,
+
+                        original.actualizadoEn
+
+                    )
+
+                ) {
+
+                    throw new Error(
+
+                        "La celebración cambió en otro dispositivo. Actualiza la agenda."
+
+                    );
+
+                }
+
+                if (
+
+                    actual.data().contratoId ||
+
+                    actual.data().estado === "cancelado"
+
+                ) {
+
+                    throw new Error(
+
+                        "Esta celebración debe administrarse desde su contrato o ya fue cancelada."
+
+                    );
+
+                }
+
+            } else if (actual.exists()) {
+
+                throw new Error("El identificador ya existe.");
+
+            }
+
+            if (!cliente.exists()) {
+
+                throw new Error("El cliente seleccionado ya no existe.");
+
+            }
+
+            const conservarPaquete =
+
+                original?.paqueteId === paqueteId &&
+
+                original?.paqueteDetalle;
+
+            if (
+
+                !conservarPaquete &&
+
+                (!paquete.exists() || paquete.data().activo === false)
+
+            ) {
+
+                throw new Error(
+
+                    "El paquete seleccionado no está disponible."
+
+                );
+
+            }
+
+            const detalle = conservarPaquete
+
+                ? original.paqueteDetalle
+
+                : {
+
+                    numero: Number(paquete.data().numero),
+
+                    nombre: paquete.data().nombre,
+
+                    voces: Number(paquete.data().voces),
+
+                    instrumento: paquete.data().instrumento || "Piano",
+
+                    audio: paquete.data().audio !== false,
+
+                    precioBase: Number(paquete.data().precio)
+
+                };
+
+            const maxSocios = Math.max(
+
+                0,
+
+                numeroVoces(detalle) - 1
+
+            );
+
+            if (datos.precio < maxSocios * APP_CONFIG.pagoPorSocio) {
+
+                throw new Error(
+
+                    "El precio es inferior al pago total de los socios."
+
+                );
+
+            }
+
+            const asignacionesActivas = asignaciones.filter(
+
+                resultado => resultado.exists() &&
+
+                resultado.data().estado !== "cancelado"
+
+            );
+
+            if (asignacionesActivas.length > maxSocios) {
+
+                throw new Error(
+
+                    "Retira primero las asignaciones de socios que exceden el nuevo paquete."
+
+                );
+
+            }
+
+            if (asignacionesActivas.length) {
+
+                const camposProtegidos = [
+
+                    "fecha",
+
+                    "hora",
+
+                    "duracion",
+
+                    "traslado",
+
+                    "paqueteId",
+
+                    "clienteId",
+
+                    "lugar",
+
+                    "direccion",
+
+                    "tipoServicio"
+
+                ];
+
+                if (camposProtegidos.some(campo =>
+
+                    String(original[campo] ?? "") !==
+
+                    String(datos[campo] ?? "")
+
+                )) {
+
+                    throw new Error(
+
+                        "La celebración tiene socios asignados. Retira las asignaciones pendientes antes de cambiar sus datos principales."
+
+                    );
+
+                }
+
+            }
+
+            const conservarCliente = original?.clienteId === clienteId;
+
+            const registro = {
+
+                ...datos,
+
+                clienteNombre: conservarCliente
+
+                    ? original.clienteNombre || cliente.data().nombre
+
+                    : cliente.data().nombre,
+
+                clienteTelefono: conservarCliente
+
+                    ? original.clienteTelefono || cliente.data().telefono || ""
+
+                    : cliente.data().telefono || "",
+
+                paqueteNombre: detalle.nombre,
+
+                paqueteDetalle: detalle,
+
+                actualizadoEn: serverTimestamp()
+
+            };
+
+            if (original) {
+
+                transaccion.update(referencia,registro);
+
+            } else {
+
+                transaccion.set(referencia,{
+
+                    ...registro,
+
+                    creadoEn: serverTimestamp()
+
+                });
+
+            }
+
+            incrementarAgenda(transaccion,version);
+
+        });
+
+        guardado = true;
+
+        cambiosPendientes = false;
+
+        ocupado = false;
+
+        modalEvento.hide();
+
+        ocupado = true;
+
+        fechaSeleccionada = datos.fecha;
+
+        const [anio,mes] = datos.fecha.split("-").map(Number);
+
+        anioCalendario = anio;
+
+        mesCalendario = mes - 1;
+
+        $("filtroEstado").value = "";
+
+        $("filtroPago").value = "";
+
+        $("buscador").value = "";
+
+        await cargarEventos();
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            original
+
+                ? "Celebración actualizada correctamente."
+
+                : "Celebración registrada correctamente."
+
+        );
+
+    } catch (error) {
+
+        mensaje(
+
+            guardado ? "mensajeGeneral" : "mensajeFormulario",
+
+            guardado
+
+                ? "La celebración se guardó, pero falta actualizar la pantalla."
+
+                : mensajeError(error),
+
+            "danger"
+
+        );
+
+    } finally {
+
+        ocupado = false;
+
+        $("btnGuardar").innerHTML =
+
+            '<i class="bi bi-floppy me-2"></i>Guardar celebración';
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// ACTUALIZAR EVENTO Y CONTRATO VINCULADO
+// =====================================
+
+async function actualizarEventoVinculado(original,cambios,validar) {
+
+    const referencia = doc(db,"eventos",original.id);
+
+    await runTransaction(db,async transaccion => {
+
+        const control = await transaccion.get(controlAgenda);
+
+        const actual = await transaccion.get(referencia);
+
+        if (!actual.exists()) {
+
+            throw new Error("La celebración ya no existe.");
+
+        }
+
+        const datos = actual.data();
+
+        if (!mismaFecha(
+
+            datos.actualizadoEn,
+
+            original.actualizadoEn
+
+        )) {
+
+            throw new Error(
+
+                "La celebración cambió. Actualiza la agenda."
+
+            );
+
+        }
+
+        let referenciaContrato = null;
+
+        let contrato = null;
+
+        if (datos.contratoId) {
+
+            referenciaContrato = doc(
+
+                db,"contratos",datos.contratoId
+
+            );
+
+            contrato = await transaccion.get(referenciaContrato);
+
+            if (
+
+                !contrato.exists() ||
+
+                contrato.data().eventoId !== original.id
+
+            ) {
+
+                throw new Error(
+
+                    "El contrato vinculado no es válido. Revisa el registro."
+
+                );
+
+            }
+
+        }
+
+        validar(datos,contrato?.data());
+
+        const registro = {
+
+            ...cambios,
+
+            actualizadoEn: serverTimestamp()
+
+        };
+
+        transaccion.update(referencia,registro);
+
+        if (referenciaContrato) {
+
+            transaccion.update(referenciaContrato,registro);
+
+        }
+
+        incrementarAgenda(
+
+            transaccion,
+
+            versionDocumento(control)
+
+        );
+
+    });
+
+}
+
+// =====================================
+// REGISTRAR PAGO
+// =====================================
+
+function abrirPago(id) {
+
+    if (ocupado || !navigator.onLine) return;
+
+    const evento = eventos.find(e => e.id === id);
+
+    if (
+
+        !evento ||
+
+        evento.estado === "cancelado" ||
+
+        evento.estadoPago === "pagado"
+
+    ) return;
+
+    eventoPago = { ...evento };
+
+    $("resumenPago").textContent =
+
+        `${evento.clienteNombre} · ${evento.tipoServicio} · ${moneda(evento.precio)}`;
+
+    $("pagoMetodo").value = evento.metodoPago || "efectivo";
+
+    $("pagoFecha").value = hoy();
+
+    $("pagoFecha").max = hoy();
+
+    $("mensajePago").hidden = true;
+
+    modalPago.show();
+
+}
+
+$("formPago").addEventListener("submit",async evento => {
+
+    evento.preventDefault();
+
+    if (ocupado || !navigator.onLine || !eventoPago) return;
+
+    const original = { ...eventoPago };
+
+    const fechaPago = $("pagoFecha").value;
+
+    if (!fechaPago || fechaPago > hoy()) {
+
+        mensaje(
+
+            "mensajePago",
+
+            "Selecciona una fecha de pago válida.",
+
+            "danger"
+
+        );
+
+        return;
+
+    }
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    let guardado = false;
+
+    try {
+
+        await actualizarEventoVinculado(
+
+            original,
+
+            {
+
+                estadoPago: "pagado",
+
+                metodoPago: $("pagoMetodo").value,
+
+                fechaPago
+
+            },
+
+            (actual,contrato) => {
+
+                if (
+
+                    actual.estado === "cancelado" ||
+
+                    actual.estadoPago === "pagado" ||
+
+                    contrato?.estado === "cancelado" ||
+
+                    contrato?.estadoPago === "pagado"
+
+                ) {
+
+                    throw new Error(
+
+                        "El pago no puede registrarse nuevamente o el servicio fue cancelado."
+
+                    );
+
+                }
+
+                if (
+
+                    contrato &&
+
+                    Number(contrato.precio) !== Number(actual.precio)
+
+                ) {
+
+                    throw new Error(
+
+                        "El importe del contrato no coincide con la agenda."
+
+                    );
+
+                }
+
+            }
+
+        );
+
+        guardado = true;
+
+        ocupado = false;
+
+        modalPago.hide();
+
+        ocupado = true;
+
+        await cargarEventos();
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            "Pago completo registrado correctamente."
+
+        );
+
+    } catch (error) {
+
+        mensaje(
+
+            guardado ? "mensajeGeneral" : "mensajePago",
+
+            guardado
+
+                ? "El pago se registró, pero falta actualizar la pantalla."
+
+                : mensajeError(error),
+
+            "danger"
+
+        );
+
+    } finally {
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// MARCAR CELEBRACIÓN REALIZADA
+// =====================================
+
+async function marcarRealizado(id) {
+
+    if (ocupado || !navigator.onLine) return;
+
+    const evento = eventos.find(e => e.id === id);
+
+    if (!evento || evento.estado !== "programado") return;
+
+    const partes = new Intl.DateTimeFormat("en-GB",{
+
+        timeZone: ZONA,
+
+        year: "numeric",
+
+        month: "2-digit",
+
+        day: "2-digit",
+
+        hour: "2-digit",
+
+        minute: "2-digit",
+
+        hourCycle: "h23"
+
+    }).formatToParts(new Date());
+
+    const parte = tipo =>
+
+        partes.find(p => p.type === tipo).value;
+
+    const ahoraCivil = Date.parse(
+
+        `${parte("year")}-${parte("month")}-${parte("day")}T${parte("hour")}:${parte("minute")}:00Z`
+
+    );
+
+    const fin = inicioEvento(evento) +
+
+        (Number(evento.duracion) || 60) * 60000;
+
+    if (!Number.isFinite(fin) || fin > ahoraCivil) {
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            "La celebración todavía no ha terminado según su horario registrado.",
+
+            "warning"
+
+        );
+
+        return;
+
+    }
+
+    if (!confirm(
+
+        "¿Confirmas que esta celebración ya fue realizada?"
+
+    )) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    let guardado = false;
+
+    try {
+
+        await actualizarEventoVinculado(
+
+            evento,
+
+            {
+
+                estado: "realizado",
+
+                realizadoEn: serverTimestamp()
+
+            },
+
+            (actual,contrato) => {
+
+                if (
+
+                    actual.estado !== "programado" ||
+
+                    (contrato && contrato.estado !== "programado")
+
+                ) {
+
+                    throw new Error(
+
+                        "El estado de la celebración cambió."
+
+                    );
+
+                }
+
+            }
+
+        );
+
+        guardado = true;
+
+        await cargarEventos();
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            "Celebración marcada como realizada."
+
+        );
+
+    } catch (error) {
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            guardado
+
+                ? "El estado se guardó, pero falta actualizar la pantalla."
+
+                : mensajeError(error),
+
+            "danger"
+
+        );
+
+    } finally {
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+}
+
+// =====================================
+// CANCELAR CELEBRACIÓN
+// =====================================
+
+async function cancelarEvento(id) {
+
+    if (ocupado || !navigator.onLine) return;
+
+    const evento = eventos.find(e => e.id === id);
+
+    if (!evento || evento.estado !== "programado") return;
+
+    // Las cancelaciones con contrato se administran
+    // desde contratos para calcular las penalizaciones.
+
+    if (evento.contratoId) {
+
+        location.href =
+
+            "contratos.html?contratoId=" +
+
+            encodeURIComponent(evento.contratoId) +
+
+            "&accion=cancelar";
+
+        return;
+
+    }
+
+    if (evento.estadoPago === "pagado") {
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            "Esta celebración tiene un pago registrado. Antes de cancelarla, resuelve el pago o reembolso correspondiente desde el contrato.",
+
+            "warning"
+
+        );
+
+        return;
+
+    }
+
+    const motivo = prompt(
+
+        "Escribe el motivo de cancelación:"
+
+    );
+
+    if (motivo === null || !motivo.trim()) return;
+
+    if (motivo.trim().length > 500) {
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            "El motivo no puede superar los 500 caracteres.",
+
+            "warning"
+
+        );
+
+        return;
+
+    }
+
+    if (!confirm(
+
+        "¿Confirmas la cancelación? Se conservará el historial."
+
+    )) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    let guardado = false;
+
+    try {
+
+        const referencia = doc(db,"eventos",id);
+
+        await runTransaction(db,async transaccion => {
+
+            const control = await transaccion.get(controlAgenda);
+
+            const actual = await transaccion.get(referencia);
+
+            const refsSocios = [1,2].map(numero =>
+
+                doc(db,"pagosSocios",`${id}_socio_${numero}`)
+
+            );
+
+            const asignaciones = await Promise.all(
+
+                refsSocios.map(ref => transaccion.get(ref))
+
+            );
+
+            if (
+
+                !actual.exists() ||
+
+                !mismaFecha(
+
+                    actual.data().actualizadoEn,
+
+                    evento.actualizadoEn
+
+                )
+
+            ) {
+
+                throw new Error(
+
+                    "La celebración cambió. Actualiza la agenda."
+
+                );
+
+            }
+
+            const datos = actual.data();
+
+            if (
+
+                datos.contratoId ||
+
+                datos.estado !== "programado" ||
+
+                datos.estadoPago === "pagado"
+
+            ) {
+
+                throw new Error(
+
+                    "La celebración ya no puede cancelarse desde esta opción."
+
+                );
+
+            }
+
+            if (asignaciones.some(resultado =>
+
+                resultado.exists() &&
+
+                resultado.data().estado === "pagado"
+
+            )) {
+
+                throw new Error(
+
+                    "Existen pagos a socios. Revisa estos movimientos antes de cancelar."
+
+                );
+
+            }
+
+            transaccion.update(referencia,{
+
+                estado: "cancelado",
+
+                motivoCancelacion: motivo.trim(),
+
+                fechaCancelacion: serverTimestamp(),
+
+                actualizadoEn: serverTimestamp()
+
+            });
+
+            asignaciones.forEach((resultado,indice) => {
+
+                if (
+
+                    resultado.exists() &&
+
+                    resultado.data().estado !== "cancelado"
+
+                ) {
+
+                    transaccion.update(refsSocios[indice],{
+
+                        estado: "cancelado",
+
+                        motivoCancelacion: "Celebración cancelada",
+
+                        actualizadoEn: serverTimestamp()
+
+                    });
+
+                }
+
+            });
+
+            incrementarAgenda(
+
+                transaccion,
+
+                versionDocumento(control)
+
+            );
+
+        });
+
+        guardado = true;
+
+        await cargarEventos();
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            "Celebración cancelada. El historial se conserva."
+
+        );
+
+    } catch (error) {
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            guardado
+
+                ? "La cancelación se guardó, pero falta actualizar la pantalla."
+
+                : mensajeError(error),
+
+            "danger"
+
+        );
+
+    } finally {
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+}
+
+// =====================================
+// PROTEGER CAMBIOS SIN GUARDAR
+// =====================================
+
+$("modalEvento").addEventListener("hide.bs.modal",evento => {
+
+    if (ocupado) {
+
+        evento.preventDefault();
+
+        return;
+
+    }
+
+    if (cambiosPendientes) {
+
+        if (!confirm(
+
+            "Tienes cambios sin guardar. ¿Deseas salir?"
+
+        )) {
+
+            evento.preventDefault();
+
+        } else {
+
+            cambiosPendientes = false;
+
+        }
+
+    }
+
+});
+
+$("modalPago").addEventListener("hide.bs.modal",evento => {
+
+    if (ocupado) evento.preventDefault();
+
+});
+
+window.addEventListener("beforeunload",evento => {
+
+    if (ocupado || cambiosPendientes) {
+
+        evento.preventDefault();
+
+        evento.returnValue = "";
+
+    }
+
+});
+
+// =====================================
+// ACTUALIZACIÓN MANUAL
+// =====================================
+
+$("btnRecargar").addEventListener("click",async () => {
+
+    if (ocupado || !navigator.onLine) return;
+
+    ocupado = true;
+
+    actualizarBotones();
+
+    try {
+
+        await Promise.all([
+
+            cargarEventos(),
+
+            cargarCatalogos()
+
+        ]);
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            "Agenda actualizada correctamente."
+
+        );
+
+    } catch (error) {
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            mensajeError(error),
+
+            "danger"
+
+        );
+
+    } finally {
+
+        ocupado = false;
+
+        actualizarBotones();
+
+    }
+
+});
+
+// =====================================
+// CONEXIÓN
+// =====================================
+
+window.addEventListener("online",() => {
+
+    actualizarBotones();
+
+    mensaje(
+
+        "mensajeGeneral",
+
+        "Conexión de red restablecida. Puedes actualizar la agenda.",
+
+        "info"
+
+    );
+
+});
+
+window.addEventListener("offline",() => {
+
+    actualizarBotones();
+
+    mensaje(
+
+        "mensajeGeneral",
+
+        "Sin conexión. No puedes modificar las celebraciones.",
+
+        "warning"
+
+    );
+
+});
+
+// =====================================
+// CERRAR SESIÓN
+// =====================================
+
+$("btnCerrarSesion").addEventListener("click",async () => {
+
+    if (ocupado) return;
+
+    if (!confirm("¿Deseas cerrar sesión?")) return;
+
+    try {
+
+        cambiosPendientes = false;
+
+        await cerrarSesion();
+
+    } catch (error) {
+
+        mensaje(
+
+            "mensajeGeneral",
+
+            mensajeError(error),
+
+            "danger"
+
+        );
+
+    }
+
+});
+
+// =====================================
+// INICIALIZAR AGENDA
+// =====================================
+
+try {
+
+    await protegerPagina();
+
+    modalEvento = new bootstrap.Modal($("modalEvento"));
+
+    modalPago = new bootstrap.Modal($("modalPago"));
+
+    await Promise.all([
+
+        cargarCatalogos(),
+
+        cargarEventos()
+
+    ]);
+
+    sistemaListo = true;
+
+    $("aplicacion").hidden = false;
+
+    $("pantallaCarga").hidden = true;
+
+    actualizarBotones();
+
+    window.VozAngelicalTema?.aplicar();
+
+    const parametros = new URLSearchParams(location.search);
+
+    if (parametros.get("accion") === "nuevo") {
+
+        const clienteId = parametros.get("clienteId") || "";
+
+        history.replaceState(null,"",location.pathname);
+
+        abrirNuevoEvento(clienteId);
+
+    } else if (parametros.get("eventoId")) {
+
+        const evento = eventos.find(e =>
+
+            e.id === parametros.get("eventoId")
+
+        );
+
+        if (evento) {
+
+            fechaSeleccionada = evento.fecha;
+
+            const [anio,mes] = evento.fecha.split("-").map(Number);
+
+            anioCalendario = anio;
+
+            mesCalendario = mes - 1;
+
+            mostrarCalendario();
+
+            mostrarEventos();
+
+        }
+
+    }
+
+} catch (error) {
+
+    $("textoCarga").textContent = mensajeError(error);
+
+    $("btnReintentar").hidden = false;
+
+    $("pantallaCarga")
+
+        .querySelector(".spinner-border")
+
+        .hidden = true;
+
+}
+
+</script>
+
+<script src="pwa.js" defer></script>
+
+</body>
+</html>
